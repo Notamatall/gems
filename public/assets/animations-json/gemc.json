@@ -1,0 +1,209 @@
+{
+  "frames": {
+    "Gem C 01.png": {
+      "frame": { "x": 1, "y": 1755, "w": 190, "h": 190 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 15, "y": 15, "w": 190, "h": 190 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "Gem C 02.png": {
+      "frame": { "x": 193, "y": 1755, "w": 190, "h": 190 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 15, "y": 15, "w": 190, "h": 190 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "Gem C 03.png": {
+      "frame": { "x": 1, "y": 1, "w": 220, "h": 220 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 220, "h": 220 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "Gem C 04.png": {
+      "frame": { "x": 1, "y": 223, "w": 220, "h": 220 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 220, "h": 220 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "Gem C 05.png": {
+      "frame": { "x": 1, "y": 1108, "w": 215, "h": 215 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 3, "y": 3, "w": 215, "h": 215 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "Gem C 06.png": {
+      "frame": { "x": 1, "y": 889, "w": 218, "h": 217 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 1, "y": 2, "w": 218, "h": 217 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "Gem C 07.png": {
+      "frame": { "x": 223, "y": 445, "w": 219, "h": 218 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 1, "y": 2, "w": 219, "h": 218 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "Gem C 08.png": {
+      "frame": { "x": 223, "y": 665, "w": 215, "h": 216 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 3, "y": 3, "w": 215, "h": 216 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "Gem C 09.png": {
+      "frame": { "x": 1, "y": 1547, "w": 202, "h": 206 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 9, "y": 9, "w": 202, "h": 206 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "Gem C 10.png": {
+      "frame": { "x": 218, "y": 1108, "w": 139, "h": 136 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 41, "y": 44, "w": 139, "h": 136 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "Gem C 11.png": {
+      "frame": { "x": 205, "y": 1518, "w": 165, "h": 161 },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 26, "y": 32, "w": 165, "h": 161 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "Gem C 12.png": {
+      "frame": { "x": 223, "y": 1, "w": 220, "h": 220 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 220, "h": 220 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "Gem C 13.png": {
+      "frame": { "x": 1, "y": 445, "w": 220, "h": 220 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 220, "h": 220 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "Gem C 14.png": {
+      "frame": { "x": 223, "y": 223, "w": 220, "h": 220 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 220, "h": 220 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "Gem C 15.png": {
+      "frame": { "x": 1, "y": 667, "w": 220, "h": 220 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 220, "h": 220 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "Gem C 16.png": {
+      "frame": { "x": 1, "y": 1325, "w": 220, "h": 194 },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 0, "y": 15, "w": 220, "h": 194 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "Gem C 17.png": {
+      "frame": { "x": 197, "y": 1325, "w": 191, "h": 160 },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 9, "y": 33, "w": 191, "h": 160 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "Gem C 18.png": {
+      "frame": { "x": 368, "y": 1513, "w": 162, "h": 136 },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 22, "y": 46, "w": 162, "h": 136 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "Gem C 19.png": {
+      "frame": { "x": 368, "y": 883, "w": 166, "h": 138 },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 20, "y": 49, "w": 166, "h": 138 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "Gem C 20.png": {
+      "frame": { "x": 359, "y": 1173, "w": 168, "h": 142 },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 18, "y": 51, "w": 168, "h": 142 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "Gem C 21.png": {
+      "frame": { "x": 359, "y": 1343, "w": 168, "h": 142 },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 16, "y": 56, "w": 168, "h": 142 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "Gem C 22.png": {
+      "frame": { "x": 223, "y": 883, "w": 163, "h": 142 },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 17, "y": 62, "w": 163, "h": 142 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "Gem C 23.png": {
+      "frame": { "x": 359, "y": 1051, "w": 147, "h": 120 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 19, "y": 89, "w": 147, "h": 120 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "Gem C 24.png": {
+      "frame": { "x": 385, "y": 1677, "w": 146, "h": 106 },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 19, "y": 108, "w": 146, "h": 106 },
+      "sourceSize": { "w": 220, "h": 220 }
+    }
+  },
+  "animations": {
+    "Gem": [
+      "Gem C 01.png",
+      "Gem C 02.png",
+      "Gem C 03.png",
+      "Gem C 04.png",
+      "Gem C 05.png",
+      "Gem C 06.png",
+      "Gem C 07.png",
+      "Gem C 08.png",
+      "Gem C 09.png",
+      "Gem C 10.png",
+      "Gem C 11.png",
+      "Gem C 12.png",
+      "Gem C 13.png",
+      "Gem C 14.png",
+      "Gem C 15.png",
+      "Gem C 16.png",
+      "Gem C 17.png",
+      "Gem C 18.png",
+      "Gem C 19.png",
+      "Gem C 20.png",
+      "Gem C 21.png",
+      "Gem C 22.png",
+      "Gem C 23.png",
+      "Gem C 24.png"
+    ]
+  },
+  "meta": {
+    "app": "https://www.codeandweb.com/texturepacker",
+    "version": "1.1",
+    "image": "gemc.png",
+    "format": "RGBA8888",
+    "size": { "w": 507, "h": 1946 },
+    "scale": "1",
+    "smartupdate": "$TexturePacker:SmartUpdate:b4e4bb8dc03d12c7cc01ddba035ad1f9:e202a846ad34158bd46f8ca0dfa4e606:2c776abc470bc677dfd81453005695b3$"
+  }
+}
