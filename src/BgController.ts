@@ -2,6 +2,7 @@ import {
   Application,
   Container,
   ContainerChild,
+  Graphics,
   Renderer,
   Sprite,
 } from "pixi.js";
@@ -10,16 +11,14 @@ import { loadSprite } from "./utils";
 export class BackgroundController {
   private _reelBg?: Sprite;
   private _bg?: Sprite;
-  async init(
-    mainContainer: Container<ContainerChild>,
-    app: Application<Renderer>,
-  ) {
+  async init(app: Application<Renderer>) {
     this._bg = await loadSprite("/assets/background.png");
     this._reelBg = await loadSprite("/assets/reel.png");
 
     const reelX = app.screen.width / 2 - this._reelBg.width / 2;
     this._reelBg.x = reelX;
-    mainContainer.addChild(this._bg, this._reelBg);
+    // mainContainer.addChild(this._bg, this._reelBg);
+    app.stage.addChild(this._bg, this._reelBg);
   }
 
   get reelBg() {

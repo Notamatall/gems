@@ -11,8 +11,6 @@ const initApp = async () => {
   const container = document.getElementById("pixi-container")!;
 
   container.appendChild(app.canvas);
-  const mainContainer = new Container();
-  app.stage.addChild(mainContainer);
-  return { mainContainer, app };
+  return { app };
 };
 export { initApp, app };
