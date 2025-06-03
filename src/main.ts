@@ -1,6 +1,6 @@
 import { extensions, ResizePlugin } from "pixi.js";
 import { initApp } from "./App";
-import { BackgroundController } from "./BgController";
+import { ResourcesController } from "./ResourcesController";
 import { AnimationContoller } from "./AnimationController";
 import { GameController } from "./GameController";
 
@@ -9,10 +9,10 @@ extensions.add(ResizePlugin);
 (async () => {
   const { app } = await initApp();
   await AnimationContoller.loadGemsAnimationsInCache();
-  const bgCtrl = new BackgroundController();
-  await bgCtrl.init(app);
-  const gameCtrl = new GameController(app, bgCtrl.reelBg);
-  await gameCtrl.createDefaulReels();
+  const resCtrl = new ResourcesController();
+  await resCtrl.init(app);
+  const gameCtrl = new GameController(app, resCtrl);
+  await gameCtrl.createDefaulReelsAndMask();
   gameCtrl.runLoop2();
   // gameCtrl.populateReelsWithSymbols();
 })();

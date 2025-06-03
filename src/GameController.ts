@@ -2,14 +2,12 @@ import {
   AnimatedSprite,
   Application,
   Assets,
-  BlurFilter,
   Container,
-  ContainerChild,
   Graphics,
   Sprite,
+  Spritesheet,
 } from "pixi.js";
 import {
-  AnimationsUrls,
   REEL_WIDTH,
   REEL_BORDER_SIZE_PX,
   REEL_HEIGHT,
@@ -18,18 +16,17 @@ import {
   AnimationsNames,
   FALL_SYMBOL_GAP,
   REEL_VIEWPORT_MAX_Y,
+  SLOT_SYMBOLS_Y_POS,
 } from "./constants";
-interface SlotSymbol {
-  symbol: AnimatedSprite;
-  finalYPos: number;
-  velocity: number;
-  isAnimated: boolean;
-}
+import { SlotSymbol, SlotReel, GameSymbol } from "./types";
+import { MatchingEngine } from "./MatchingEngine";
+import { ResourcesController } from "./ResourcesController";
 
+type SlotState = "Idle" | "Spinning" | "Animating" | "Handling";
 export class GameController {
-  constructor(app: Application, reelBg: Sprite) {
+  constructor(app: Application, resCtrl: ResourcesController) {
     this._app = app;
-    this._reelBg = reelBg;
+    this._resCtrl = resCtrl;
     const spinButton = document.getElementById("spin-button");
     if (!spinButton) throw new Error("Spin button not found");
     spinButton.onclick = () => {
@@ -45,65 +42,44 @@ export class GameController {
     playButton.onclick = () => {
       this.play();
     };
-    const gemV = Assets.cache.get(AnimationsUrls.GemV).data.animations;
-    const gemC = Assets.cache.get(AnimationsUrls.GemC).data.animations;
-    const gemG = Assets.cache.get(AnimationsUrls.GemG).data.animations;
-    const animations: any[] = [gemV, gemC, gemG];
-    this.slotTextures = animations;
   }
   private _app: Application;
-  private _reelBg: Sprite;
-  slotTextures: any[] = [];
-  slotSymbols: SlotSymbol[] = [];
+  private _resCtrl: ResourcesController;
+  private slotState: SlotState = "Idle";
+
   reelContainer: Container = new Container<Container>();
   isSpinning: boolean = false;
+  private reels: SlotReel[] = [];
+  private isInitial = true;
 
-  private slotSymbolsRemove: SlotSymbol[] = [];
-  private slotSymbolsToAnimate: SlotSymbol[] = [];
-  async createDefaulReels() {
+  async createDefaulReelsAndMask() {
+    const reelBg = this._resCtrl.reelBg;
     for (let i = 0; i < REEL_WIDTH; i++) {
       const reelContainer = new Container();
-      reelContainer.x = this._reelBg.x + 188 * i;
-      reelContainer.y = this._reelBg.y + REEL_BORDER_SIZE_PX;
+      reelContainer.x = reelBg.x + 188 * i;
+      reelContainer.y = reelBg.y + REEL_BORDER_SIZE_PX;
       this.reelContainer.addChild(reelContainer);
+      this.reels.push({
+        rc: reelContainer,
+        symToMov: [],
+        symToRem: [],
+        symLocated: false,
+      });
     }
 
-    // Create mask with correct positioning
     const mask = new Graphics()
       .rect(
-        this._reelBg.x, // Start from reel background position
-        this._reelBg.y + REEL_BORDER_SIZE_PX, // Account for border
-        this._reelBg.width, // Use actual reel background width
-        this._reelBg.height - REEL_BORDER_SIZE_PX * 2, // Subtract top and bottom borders
+        reelBg.x,
+        reelBg.y + REEL_BORDER_SIZE_PX,
+        reelBg.width,
+        reelBg.height - REEL_BORDER_SIZE_PX * 2,
       )
-      .fill(0xffffff); // Color doesn't matter for masks
+      .fill(0xffffff);
 
-    // Add mask to stage (important!)
     this._app.stage.addChild(mask);
-
-    // Apply mask to reel container
     this.reelContainer.mask = mask;
-
-    // Add the masked container to stage
     this._app.stage.addChild(this.reelContainer);
-  }
-
-  populateReelsWithSymbols() {
-    for (let index = 0; index < this.reelContainer.children.length; index++) {
-      const reelContainer = this.reelContainer.children[index];
-      for (let j = 0; j < REEL_HEIGHT; j++) {
-        const symbol = this.getRandomSymbol();
-        symbol.animationSpeed = 1 / 3;
-        symbol.loop = false;
-        symbol.x = SMALL_SYMBOL_SIZE_PX / 2 - ANIMATION_DIFFERENCE;
-        symbol.y = j * SMALL_SYMBOL_SIZE_PX - ANIMATION_DIFFERENCE;
-        symbol.onComplete = () => {
-          reelContainer.removeChild(symbol);
-          console.log(reelContainer.children.length);
-        };
-        reelContainer.addChild(symbol);
-      }
-    }
+    this.generateGameSymbols();
   }
 
   private expload() {
@@ -115,140 +91,159 @@ export class GameController {
     console.log(symbols);
   }
 
-  private spin() {
-    this.isSpinning = true;
-    // this.slotSymbols.push();
-    const reelContainer = this.reelContainer.children[0];
-    for (let index = 0; index < 5; index++) {
-      const symbol = this.getRandomSymbol();
-      symbol.animationSpeed = 1 / 3;
-      symbol.loop = false;
-      symbol.x = SMALL_SYMBOL_SIZE_PX / 2 - ANIMATION_DIFFERENCE;
-      symbol.y =
-        (index + 1) * -SMALL_SYMBOL_SIZE_PX -
-        ANIMATION_DIFFERENCE +
-        index * -FALL_SYMBOL_GAP;
-      console.log((index + 1) * -SMALL_SYMBOL_SIZE_PX - ANIMATION_DIFFERENCE);
-      symbol.onComplete = () => {
-        reelContainer.removeChild(symbol);
-      };
-      reelContainer.addChild(symbol);
-    }
-  }
+  private spin() {}
 
-  private generateNewSymbolsForReel(reelIndex: number) {
-    const reelContainer = this.reelContainer.children[reelIndex];
-    const symbols = [];
-    for (let index = 0; index < 5; index++) {
-      const symbol = this.getRandomSymbol();
-      symbol.animationSpeed = 1 / 3;
-      symbol.loop = false;
-      symbol.x = SMALL_SYMBOL_SIZE_PX / 2 - ANIMATION_DIFFERENCE;
-      symbol.y =
+  private generateNewSymbolsForReel(reelIndex: number): SlotSymbol[] {
+    const reel = this.reels[reelIndex];
+    const gameSymbols: SlotSymbol[] = [];
+    for (let index = REEL_HEIGHT; index >= 0; index--) {
+      const gameSymbol = this._resCtrl.getRandomSlotSymbol();
+      const sprite = gameSymbol.animSprite;
+      sprite.x = SMALL_SYMBOL_SIZE_PX / 2 - ANIMATION_DIFFERENCE;
+      sprite.y =
         (index + 1) * -SMALL_SYMBOL_SIZE_PX -
         ANIMATION_DIFFERENCE +
-        index * -FALL_SYMBOL_GAP;
-      symbol.onComplete = () => {
-        reelContainer.removeChild(symbol);
+        index * -FALL_SYMBOL_GAP -
+        reelIndex * FALL_SYMBOL_GAP;
+      sprite.onComplete = () => {
+        reel.rc.removeChild(sprite);
       };
-      symbols.push(symbol);
-      reelContainer.addChild(symbol);
+      reel.rc.addChild(sprite);
+      gameSymbols.push(gameSymbol);
     }
-    return symbols;
+    return gameSymbols;
+  }
+  private generateGameSymbols() {
+    const reelLength = this.reels.length;
+
+    for (let index = 0; index < reelLength; index++) {
+      const reel = this.reels[index];
+      reel.symLocated = false;
+      const slotSymbols = this.generateNewSymbolsForReel(index);
+
+      if (reel.symToMov.length) {
+        reel.symToRem = reel.symToMov;
+        reel.symToRem.forEach((sym) => (sym.velocity = 0));
+        reel.symToMov = [];
+      }
+
+      reel.symToMov = slotSymbols.map(
+        (symbol, ind: number) =>
+          new GameSymbol({
+            type: symbol.type,
+            animSprite: symbol.animSprite,
+            row: reelLength - index,
+            col: index,
+            finalYPos: SLOT_SYMBOLS_Y_POS[ind],
+          }),
+      );
+    }
   }
 
   private play() {
-    const symbols = this.generateNewSymbolsForReel(0);
-
-    if (this.slotSymbolsToAnimate.length) {
-      const symbolsToRemove = this.slotSymbolsToAnimate.filter(
-        (symbol) => symbol.isAnimated,
-      );
-      this.slotSymbolsRemove = symbolsToRemove;
-      this.slotSymbolsToAnimate = [];
-    }
-
-    const final_positions = [736, 548, 360, 172, -16];
-    this.slotSymbolsToAnimate.push(
-      ...symbols.map((symbol: any, index: number) => ({
-        symbol,
-        finalYPos: final_positions[index],
-        velocity: 0,
-        isAnimated: false,
-      })),
-    );
+    this.slotState = "Spinning";
+    this.isInitial = false;
+    this.generateGameSymbols();
   }
 
-  private getRandomSymbol() {
-    const animation =
-      this.slotTextures[Math.floor(Math.random() * this.slotTextures.length)];
+  private animateSlotSymbolsMovement() {
+    for (let reelsI = 0; reelsI < this.reels.length; reelsI++) {
+      const reel = this.reels[reelsI];
+      const { symToRem, symToMov } = reel;
+      for (let symToRemI = 0; symToRemI < symToRem.length; symToRemI++) {
+        const gameSym = symToRem[symToRemI];
+        this.removeWithPhysics(gameSym, () => {
+          symToRem.splice(symToRemI, 1);
+          gameSym.destroy();
+          --symToRemI;
+        });
+      }
 
-    return AnimatedSprite.fromFrames(animation[AnimationsNames.Gem]);
+      if (symToRem.length === 0) {
+        const locatedInfo: boolean[] = [];
+        symToMov.forEach((sym) => {
+          const isLocated = this.moveWithPhysics(sym);
+          locatedInfo.push(isLocated);
+        });
+        reel.symLocated = !locatedInfo.some((loc) => loc === false);
+      }
+    }
+  }
+
+  private calculateMultiplier() {}
+  private checkAllSymbolsLocated() {
+    const isAllLocated = !this.reels.some((reel) => reel.symLocated === false);
+
+    if (
+      isAllLocated &&
+      this.slotState != "Handling" &&
+      this.isInitial === false
+    ) {
+      this.slotState = "Handling";
+      const val = this.reels.map((r) => r.symToMov);
+      //MatchingEngine.getVerticalWins(val);
+      let matchSymbols: GameSymbol[] = [];
+      for (let index = 0; index < 5; index++) {
+        matchSymbols = MatchingEngine.checkHorizontal(val, index);
+      }
+      for (let index = 0; index < matchSymbols.length; index++) {
+        const matchSymbol = matchSymbols[index];
+
+        // if (matchSymbol.row > 0) {
+        //   for (let index = 0; index < matchSymbol.row; index++) {
+        //     const symToMove = this.reels[matchSymbol.col].symToMov[index];
+        //     symToMove.row = matchSymbol.row;
+        //     symToMove.finalYPos=matchSymbol.finalYPos;
+        //   }
+        // }
+      }
+    }
   }
 
   runLoop2() {
     this._app.ticker.add(() => {
-      for (let i = 0; i < this.slotSymbolsRemove.length; i++) {
-        const elem = this.slotSymbolsRemove[i];
-        this.removeWithPhysics(elem, () => {
-          this.slotSymbolsRemove.splice(i, 1);
-          i--;
-          elem.symbol.destroy();
-        });
-      }
-
-      if (this.slotSymbolsRemove.length === 0) {
-        for (let i = 0; i < this.slotSymbolsToAnimate.length; i++) {
-          const elem = this.slotSymbolsToAnimate[i];
-          this.moveWithPhysics(elem);
-        }
-      }
+      this.animateSlotSymbolsMovement();
+      this.checkAllSymbolsLocated();
     });
   }
 
-  private moveWithPhysics(elem: SlotSymbol) {
-    const gravity = 1.9;
+  private moveWithPhysics(elem: GameSymbol) {
+    const gravity = 5;
     const damping = 1;
-    // Init velocity
-    if (elem.velocity === undefined) elem.velocity = 0;
-
-    const { symbol, finalYPos } = elem;
-
-    // Apply physics
-    const distance = finalYPos - symbol.y;
+    const { animSprite, finalYPos } = elem;
+    const distance = finalYPos - animSprite.y;
 
     if (Math.abs(distance) < 1 && Math.abs(elem.velocity) < 1) {
-      // Snap to position
-      symbol.y = finalYPos;
-      elem.isAnimated = true;
-      return;
+      animSprite.y = finalYPos;
+      return true;
     }
 
     elem.velocity += gravity;
     elem.velocity *= damping;
-    symbol.y += elem.velocity;
+    animSprite.y += elem.velocity;
 
-    // Clamp if we overshoot
-    if (symbol.y > finalYPos && elem.velocity > 0) {
-      symbol.y = finalYPos;
-      elem.isAnimated = true;
+    if (animSprite.y > finalYPos && elem.velocity > 0) {
+      animSprite.y = finalYPos;
+      return true;
     }
+    return false;
   }
 
-  private removeWithPhysics(elem: SlotSymbol, onRemoveAction: () => void) {
-    const gravity = 2.3;
-    const damping = 0.9;
-    // Init velocity
-    if (elem.velocity === undefined) elem.velocity = 0;
+  private removeWithPhysics(gameSym: GameSymbol, onRemoveAction: () => void) {
+    const baseGravity = 30;
+    const damping = 1.2 + gameSym.row * 0.2;
 
-    const { symbol } = elem;
+    const gravity = baseGravity;
 
-    elem.velocity += gravity;
-    elem.velocity *= damping;
-    symbol.y += elem.velocity;
+    gameSym.velocity = 0;
 
-    // Clamp if we overshoot
-    if (symbol.y >= REEL_VIEWPORT_MAX_Y) {
+    const { animSprite } = gameSym;
+
+    gameSym.velocity += gravity;
+    gameSym.velocity *= damping;
+    animSprite.y += gameSym.velocity;
+
+    if (animSprite.y >= REEL_VIEWPORT_MAX_Y) {
       onRemoveAction();
     }
   }

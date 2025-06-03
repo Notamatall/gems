@@ -1,0 +1,16 @@
+  populateReelsWithSymbols() {
+    for (let index = 0; index < this.reels.length; index++) {
+      const reelContainer = this.reels[index].rc;
+      for (let j = 0; j < REEL_HEIGHT; j++) {
+        const { animSprite } = this.getRandomSlotSymbol();
+
+        animSprite.x = SMALL_SYMBOL_SIZE_PX / 2 - ANIMATION_DIFFERENCE;
+        animSprite.y = j * SMALL_SYMBOL_SIZE_PX - ANIMATION_DIFFERENCE;
+        animSprite.onComplete = () => {
+          reelContainer.removeChild(animSprite);
+          console.log(reelContainer.children.length);
+        };
+        reelContainer.addChild(animSprite);
+      }
+    }
+  }

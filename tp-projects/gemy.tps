@@ -124,7 +124,7 @@
             <key>data</key>
             <struct type="DataFile">
                 <key>name</key>
-                <filename>../public/assets/animations-json/gemc.json</filename>
+                <filename>../public/assets/animations-json/gemy.json</filename>
             </struct>
         </map>
         <key>multiPackMode</key>
@@ -173,30 +173,30 @@
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
-            <key type="filename">../../graphic/gems/Animations/Gem C/Gem C 01.png</key>
-            <key type="filename">../../graphic/gems/Animations/Gem C/Gem C 02.png</key>
-            <key type="filename">../../graphic/gems/Animations/Gem C/Gem C 03.png</key>
-            <key type="filename">../../graphic/gems/Animations/Gem C/Gem C 04.png</key>
-            <key type="filename">../../graphic/gems/Animations/Gem C/Gem C 05.png</key>
-            <key type="filename">../../graphic/gems/Animations/Gem C/Gem C 06.png</key>
-            <key type="filename">../../graphic/gems/Animations/Gem C/Gem C 07.png</key>
-            <key type="filename">../../graphic/gems/Animations/Gem C/Gem C 08.png</key>
-            <key type="filename">../../graphic/gems/Animations/Gem C/Gem C 09.png</key>
-            <key type="filename">../../graphic/gems/Animations/Gem C/Gem C 10.png</key>
-            <key type="filename">../../graphic/gems/Animations/Gem C/Gem C 11.png</key>
-            <key type="filename">../../graphic/gems/Animations/Gem C/Gem C 12.png</key>
-            <key type="filename">../../graphic/gems/Animations/Gem C/Gem C 13.png</key>
-            <key type="filename">../../graphic/gems/Animations/Gem C/Gem C 14.png</key>
-            <key type="filename">../../graphic/gems/Animations/Gem C/Gem C 15.png</key>
-            <key type="filename">../../graphic/gems/Animations/Gem C/Gem C 16.png</key>
-            <key type="filename">../../graphic/gems/Animations/Gem C/Gem C 17.png</key>
-            <key type="filename">../../graphic/gems/Animations/Gem C/Gem C 18.png</key>
-            <key type="filename">../../graphic/gems/Animations/Gem C/Gem C 19.png</key>
-            <key type="filename">../../graphic/gems/Animations/Gem C/Gem C 20.png</key>
-            <key type="filename">../../graphic/gems/Animations/Gem C/Gem C 21.png</key>
-            <key type="filename">../../graphic/gems/Animations/Gem C/Gem C 22.png</key>
-            <key type="filename">../../graphic/gems/Animations/Gem C/Gem C 23.png</key>
-            <key type="filename">../../graphic/gems/Animations/Gem C/Gem C 24.png</key>
+            <key type="filename">../../graphic/gems/Animations/Gem Y/Gem Y 01.png</key>
+            <key type="filename">../../graphic/gems/Animations/Gem Y/Gem Y 02.png</key>
+            <key type="filename">../../graphic/gems/Animations/Gem Y/Gem Y 03.png</key>
+            <key type="filename">../../graphic/gems/Animations/Gem Y/Gem Y 04.png</key>
+            <key type="filename">../../graphic/gems/Animations/Gem Y/Gem Y 05.png</key>
+            <key type="filename">../../graphic/gems/Animations/Gem Y/Gem Y 06.png</key>
+            <key type="filename">../../graphic/gems/Animations/Gem Y/Gem Y 07.png</key>
+            <key type="filename">../../graphic/gems/Animations/Gem Y/Gem Y 08.png</key>
+            <key type="filename">../../graphic/gems/Animations/Gem Y/Gem Y 09.png</key>
+            <key type="filename">../../graphic/gems/Animations/Gem Y/Gem Y 10.png</key>
+            <key type="filename">../../graphic/gems/Animations/Gem Y/Gem Y 11.png</key>
+            <key type="filename">../../graphic/gems/Animations/Gem Y/Gem Y 12.png</key>
+            <key type="filename">../../graphic/gems/Animations/Gem Y/Gem Y 13.png</key>
+            <key type="filename">../../graphic/gems/Animations/Gem Y/Gem Y 14.png</key>
+            <key type="filename">../../graphic/gems/Animations/Gem Y/Gem Y 15.png</key>
+            <key type="filename">../../graphic/gems/Animations/Gem Y/Gem Y 16.png</key>
+            <key type="filename">../../graphic/gems/Animations/Gem Y/Gem Y 17.png</key>
+            <key type="filename">../../graphic/gems/Animations/Gem Y/Gem Y 18.png</key>
+            <key type="filename">../../graphic/gems/Animations/Gem Y/Gem Y 19.png</key>
+            <key type="filename">../../graphic/gems/Animations/Gem Y/Gem Y 20.png</key>
+            <key type="filename">../../graphic/gems/Animations/Gem Y/Gem Y 21.png</key>
+            <key type="filename">../../graphic/gems/Animations/Gem Y/Gem Y 22.png</key>
+            <key type="filename">../../graphic/gems/Animations/Gem Y/Gem Y 23.png</key>
+            <key type="filename">../../graphic/gems/Animations/Gem Y/Gem Y 24.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0,0</point_f>
@@ -218,30 +218,30 @@
             <struct type="SpriteSheet">
                 <key>files</key>
                 <array>
-                    <filename>../../graphic/gems/Animations/Gem C/Gem C 01.png</filename>
-                    <filename>../../graphic/gems/Animations/Gem C/Gem C 02.png</filename>
-                    <filename>../../graphic/gems/Animations/Gem C/Gem C 03.png</filename>
-                    <filename>../../graphic/gems/Animations/Gem C/Gem C 04.png</filename>
-                    <filename>../../graphic/gems/Animations/Gem C/Gem C 05.png</filename>
-                    <filename>../../graphic/gems/Animations/Gem C/Gem C 06.png</filename>
-                    <filename>../../graphic/gems/Animations/Gem C/Gem C 07.png</filename>
-                    <filename>../../graphic/gems/Animations/Gem C/Gem C 08.png</filename>
-                    <filename>../../graphic/gems/Animations/Gem C/Gem C 09.png</filename>
-                    <filename>../../graphic/gems/Animations/Gem C/Gem C 10.png</filename>
-                    <filename>../../graphic/gems/Animations/Gem C/Gem C 11.png</filename>
-                    <filename>../../graphic/gems/Animations/Gem C/Gem C 12.png</filename>
-                    <filename>../../graphic/gems/Animations/Gem C/Gem C 13.png</filename>
-                    <filename>../../graphic/gems/Animations/Gem C/Gem C 14.png</filename>
-                    <filename>../../graphic/gems/Animations/Gem C/Gem C 15.png</filename>
-                    <filename>../../graphic/gems/Animations/Gem C/Gem C 16.png</filename>
-                    <filename>../../graphic/gems/Animations/Gem C/Gem C 17.png</filename>
-                    <filename>../../graphic/gems/Animations/Gem C/Gem C 18.png</filename>
-                    <filename>../../graphic/gems/Animations/Gem C/Gem C 19.png</filename>
-                    <filename>../../graphic/gems/Animations/Gem C/Gem C 20.png</filename>
-                    <filename>../../graphic/gems/Animations/Gem C/Gem C 21.png</filename>
-                    <filename>../../graphic/gems/Animations/Gem C/Gem C 22.png</filename>
-                    <filename>../../graphic/gems/Animations/Gem C/Gem C 23.png</filename>
-                    <filename>../../graphic/gems/Animations/Gem C/Gem C 24.png</filename>
+                    <filename>../../graphic/gems/Animations/Gem Y/Gem Y 01.png</filename>
+                    <filename>../../graphic/gems/Animations/Gem Y/Gem Y 02.png</filename>
+                    <filename>../../graphic/gems/Animations/Gem Y/Gem Y 03.png</filename>
+                    <filename>../../graphic/gems/Animations/Gem Y/Gem Y 04.png</filename>
+                    <filename>../../graphic/gems/Animations/Gem Y/Gem Y 05.png</filename>
+                    <filename>../../graphic/gems/Animations/Gem Y/Gem Y 06.png</filename>
+                    <filename>../../graphic/gems/Animations/Gem Y/Gem Y 07.png</filename>
+                    <filename>../../graphic/gems/Animations/Gem Y/Gem Y 08.png</filename>
+                    <filename>../../graphic/gems/Animations/Gem Y/Gem Y 09.png</filename>
+                    <filename>../../graphic/gems/Animations/Gem Y/Gem Y 10.png</filename>
+                    <filename>../../graphic/gems/Animations/Gem Y/Gem Y 11.png</filename>
+                    <filename>../../graphic/gems/Animations/Gem Y/Gem Y 12.png</filename>
+                    <filename>../../graphic/gems/Animations/Gem Y/Gem Y 13.png</filename>
+                    <filename>../../graphic/gems/Animations/Gem Y/Gem Y 14.png</filename>
+                    <filename>../../graphic/gems/Animations/Gem Y/Gem Y 15.png</filename>
+                    <filename>../../graphic/gems/Animations/Gem Y/Gem Y 16.png</filename>
+                    <filename>../../graphic/gems/Animations/Gem Y/Gem Y 17.png</filename>
+                    <filename>../../graphic/gems/Animations/Gem Y/Gem Y 18.png</filename>
+                    <filename>../../graphic/gems/Animations/Gem Y/Gem Y 19.png</filename>
+                    <filename>../../graphic/gems/Animations/Gem Y/Gem Y 20.png</filename>
+                    <filename>../../graphic/gems/Animations/Gem Y/Gem Y 21.png</filename>
+                    <filename>../../graphic/gems/Animations/Gem Y/Gem Y 22.png</filename>
+                    <filename>../../graphic/gems/Animations/Gem Y/Gem Y 23.png</filename>
+                    <filename>../../graphic/gems/Animations/Gem Y/Gem Y 24.png</filename>
                 </array>
             </struct>
         </map>

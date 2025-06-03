@@ -1,12 +1,18 @@
-export enum AnimationsUrls {
-  GemV = "/assets/animations-json/gemv.json",
-  GemC = "/assets/animations-json/gemc.json",
-  GemG = "/assets/animations-json/gemg.json",
-}
+import { TextureType } from "./types";
+
+export const AnimationsUrls: Record<TextureType, string> = {
+  GemV: "/assets/animations-json/gemv.json",
+  GemC: "/assets/animations-json/gemc.json",
+  GemG: "/assets/animations-json/gemg.json",
+  GemW: "/assets/animations-json/gemw.json",
+  GemY: "/assets/animations-json/gemy.json",
+  GemR: "/assets/animations-json/gemr.json",
+};
 
 export enum AnimationsNames {
   Gem = "Gem",
 }
+export const SLOT_SYMBOLS_Y_POS = [-16, 172, 360, 548, 736];
 export const REEL_WIDTH = 6;
 export const REEL_HEIGHT = 5;
 export const REEL_BORDER_SIZE_PX = 70;
