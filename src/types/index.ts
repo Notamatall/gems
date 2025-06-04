@@ -1,5 +1,4 @@
-import { AnimatedSprite, Container, Dict } from "pixi.js";
-import { GameSymbol } from "./GameSymbol";
+import { AnimatedSprite, Dict } from "pixi.js";
 
 export enum TextureType {
   gemv = "GemV",
@@ -8,6 +7,8 @@ export enum TextureType {
   gemw = "GemW",
   gemy = "GemY",
   gemr = "GemR",
+  chests = "ChestS",
+  chestg = "ChestG",
 }
 
 export interface SlotTexture {

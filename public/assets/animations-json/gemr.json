@@ -170,7 +170,7 @@
     }
   },
   "animations": {
-    "Gem": [
+    "anim": [
       "Gem R01.png",
       "Gem R02.png",
       "Gem R03.png",

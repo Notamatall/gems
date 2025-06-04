@@ -1,0 +1,209 @@
+{
+  "frames": {
+    "Chest Silver 01.png": {
+      "frame": { "x": 195, "y": 1278, "w": 190, "h": 187 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 15, "y": 16, "w": 190, "h": 187 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "Chest Silver 02.png": {
+      "frame": { "x": 193, "y": 1467, "w": 190, "h": 170 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 15, "y": 34, "w": 190, "h": 170 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "Chest Silver 03.png": {
+      "frame": { "x": 1, "y": 1297, "w": 190, "h": 182 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 15, "y": 22, "w": 190, "h": 182 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "Chest Silver 04.png": {
+      "frame": { "x": 1, "y": 1107, "w": 192, "h": 188 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 14, "y": 15, "w": 192, "h": 188 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "Chest Silver 05.png": {
+      "frame": { "x": 1, "y": 1107, "w": 192, "h": 188 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 14, "y": 15, "w": 192, "h": 188 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "Chest Silver 06.png": {
+      "frame": { "x": 1, "y": 1107, "w": 192, "h": 188 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 14, "y": 15, "w": 192, "h": 188 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "Chest Silver 07.png": {
+      "frame": { "x": 1, "y": 1, "w": 220, "h": 220 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 220, "h": 220 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "Chest Silver 08.png": {
+      "frame": { "x": 1, "y": 223, "w": 220, "h": 220 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 220, "h": 220 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "Chest Silver 09.png": {
+      "frame": { "x": 223, "y": 656, "w": 208, "h": 208 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 5, "y": 6, "w": 208, "h": 208 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "Chest Silver 10.png": {
+      "frame": { "x": 223, "y": 1, "w": 214, "h": 214 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 2, "y": 3, "w": 214, "h": 214 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "Chest Silver 11.png": {
+      "frame": { "x": 1, "y": 889, "w": 218, "h": 216 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 0, "y": 2, "w": 218, "h": 216 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "Chest Silver 12.png": {
+      "frame": { "x": 221, "y": 1057, "w": 219, "h": 215 },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 1, "y": 3, "w": 219, "h": 215 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "Chest Silver 13.png": {
+      "frame": { "x": 223, "y": 439, "w": 215, "h": 206 },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 2, "y": 6, "w": 215, "h": 206 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "Chest Silver 14.png": {
+      "frame": { "x": 1, "y": 445, "w": 220, "h": 220 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 220, "h": 220 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "Chest Silver 15.png": {
+      "frame": { "x": 1, "y": 667, "w": 220, "h": 220 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 220, "h": 220 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "Chest Silver 16.png": {
+      "frame": { "x": 223, "y": 217, "w": 220, "h": 208 },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 0, "y": 12, "w": 220, "h": 208 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "Chest Silver 17.png": {
+      "frame": { "x": 223, "y": 866, "w": 200, "h": 189 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 0, "y": 29, "w": 200, "h": 189 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "Chest Silver 18.png": {
+      "frame": { "x": 1, "y": 1481, "w": 168, "h": 155 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 15, "y": 45, "w": 168, "h": 155 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "Chest Silver 19.png": {
+      "frame": { "x": 287, "y": 1639, "w": 144, "h": 133 },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 27, "y": 56, "w": 144, "h": 133 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "Chest Silver 20.png": {
+      "frame": { "x": 1, "y": 1776, "w": 146, "h": 134 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 26, "y": 60, "w": 146, "h": 134 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "Chest Silver 21.png": {
+      "frame": { "x": 1, "y": 1638, "w": 146, "h": 136 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 25, "y": 64, "w": 146, "h": 136 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "Chest Silver 22.png": {
+      "frame": { "x": 149, "y": 1639, "w": 145, "h": 136 },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 25, "y": 69, "w": 145, "h": 136 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "Chest Silver 23.png": {
+      "frame": { "x": 280, "y": 1786, "w": 129, "h": 123 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 38, "y": 76, "w": 129, "h": 123 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "Chest Silver 24.png": {
+      "frame": { "x": 149, "y": 1786, "w": 129, "h": 124 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 38, "y": 83, "w": 129, "h": 124 },
+      "sourceSize": { "w": 220, "h": 220 }
+    }
+  },
+  "animations": {
+    "anim": [
+      "Chest Silver 01.png",
+      "Chest Silver 02.png",
+      "Chest Silver 03.png",
+      "Chest Silver 04.png",
+      "Chest Silver 05.png",
+      "Chest Silver 06.png",
+      "Chest Silver 07.png",
+      "Chest Silver 08.png",
+      "Chest Silver 09.png",
+      "Chest Silver 10.png",
+      "Chest Silver 11.png",
+      "Chest Silver 12.png",
+      "Chest Silver 13.png",
+      "Chest Silver 14.png",
+      "Chest Silver 15.png",
+      "Chest Silver 16.png",
+      "Chest Silver 17.png",
+      "Chest Silver 18.png",
+      "Chest Silver 19.png",
+      "Chest Silver 20.png",
+      "Chest Silver 21.png",
+      "Chest Silver 22.png",
+      "Chest Silver 23.png",
+      "Chest Silver 24.png"
+    ]
+  },
+  "meta": {
+    "app": "https://www.codeandweb.com/texturepacker",
+    "version": "1.1",
+    "image": "chestsilver.png",
+    "format": "RGBA8888",
+    "size": { "w": 438, "h": 1911 },
+    "scale": "1",
+    "smartupdate": "$TexturePacker:SmartUpdate:7f7e595e69f2b5fb8de1f094601f7e35:745fde5812fb0c0d1e060079f02f53aa:055021256e1e8791ca28645b084c91c5$"
+  }
+}

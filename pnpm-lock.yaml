@@ -14,6 +14,9 @@ importers:
       '@pixi/react':
         specifier: ^8.0.2
         version: 8.0.2(@types/react@19.1.6)(pixi.js@8.9.2)(react@19.1.0)
+      '@pixi/sound':
+        specifier: ^6.0.1
+        version: 6.0.1(pixi.js@8.9.2)
       pixi.js:
         specifier: ^8.2.6
         version: 8.9.2
@@ -281,6 +284,11 @@ packages:
     peerDependencies:
       pixi.js: ^8.2.6
       react: '>=19.0.0'
+
+  '@pixi/sound@6.0.1':
+    resolution: {integrity: sha512-hpFlQSScAR2L/CsEoIvDi7s1oGsu8y9Zd742Vd3982N+q3IF2vFuIfV9HN4ryjlGnhCT8yBlEgs1gp4G9Rt9TA==}
+    peerDependencies:
+      pixi.js: ^8.0.0
 
   '@pkgr/core@0.2.7':
     resolution: {integrity: sha512-YLT9Zo3oNPJoBjBc4q8G2mjU4tqIbf5CEOORbUUr48dCD9q3umJ3IPlVqOqDakPfd2HuwccBaqlGhN4Gmr5OWg==}
@@ -1154,6 +1162,10 @@ snapshots:
       react-reconciler: 0.31.0(react@19.1.0)
     transitivePeerDependencies:
       - '@types/react'
+
+  '@pixi/sound@6.0.1(pixi.js@8.9.2)':
+    dependencies:
+      pixi.js: 8.9.2
 
   '@pkgr/core@0.2.7': {}
 

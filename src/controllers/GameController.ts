@@ -7,13 +7,14 @@ import {
   ANIMATION_DIFFERENCE,
   FALL_SYMBOL_GAP,
   SLOT_SYMBOLS_Y_POS,
-  GAME_SYMBOL_LEAST_MATCHES,
+  MIN_MATCH_COUNT,
 } from "../constants";
 import { SlotSymbol, TextureType } from "../types";
 import { ResourcesController } from "./ResourcesController";
 import { SlotReel } from "../types/SlotReel";
 import { GameSymbol } from "../types/GameSymbol";
 import { waitAsync } from "../utils";
+import { AudioController, AudioKey } from "./AudioController";
 
 type SlotState =
   | "idle"
@@ -27,25 +28,36 @@ type SlotState =
   | "waiting";
 
 export class GameController {
-  constructor(app: Application, resCtrl: ResourcesController) {
+  constructor(
+    app: Application,
+    resCtrl: ResourcesController,
+    audioCtrl: AudioController,
+  ) {
     this._app = app;
     this._resCtrl = resCtrl;
-
+    this._audioCtrl = audioCtrl;
     const exploadButton = document.getElementById("expload-button");
     if (!exploadButton) throw new Error("Expload button not found");
     exploadButton.onclick = () => {
       this.expload();
+    };
+    const audioButton = document.getElementById("audio-button");
+    if (!audioButton) throw new Error("Expload button not found");
+    audioButton.onclick = () => {
+      this._audioCtrl.play(AudioKey.bg, { loop: true, volume: 0.2 });
     };
     const playButton = document.getElementById("play-button");
     if (!playButton) throw new Error("Play button not found");
     this._playButton = playButton as HTMLButtonElement;
     this._playButton.onclick = () => {
       this.play();
+      this._audioCtrl.play(AudioKey.bet);
     };
   }
   private _playButton: HTMLButtonElement;
   private _app: Application;
   private _resCtrl: ResourcesController;
+  private _audioCtrl: AudioController;
   private state: SlotState = "idle";
   private _reels: SlotReel[] = [];
   private _isInitial = true;
@@ -79,7 +91,7 @@ export class GameController {
     this.genAllReelSym();
   }
 
-  private genSignleReelSym(reelIndex: number): SlotSymbol[] {
+  private genSingleReelSym(reelIndex: number): SlotSymbol[] {
     const reel = this._reels[reelIndex];
     const gameSymbols: SlotSymbol[] = [];
     for (let index = REEL_HEIGHT; index > 0; index--) {
@@ -101,9 +113,9 @@ export class GameController {
   private genAllReelSym() {
     const reelLength = this._reels.length;
 
-    for (let index = 0; index < this._reels.length; index++) {
+    for (let index = 0; index < reelLength; index++) {
       const reel = this._reels[index];
-      const slotSymbols = this.genSignleReelSym(index);
+      const slotSymbols = this.genSingleReelSym(index);
 
       const activeSymbols = reel.symbols.filter(
         (symbol) => symbol.state === "Active",
@@ -118,7 +130,7 @@ export class GameController {
           new GameSymbol({
             type: symbol.type,
             animSprite: symbol.animSprite,
-            row: reelLength - index,
+            row: REEL_HEIGHT - index,
             col: index,
             finalYPos: SLOT_SYMBOLS_Y_POS[ind],
             reel,
@@ -142,6 +154,8 @@ export class GameController {
       GemW: [],
       GemY: [],
       GemV: [],
+      ChestG: [],
+      ChestS: [],
     };
 
     for (const type of Object.values(TextureType)) {
@@ -151,9 +165,10 @@ export class GameController {
     }
     let isAnyMatch = false;
     for (const listOfMatches of Object.values(matches)) {
-      if (listOfMatches.length >= GAME_SYMBOL_LEAST_MATCHES) {
+      if (listOfMatches.length >= MIN_MATCH_COUNT) {
         isAnyMatch = true;
         listOfMatches.forEach((sym) => sym.play());
+        this._audioCtrl.play(AudioKey.win);
         await waitAsync(550);
       }
     }
@@ -204,20 +219,13 @@ export class GameController {
     for (let reelIndex = 0; reelIndex < this._reels.length; reelIndex++) {
       const reel = this._reels[reelIndex];
 
-      // Get all active symbols in this reel
       const activeSymbols = reel.actSym;
 
       if (activeSymbols.length === REEL_HEIGHT) continue;
 
-      // Sort symbols by their current Y position (bottom to top)
-      activeSymbols.sort((a, b) => b.animSprite.y - a.animSprite.y);
-
-      // Create array to track which positions are filled
       const filledPositions = new Array(REEL_HEIGHT).fill(false);
 
-      // Mark positions that already have symbols
       activeSymbols.forEach((symbol) => {
-        // Find which slot position this symbol is closest to
         const closestSlot = SLOT_SYMBOLS_Y_POS.findIndex(
           (pos) =>
             Math.abs(symbol.animSprite.y - pos) < SMALL_SYMBOL_SIZE_PX / 2,
@@ -227,8 +235,7 @@ export class GameController {
         }
       });
 
-      // Move existing symbols down to fill gaps
-      let writeIndex = REEL_HEIGHT - 1; // Start from bottom
+      let writeIndex = REEL_HEIGHT - 1;
 
       for (let i = REEL_HEIGHT - 1; i >= 0; i--) {
         if (filledPositions[i]) {
@@ -242,7 +249,7 @@ export class GameController {
           if (symbol && writeIndex !== i) {
             // Update symbol's target position
             symbol.finalYPos = SLOT_SYMBOLS_Y_POS[writeIndex];
-            symbol.row = REEL_HEIGHT - writeIndex;
+            symbol.row = writeIndex;
 
             // Reset velocity to make it fall
             symbol.velocity = 0;
@@ -251,43 +258,38 @@ export class GameController {
           writeIndex--;
         }
       }
+      const emptySlots = REEL_HEIGHT - activeSymbols.length;
+      writeIndex = emptySlots - 1;
 
-      // // Generate new symbols to fill remaining empty slots
-      // const emptySlots = REEL_HEIGHT - activeSymbols.length;
+      if (emptySlots > 0) {
+        const newSymbols: GameSymbol[] = [];
 
-      // if (emptySlots > 0) {
-      //   const newSymbols: GameSymbol[] = [];
+        for (let row = 0; row < emptySlots; row++) {
+          const gameSymbol = this._resCtrl.getRandomSlotSymbol();
+          const sprite = gameSymbol.animSprite;
 
-      //   for (let i = 0; i < emptySlots; i++) {
-      //     const gameSymbol = this._resCtrl.getRandomSlotSymbol();
-      //     const sprite = gameSymbol.animSprite;
+          sprite.x = SMALL_SYMBOL_SIZE_PX / 2 - ANIMATION_DIFFERENCE;
+          sprite.y =
+            -SMALL_SYMBOL_SIZE_PX * (row + 1) -
+            ANIMATION_DIFFERENCE -
+            row * FALL_SYMBOL_GAP;
 
-      //     // Position new symbols above the visible area
-      //     sprite.x = SMALL_SYMBOL_SIZE_PX / 2 - ANIMATION_DIFFERENCE;
-      //     sprite.y =
-      //       -SMALL_SYMBOL_SIZE_PX * (i + 1) -
-      //       ANIMATION_DIFFERENCE -
-      //       i * FALL_SYMBOL_GAP;
+          reel.rc.addChild(sprite);
 
-      //     reel.rc.addChild(sprite);
+          const newGameSymbol = new GameSymbol({
+            type: gameSymbol.type,
+            animSprite: sprite,
+            row,
+            col: reelIndex,
+            finalYPos: SLOT_SYMBOLS_Y_POS[writeIndex - row],
+            reel,
+          });
 
-      //     // Create new GameSymbol with target position
-      //     const targetSlot = i; // Fill from top
-      //     const newGameSymbol = new GameSymbol({
-      //       type: gameSymbol.type,
-      //       animSprite: sprite,
-      //       row: REEL_HEIGHT - targetSlot,
-      //       col: reelIndex,
-      //       finalYPos: SLOT_SYMBOLS_Y_POS[targetSlot],
-      //       reel,
-      //     });
+          newSymbols.push(newGameSymbol);
+        }
 
-      //     newSymbols.push(newGameSymbol);
-      //   }
-
-      //   // Add new symbols to reel
-      //   reel.addSymbols(newSymbols);
-      // }
+        reel.addSymbols(newSymbols);
+      }
     }
     this.state = "start_move";
   }
@@ -303,9 +305,7 @@ export class GameController {
       if (this.state === "finish_destroy") {
         this.moveToEmptyPlaces();
       }
-      // if (this.state === "finish_define_empty") {
-      //   this.animateSlotSymbolsMovement();
-      // }
+
       if (this.state === "waiting") {
         this._playButton.disabled = false;
       }

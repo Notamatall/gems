@@ -7,11 +7,11 @@ export const AnimationsUrls: Record<TextureType, string> = {
   GemW: "/assets/animations-json/gemw.json",
   GemY: "/assets/animations-json/gemy.json",
   GemR: "/assets/animations-json/gemr.json",
+  ChestS: "/assets/animations-json/chestsilver.json",
+  ChestG: "/assets/animations-json/chestgold.json",
 };
 
-export enum AnimationsNames {
-  Gem = "Gem",
-}
+export const SLOT_SYM_ANIMATION_NAME = "anim";
 export const SLOT_SYMBOLS_Y_POS = [-16, 172, 360, 548, 736];
 export const REEL_WIDTH = 6;
 export const REEL_HEIGHT = 5;
@@ -20,4 +20,4 @@ export const SMALL_SYMBOL_SIZE_PX = 188;
 export const ANIMATION_DIFFERENCE = 16;
 export const FALL_SYMBOL_GAP = 80;
 export const REEL_VIEWPORT_MAX_Y = 736 + 188;
-export const GAME_SYMBOL_LEAST_MATCHES = 8;
+export const MIN_MATCH_COUNT = 8;

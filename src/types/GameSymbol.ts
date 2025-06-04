@@ -63,7 +63,7 @@ export class GameSymbol {
   }
 
   removeWithPhysics() {
-    const baseGravity = 30;
+    const baseGravity = 45;
     const damping = 1.2 + this.row * 0.2;
 
     const gravity = baseGravity;
@@ -82,7 +82,7 @@ export class GameSymbol {
   }
 
   moveWithPhysics() {
-    const gravity = 5;
+    const gravity = 2;
     const damping = 1;
     const { animSprite, finalYPos } = this;
     const distance = finalYPos - animSprite.y;

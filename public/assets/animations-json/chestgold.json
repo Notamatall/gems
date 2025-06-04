@@ -1,0 +1,209 @@
+{
+  "frames": {
+    "Chest Gold 01.png": {
+      "frame": { "x": 1, "y": 1287, "w": 190, "h": 189 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 15, "y": 15, "w": 190, "h": 189 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "Chest Gold 02.png": {
+      "frame": { "x": 193, "y": 1476, "w": 190, "h": 172 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 15, "y": 33, "w": 190, "h": 172 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "Chest Gold 03.png": {
+      "frame": { "x": 193, "y": 1290, "w": 190, "h": 184 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 15, "y": 21, "w": 190, "h": 184 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "Chest Gold 04.png": {
+      "frame": { "x": 1, "y": 1096, "w": 192, "h": 189 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 14, "y": 15, "w": 192, "h": 189 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "Chest Gold 05.png": {
+      "frame": { "x": 1, "y": 1096, "w": 192, "h": 189 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 14, "y": 15, "w": 192, "h": 189 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "Chest Gold 06.png": {
+      "frame": { "x": 1, "y": 1096, "w": 192, "h": 189 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 14, "y": 15, "w": 192, "h": 189 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "Chest Gold 07.png": {
+      "frame": { "x": 1, "y": 1, "w": 220, "h": 220 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 220, "h": 220 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "Chest Gold 08.png": {
+      "frame": { "x": 223, "y": 1, "w": 220, "h": 220 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 220, "h": 220 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "Chest Gold 09.png": {
+      "frame": { "x": 216, "y": 884, "w": 207, "h": 208 },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 6, "y": 5, "w": 207, "h": 208 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "Chest Gold 10.png": {
+      "frame": { "x": 1, "y": 666, "w": 213, "h": 214 },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 3, "y": 2, "w": 213, "h": 214 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "Chest Gold 11.png": {
+      "frame": { "x": 223, "y": 665, "w": 217, "h": 217 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 1, "y": 1, "w": 217, "h": 217 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "Chest Gold 12.png": {
+      "frame": { "x": 223, "y": 445, "w": 218, "h": 218 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 0, "y": 2, "w": 218, "h": 218 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "Chest Gold 13.png": {
+      "frame": { "x": 1, "y": 881, "w": 213, "h": 213 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 2, "y": 6, "w": 213, "h": 213 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "Chest Gold 14.png": {
+      "frame": { "x": 1, "y": 223, "w": 220, "h": 220 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 220, "h": 220 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "Chest Gold 15.png": {
+      "frame": { "x": 223, "y": 223, "w": 220, "h": 220 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 220, "h": 220 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "Chest Gold 16.png": {
+      "frame": { "x": 1, "y": 445, "w": 220, "h": 219 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 0, "y": 1, "w": 220, "h": 219 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "Chest Gold 17.png": {
+      "frame": { "x": 216, "y": 1093, "w": 220, "h": 195 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 0, "y": 21, "w": 220, "h": 195 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "Chest Gold 18.png": {
+      "frame": { "x": 1, "y": 1478, "w": 188, "h": 160 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 13, "y": 38, "w": 188, "h": 160 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "Chest Gold 19.png": {
+      "frame": { "x": 341, "y": 1650, "w": 160, "h": 135 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 25, "y": 52, "w": 160, "h": 135 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "Chest Gold 20.png": {
+      "frame": { "x": 1, "y": 1778, "w": 164, "h": 136 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 22, "y": 56, "w": 164, "h": 136 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "Chest Gold 21.png": {
+      "frame": { "x": 1, "y": 1640, "w": 167, "h": 136 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 20, "y": 61, "w": 167, "h": 136 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "Chest Gold 22.png": {
+      "frame": { "x": 170, "y": 1650, "w": 169, "h": 133 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 18, "y": 68, "w": 169, "h": 133 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "Chest Gold 23.png": {
+      "frame": { "x": 167, "y": 1785, "w": 162, "h": 132 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 25, "y": 77, "w": 162, "h": 132 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "Chest Gold 24.png": {
+      "frame": { "x": 385, "y": 1290, "w": 163, "h": 116 },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 23, "y": 101, "w": 163, "h": 116 },
+      "sourceSize": { "w": 220, "h": 220 }
+    }
+  },
+  "animations": {
+    "anim": [
+      "Chest Gold 01.png",
+      "Chest Gold 02.png",
+      "Chest Gold 03.png",
+      "Chest Gold 04.png",
+      "Chest Gold 05.png",
+      "Chest Gold 06.png",
+      "Chest Gold 07.png",
+      "Chest Gold 08.png",
+      "Chest Gold 09.png",
+      "Chest Gold 10.png",
+      "Chest Gold 11.png",
+      "Chest Gold 12.png",
+      "Chest Gold 13.png",
+      "Chest Gold 14.png",
+      "Chest Gold 15.png",
+      "Chest Gold 16.png",
+      "Chest Gold 17.png",
+      "Chest Gold 18.png",
+      "Chest Gold 19.png",
+      "Chest Gold 20.png",
+      "Chest Gold 21.png",
+      "Chest Gold 22.png",
+      "Chest Gold 23.png",
+      "Chest Gold 24.png"
+    ]
+  },
+  "meta": {
+    "app": "https://www.codeandweb.com/texturepacker",
+    "version": "1.1",
+    "image": "chestgold.png",
+    "format": "RGBA8888",
+    "size": { "w": 502, "h": 1918 },
+    "scale": "1",
+    "smartupdate": "$TexturePacker:SmartUpdate:33e64d78bea6cabc3bcd998799add7f2:8827d1792a5c316c8e47aafd23f0bfe2:b3855bdaa6f4a142789b7c4348295b8d$"
+  }
+}

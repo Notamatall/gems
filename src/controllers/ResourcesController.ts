@@ -8,7 +8,7 @@ import {
 } from "pixi.js";
 import { loadSprite } from "../utils";
 import { SlotSymbol, SlotTexture, TextureType } from "../types";
-import { AnimationsNames, AnimationsUrls } from "../constants";
+import { AnimationsUrls, SLOT_SYM_ANIMATION_NAME } from "../constants";
 
 export class ResourcesController {
   private _reelBg?: Sprite;
@@ -41,7 +41,7 @@ export class ResourcesController {
   getRandomSlotSymbol() {
     const slotTexture = this.getRandomSlotTexture();
     const animSprite = AnimatedSprite.fromFrames(
-      slotTexture.animations[AnimationsNames.Gem],
+      slotTexture.animations[SLOT_SYM_ANIMATION_NAME],
     );
     return new SlotSymbol({ animSprite, type: slotTexture.type });
   }
