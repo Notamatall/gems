@@ -6,19 +6,91 @@
   <link rel="icon" type="image/png" href="/favicon.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="src/style.css" />
+  <link rel="stylesheet" href="src/style-interactive.css" />
+  <link rel="stylesheet" href="src/style-root.css" />
   <title>PixiJS - Template</title>
-</head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Exo:ital,wght@0,100..900;1,100..900&family=Outfit:wght@100..900&display=swap"
+    rel="stylesheet">
 
 <body>
   <div id="app">
-    <div id="pixi-container"></div>
-    <div>
-      <!-- <button id="spin-button">spin</button> -->
-      <button id="play-button">play</button>
-      <button id="expload-button">expload</button>
-      <button id="audio-button">audio</button>
+
+    <div id="game-container">
+      <div id="pixi-container"></div>
     </div>
 
+    <div id="main-panel">
+      <div id="MainPanelContainer">
+
+        <div id="DataPanel">
+          <div id="DataPanel_Menu">
+            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+              class="icon icon-tabler icons-tabler-outline icon-tabler-menu-deep">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <path d="M4 6h16" />
+              <path d="M7 12h13" />
+              <path d="M10 18h10" />
+            </svg>
+          </div>
+
+          <div class="Divider_Vertical"></div>
+          <div id="Balance" class="DataPanelItem ">
+            <span class="PanelItem_Label">Demo Balance</span>
+            <span id="BalanceValue" class="PanelItem_Value"></span>
+
+          </div>
+        </div>
+
+        <div id="ActionPanel">
+          <div id="BetAmountWidget">
+            <div id="BetAmountWidget-container">
+              <span class="PanelItem_Label">Demo Bet</span>
+              <span id="BetAmountValue" class="PanelItem_Value"></span>
+
+              <div id="BetAmountProgress">
+                <div id="BetAmountProgress_Value" style="--progress: 70;"></div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="Divider_Vertical" data-small="true"></div>
+
+          <div class="BetAmountChangersWidget">
+
+            <button class="BetAmountChangersButton" id="BetAmountChangersButton-Inc">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"
+                class="icon icon-tabler icons-tabler-filled icon-tabler-caret-up">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path
+                  d="M11.293 7.293a1 1 0 0 1 1.32 -.083l.094 .083l6 6l.083 .094l.054 .077l.054 .096l.017 .036l.027 .067l.032 .108l.01 .053l.01 .06l.004 .057l.002 .059l-.002 .059l-.005 .058l-.009 .06l-.01 .052l-.032 .108l-.027 .067l-.07 .132l-.065 .09l-.073 .081l-.094 .083l-.077 .054l-.096 .054l-.036 .017l-.067 .027l-.108 .032l-.053 .01l-.06 .01l-.057 .004l-.059 .002h-12c-.852 0 -1.297 -.986 -.783 -1.623l.076 -.084l6 -6z" />
+              </svg>
+            </button>
+
+            <button class="BetAmountChangersButton" id="BetAmountChangersButton-Dec">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"
+                class="icon icon-tabler icons-tabler-filled icon-tabler-caret-down">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path
+                  d="M18 9c.852 0 1.297 .986 .783 1.623l-.076 .084l-6 6a1 1 0 0 1 -1.32 .083l-.094 -.083l-6 -6l-.083 -.094l-.054 -.077l-.054 -.096l-.017 -.036l-.027 -.067l-.032 -.108l-.01 -.053l-.01 -.06l-.004 -.057v-.118l.005 -.058l.009 -.06l.01 -.052l.032 -.108l.027 -.067l.07 -.132l.065 -.09l.073 -.081l.094 -.083l.077 -.054l.096 -.054l.036 -.017l.067 -.027l.108 -.032l.053 -.01l.06 -.01l.057 -.004l12.059 -.002z" />
+              </svg>
+            </button>
+
+          </div>
+
+          <button id="play-button">
+
+          </button>
+
+        </div>
+      </div>
+
+    </div>
+    <button id="audio-button">audio</button>
   </div>
   <script type="module" src="/src/main.ts"></script>
 </body>

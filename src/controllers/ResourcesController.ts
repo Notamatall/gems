@@ -14,6 +14,17 @@ export class ResourcesController {
   private _reelBg?: Sprite;
   private _bg?: Sprite;
   private _slotTextures: SlotTexture[] = [];
+  private static _instance: ResourcesController;
+
+  static async create(app: Application) {
+    if (this._instance) return this._instance;
+    const resCtrl = new ResourcesController();
+    await this.loadGemsAnimationsInCache();
+    this._instance = resCtrl;
+    await resCtrl.init(app);
+    return this._instance;
+  }
+
   async init(app: Application<Renderer>) {
     this._reelBg = await loadSprite("/assets/reel.png");
     this._slotTextures = Object.entries(AnimationsUrls).map(([name, url]) => {
@@ -38,6 +49,7 @@ export class ResourcesController {
   static async loadGemsAnimationsInCache() {
     await Assets.load(Object.values(AnimationsUrls));
   }
+
   getRandomSlotSymbol() {
     const slotTexture = this.getRandomSlotTexture();
     const animSprite = AnimatedSprite.fromFrames(

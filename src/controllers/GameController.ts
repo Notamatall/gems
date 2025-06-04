@@ -15,6 +15,7 @@ import { SlotReel } from "../types/SlotReel";
 import { GameSymbol } from "../types/GameSymbol";
 import { waitAsync } from "../utils";
 import { AudioController, AudioKey } from "./AudioController";
+import { BalanceController } from "./BalanceController";
 
 type SlotState =
   | "idle"
@@ -32,31 +33,32 @@ export class GameController {
     app: Application,
     resCtrl: ResourcesController,
     audioCtrl: AudioController,
+    balController: BalanceController,
   ) {
     this._app = app;
     this._resCtrl = resCtrl;
     this._audioCtrl = audioCtrl;
-    const exploadButton = document.getElementById("expload-button");
-    if (!exploadButton) throw new Error("Expload button not found");
-    exploadButton.onclick = () => {
-      this.expload();
-    };
+    this._balCtrl = balController;
+
     const audioButton = document.getElementById("audio-button");
     if (!audioButton) throw new Error("Expload button not found");
     audioButton.onclick = () => {
-      this._audioCtrl.play(AudioKey.bg, { loop: true, volume: 0.2 });
+      this._audioCtrl.play(AudioKey.bg, { loop: true, volume: 0.1 });
     };
+
     const playButton = document.getElementById("play-button");
     if (!playButton) throw new Error("Play button not found");
     this._playButton = playButton as HTMLButtonElement;
     this._playButton.onclick = () => {
       this.play();
-      this._audioCtrl.play(AudioKey.bet);
+      this._balCtrl.decBal();
+      this._audioCtrl.play(AudioKey.bet, { volume: 0.2 });
     };
   }
   private _playButton: HTMLButtonElement;
   private _app: Application;
   private _resCtrl: ResourcesController;
+  private _balCtrl: BalanceController;
   private _audioCtrl: AudioController;
   private state: SlotState = "idle";
   private _reels: SlotReel[] = [];
@@ -182,10 +184,20 @@ export class GameController {
     }
   }
 
+  disCtrlsGlobal() {
+    this._balCtrl.disCtrls();
+    this._playButton.disabled = true;
+  }
+
+  enCtrlsGlobal() {
+    this._balCtrl.enCtrls();
+    this._playButton.disabled = false;
+  }
+
   private play() {
     this.state = "start_move";
     this._isInitial = false;
-    this._playButton.disabled = true;
+    this.disCtrlsGlobal();
     this.genAllReelSym();
   }
 
@@ -200,9 +212,13 @@ export class GameController {
         sym.removeWithPhysics();
       }
 
-      for (let asInd = 0; asInd < actSym.length; asInd++) {
-        const sym = actSym[asInd];
-        sym.moveWithPhysics();
+      if (!reel.isAllPlaced) {
+        for (let asInd = 0; asInd < actSym.length; asInd++) {
+          const sym = actSym[asInd];
+          sym.moveWithPhysics();
+        }
+        if (reel.isAllPlaced && this._isInitial === false)
+          this._audioCtrl.play(AudioKey.drop, { volume: 0.6 });
       }
     }
 
@@ -214,7 +230,6 @@ export class GameController {
   }
 
   private moveToEmptyPlaces() {
-    // debugger;
     this.state = "start_define_empty";
     for (let reelIndex = 0; reelIndex < this._reels.length; reelIndex++) {
       const reel = this._reels[reelIndex];
@@ -226,6 +241,8 @@ export class GameController {
       const filledPositions = new Array(REEL_HEIGHT).fill(false);
 
       activeSymbols.forEach((symbol) => {
+        //TODO
+
         const closestSlot = SLOT_SYMBOLS_Y_POS.findIndex(
           (pos) =>
             Math.abs(symbol.animSprite.y - pos) < SMALL_SYMBOL_SIZE_PX / 2,
@@ -239,7 +256,7 @@ export class GameController {
 
       for (let i = REEL_HEIGHT - 1; i >= 0; i--) {
         if (filledPositions[i]) {
-          // Find the symbol at this position
+          //TODO
           const symbol = activeSymbols.find(
             (sym) =>
               Math.abs(sym.animSprite.y - SLOT_SYMBOLS_Y_POS[i]) <
@@ -247,11 +264,9 @@ export class GameController {
           );
 
           if (symbol && writeIndex !== i) {
-            // Update symbol's target position
             symbol.finalYPos = SLOT_SYMBOLS_Y_POS[writeIndex];
             symbol.row = writeIndex;
 
-            // Reset velocity to make it fall
             symbol.velocity = 0;
           }
 
@@ -307,7 +322,7 @@ export class GameController {
       }
 
       if (this.state === "waiting") {
-        this._playButton.disabled = false;
+        this.enCtrlsGlobal();
       }
     });
   }

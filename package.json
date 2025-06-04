@@ -13,6 +13,8 @@
     "@pixi/devtools": "^2.0.1",
     "@pixi/react": "^8.0.2",
     "@pixi/sound": "^6.0.1",
+    "@tabler/icons": "^3.34.0",
+    "countup.js": "^2.9.0",
     "pixi.js": "^8.2.6",
     "react": "^19.1.0"
   },
