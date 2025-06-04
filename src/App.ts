@@ -1,5 +1,5 @@
 import { initDevtools } from "@pixi/devtools";
-import { Application, Container } from "pixi.js";
+import { Application } from "pixi.js";
 
 const app = new Application();
 const initApp = async () => {

@@ -6,9 +6,9 @@ import {
   Sprite,
   Spritesheet,
 } from "pixi.js";
-import { loadSprite } from "./utils";
-import { SlotSymbol, SlotTexture, TextureType } from "./types";
-import { AnimationsNames, AnimationsUrls } from "./constants";
+import { loadSprite } from "../utils";
+import { SlotSymbol, SlotTexture, TextureType } from "../types";
+import { AnimationsNames, AnimationsUrls } from "../constants";
 
 export class ResourcesController {
   private _reelBg?: Sprite;
@@ -35,6 +35,9 @@ export class ResourcesController {
     ];
   }
 
+  static async loadGemsAnimationsInCache() {
+    await Assets.load(Object.values(AnimationsUrls));
+  }
   getRandomSlotSymbol() {
     const slotTexture = this.getRandomSlotTexture();
     const animSprite = AnimatedSprite.fromFrames(

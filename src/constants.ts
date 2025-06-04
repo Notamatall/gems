@@ -20,3 +20,4 @@ export const SMALL_SYMBOL_SIZE_PX = 188;
 export const ANIMATION_DIFFERENCE = 16;
 export const FALL_SYMBOL_GAP = 80;
 export const REEL_VIEWPORT_MAX_Y = 736 + 188;
+export const GAME_SYMBOL_LEAST_MATCHES = 8;
