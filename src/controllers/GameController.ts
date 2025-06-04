@@ -289,7 +289,7 @@ export class GameController {
       //   reel.addSymbols(newSymbols);
       // }
     }
-    this.state = "finish_define_empty";
+    this.state = "start_move";
   }
 
   loop() {
@@ -303,9 +303,9 @@ export class GameController {
       if (this.state === "finish_destroy") {
         this.moveToEmptyPlaces();
       }
-      if (this.state === "finish_define_empty") {
-        this.animateSlotSymbolsMovement();
-      }
+      // if (this.state === "finish_define_empty") {
+      //   this.animateSlotSymbolsMovement();
+      // }
       if (this.state === "waiting") {
         this._playButton.disabled = false;
       }
