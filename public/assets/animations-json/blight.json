@@ -1,0 +1,44 @@
+{
+  "frames": {
+    "m8.png": {
+      "frame": { "x": 341, "y": 1, "w": 169, "h": 117 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 91, "y": 321, "w": 169, "h": 117 },
+      "sourceSize": { "w": 274, "h": 495 }
+    },
+    "m9.png": {
+      "frame": { "x": 1, "y": 193, "w": 130, "h": 442 },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 99, "y": 0, "w": 130, "h": 442 },
+      "sourceSize": { "w": 274, "h": 495 }
+    },
+    "m10.png": {
+      "frame": { "x": 1, "y": 120, "w": 71, "h": 461 },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 85, "y": 0, "w": 71, "h": 461 },
+      "sourceSize": { "w": 274, "h": 495 }
+    },
+    "m11.png": {
+      "frame": { "x": 1, "y": 1, "w": 58, "h": 338 },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 81, "y": 0, "w": 58, "h": 338 },
+      "sourceSize": { "w": 274, "h": 495 }
+    }
+  },
+  "animations": {
+    "anim": ["m8.png", "m9.png", "m10.png", "m11.png"]
+  },
+  "meta": {
+    "app": "https://www.codeandweb.com/texturepacker",
+    "version": "1.1",
+    "image": "blight.png",
+    "format": "RGBA8888",
+    "size": { "w": 511, "h": 324 },
+    "scale": "1",
+    "smartupdate": "$TexturePacker:SmartUpdate:804324f89106df53c6a3f5e26569e711:4248ca94491bbf4d0503b772776855d0:a50ca0d006030eeae0f2860c73c568fa$"
+  }
+}

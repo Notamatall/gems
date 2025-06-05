@@ -5,15 +5,17 @@
   <meta charset="UTF-8" />
   <link rel="icon" type="image/png" href="/favicon.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="src/style.css" />
-  <link rel="stylesheet" href="src/style-interactive.css" />
-  <link rel="stylesheet" href="src/style-root.css" />
+  <link rel="stylesheet" href="src/styles/style.css" />
+  <link rel="stylesheet" href="src/styles/menu.css" />
+  <link rel="stylesheet" href="src/styles/style-interactive.css" />
+  <link rel="stylesheet" href="src/styles/style-root.css" />
   <title>PixiJS - Template</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
     href="https://fonts.googleapis.com/css2?family=Exo:ital,wght@0,100..900;1,100..900&family=Outfit:wght@100..900&display=swap"
     rel="stylesheet">
+  <link href="https://unpkg.com/@tabler/icons-webfont/tabler-icons.min.css" rel="stylesheet" />
 
 <body>
   <div id="app">
@@ -27,15 +29,103 @@
 
         <div id="DataPanel">
           <div id="DataPanel_Menu">
-            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none"
-              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-              class="icon icon-tabler icons-tabler-outline icon-tabler-menu-deep">
-              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-              <path d="M4 6h16" />
-              <path d="M7 12h13" />
-              <path d="M10 18h10" />
-            </svg>
+            <div class="menu-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="icon icon-tabler icons-tabler-outline icon-tabler-menu-deep">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path d="M4 6h16" />
+                <path d="M7 12h13" />
+                <path d="M10 18h10" />
+              </svg>
+            </div>
+
+            <div class="x-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="icon icon-tabler icons-tabler-outline icon-tabler-x">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path d="M18 6l-12 12" />
+                <path d="M6 6l12 12" />
+              </svg>
+            </div>
+
           </div>
+          <div id="MainMenu" class="MainMenu">
+            <ul>
+              <li id="SoundToggle" class="MainMenuItem" data-active="true">
+                <button class="enabled-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="icon icon-tabler icons-tabler-outline icon-tabler-volume">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <path d="M15 8a5 5 0 0 1 0 8" />
+                    <path d="M17.7 5a9 9 0 0 1 0 14" />
+                    <path
+                      d="M6 15h-2a1 1 0 0 1 -1 -1v-4a1 1 0 0 1 1 -1h2l3.5 -4.5a.8 .8 0 0 1 1.5 .5v14a.8 .8 0 0 1 -1.5 .5l-3.5 -4.5" />
+                  </svg>
+                </button>
+
+                <button class="disabled-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="icon icon-tabler icons-tabler-outline icon-tabler-volume-3">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <path
+                      d="M6 15h-2a1 1 0 0 1 -1 -1v-4a1 1 0 0 1 1 -1h2l3.5 -4.5a.8 .8 0 0 1 1.5 .5v14a.8 .8 0 0 1 -1.5 .5l-3.5 -4.5" />
+                    <path d="M16 10l4 4m0 -4l-4 4" />
+                  </svg>
+                </button>
+
+                <span class="text">SOUND</span>
+              </li>
+              <li id="MusicToggle" class="MainMenuItem" data-active="true">
+                <button class="enabled-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="icon icon-tabler icons-tabler-outline icon-tabler-music">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <path d="M3 17a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" />
+                    <path d="M13 17a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" />
+                    <path d="M9 17v-13h10v13" />
+                    <path d="M9 8h10" />
+                  </svg>
+                </button>
+
+                <button class="disabled-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="icon icon-tabler icons-tabler-outline icon-tabler-music-off">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <path d="M6 17m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
+                    <path d="M14.42 14.45a3 3 0 1 0 4.138 4.119" />
+                    <path d="M9 17v-8m0 -4v-1h10v11" />
+                    <path d="M12 8h7" />
+                    <path d="M3 3l18 18" />
+                  </svg>
+                </button>
+
+                <span class="text">MUSIC</span>
+              </li>
+
+              <li id="GameInfoBtn" class="MainMenuItem MainMenuItem--info">
+                <button class="disabled-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="icon icon-tabler icons-tabler-outline icon-tabler-help-hexagon">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <path
+                      d="M19.875 6.27c.7 .398 1.13 1.143 1.125 1.948v7.284c0 .809 -.443 1.555 -1.158 1.948l-6.75 4.27a2.269 2.269 0 0 1 -2.184 0l-6.75 -4.27a2.225 2.225 0 0 1 -1.158 -1.948v-7.285c0 -.809 .443 -1.554 1.158 -1.947l6.75 -3.98a2.33 2.33 0 0 1 2.25 0l6.75 3.98h-.033z" />
+                    <path d="M12 16v.01" />
+                    <path d="M12 13a2 2 0 0 0 .914 -3.782a1.98 1.98 0 0 0 -2.414 .483" />
+                  </svg>
+                </button>
+                <span class="text">INFO</span>
+              </li>
+
+            </ul>
+          </div>
+
 
           <div class="Divider_Vertical"></div>
           <div id="Balance" class="DataPanelItem ">

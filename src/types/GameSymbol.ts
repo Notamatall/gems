@@ -1,10 +1,11 @@
 import { AnimatedSprite } from "pixi.js";
-import { TextureType } from ".";
+import { GSType } from ".";
 import { SlotReel } from "./SlotReel";
 import { REEL_VIEWPORT_MAX_Y } from "../constants";
+import { AudioKey } from "../controllers/AudioController";
 export type GameSymbolState = "Active" | "Inactive";
 export interface GameSymbolInitializer {
-  type: TextureType;
+  type: GSType;
   row: number;
   col: number;
   finalYPos: number;
@@ -54,7 +55,7 @@ export class GameSymbol {
 
   private _id = gameSymbolId++;
   private _state: GameSymbolState = "Active";
-  private _type: TextureType;
+  private _type: GSType;
   private _animSprite: AnimatedSprite;
   private _row: number;
   private _col: number;
@@ -160,3 +161,15 @@ export class GameSymbol {
     return this._state;
   }
 }
+
+export const GSDestAudioKey: Record<GSType, AudioKey> = {
+  GemC: AudioKey.gemdest,
+  GemG: AudioKey.gemdest,
+  GemR: AudioKey.gemdest,
+  GemW: AudioKey.gemdest,
+  GemY: AudioKey.gemdest,
+  GemV: AudioKey.gemdest,
+  ChestG: AudioKey.chestrew,
+  ChestS: AudioKey.chestrew,
+  FSChest: AudioKey.fshit,
+};

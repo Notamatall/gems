@@ -9,10 +9,10 @@ import {
   SLOT_SYMBOLS_Y_POS,
   MIN_MATCH_COUNT,
 } from "../constants";
-import { SlotSymbol, TextureType } from "../types";
+import { SlotSymbol, GSType, GSEffect } from "../types";
 import { ResourcesController } from "./ResourcesController";
 import { SlotReel } from "../types/SlotReel";
-import { GameSymbol } from "../types/GameSymbol";
+import { GameSymbol, GSDestAudioKey } from "../types/GameSymbol";
 import { waitAsync } from "../utils";
 import { AudioController, AudioKey } from "./AudioController";
 import { BalanceController } from "./BalanceController";
@@ -37,14 +37,8 @@ export class GameController {
   ) {
     this._app = app;
     this._resCtrl = resCtrl;
-    this._audioCtrl = audioCtrl;
+    this._ac = audioCtrl;
     this._balCtrl = balController;
-
-    const audioButton = document.getElementById("audio-button");
-    if (!audioButton) throw new Error("Expload button not found");
-    audioButton.onclick = () => {
-      this._audioCtrl.play(AudioKey.bg, { loop: true, volume: 0.1 });
-    };
 
     const playButton = document.getElementById("play-button");
     if (!playButton) throw new Error("Play button not found");
@@ -52,14 +46,14 @@ export class GameController {
     this._playButton.onclick = () => {
       this.play();
       this._balCtrl.decBal();
-      this._audioCtrl.play(AudioKey.bet, { volume: 0.2 });
+      this._ac.play(AudioKey.bet, { volume: 0.2 });
     };
   }
   private _playButton: HTMLButtonElement;
   private _app: Application;
   private _resCtrl: ResourcesController;
   private _balCtrl: BalanceController;
-  private _audioCtrl: AudioController;
+  private _ac: AudioController;
   private state: SlotState = "idle";
   private _reels: SlotReel[] = [];
   private _isInitial = true;
@@ -136,7 +130,10 @@ export class GameController {
             col: index,
             finalYPos: SLOT_SYMBOLS_Y_POS[ind],
             reel,
-            onPlay: () => this._audioCtrl.play(AudioKey.gemdest),
+            onPlay: () =>
+              this._ac.play(GSDestAudioKey[symbol.type], {
+                volume: 0.2,
+              }),
           }),
       );
       reel.addSymbols(newSymbols);
@@ -150,7 +147,7 @@ export class GameController {
     await waitAsync(200);
     const symbols = this._reels.map((reel) => reel.symbols).flat(1);
 
-    const matches: Record<TextureType, GameSymbol[]> = {
+    const matches: Record<GSType, GameSymbol[]> = {
       GemC: [],
       GemG: [],
       GemR: [],
@@ -162,14 +159,14 @@ export class GameController {
       FSChest: [],
     };
 
-    for (const type of Object.values(TextureType)) {
+    for (const type of Object.values(GSType)) {
       for (const symbol of symbols) {
         if (symbol.type === type) matches[type].push(symbol);
       }
     }
     let isAnyMatch = false;
     for (const [type, value] of Object.entries(matches)) {
-      const minMatchCount = type == TextureType.fschest ? 3 : MIN_MATCH_COUNT;
+      const minMatchCount = type == GSType.chestg ? 3 : MIN_MATCH_COUNT;
       if (value.length >= minMatchCount) {
         isAnyMatch = true;
         value.forEach((sym) => sym.play());
@@ -220,7 +217,7 @@ export class GameController {
           sym.moveWithPhysics();
         }
         if (reel.isAllPlaced && this._isInitial === false)
-          this._audioCtrl.play(AudioKey.drop, { volume: 0.6 });
+          this._ac.play(AudioKey.drop, { speed: 1, volume: 0.3 });
       }
     }
 
@@ -300,7 +297,10 @@ export class GameController {
             col: reelIndex,
             finalYPos: SLOT_SYMBOLS_Y_POS[writeIndex - row],
             reel,
-            onPlay: () => this._audioCtrl.play(AudioKey.gemdest),
+            onPlay: () =>
+              this._ac.play(GSDestAudioKey[gameSymbol.type], {
+                volume: 0.2,
+              }),
           });
 
           newSymbols.push(newGameSymbol);

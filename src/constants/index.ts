@@ -1,6 +1,6 @@
-import { TextureType } from "./types";
+import { GSEffect, GSType } from "../types";
 
-export const AnimationsUrls: Record<TextureType, string> = {
+export const gs_des_anim: Record<GSType, string> = {
   GemV: "/assets/animations-json/gemv.json",
   GemC: "/assets/animations-json/gemc.json",
   GemG: "/assets/animations-json/gemg.json",
@@ -10,6 +10,10 @@ export const AnimationsUrls: Record<TextureType, string> = {
   ChestS: "/assets/animations-json/chestsilver.json",
   ChestG: "/assets/animations-json/chestgold.json",
   FSChest: "/assets/animations-json/fs-chest-green.json",
+};
+
+export const gs_eff_anim: Record<GSEffect, string> = {
+  BlueLight: "/assets/animations-json/bl-220.json",
 };
 
 export const SLOT_SYM_ANIMATION_NAME = "anim";

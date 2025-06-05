@@ -1,0 +1,78 @@
+#MainMenu {
+  align-items: center;
+  background: rgba(var(--menu-panel-rgb), 1);
+  border-bottom: 0;
+  border-radius: 3px 3px 0 0;
+  bottom: 5rem;
+  display: none;
+  left: -0.3rem;
+  position: absolute;
+  max-width: 200px;
+}
+
+#MainMenu ul {
+  align-items: stretch;
+  display: flex;
+  flex-flow: column;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+#MainMenu.is-visible {
+  display: flex;
+}
+
+.MainMenuItem:hover {
+  color: #fff;
+}
+
+.MainMenuItem {
+  align-items: center;
+  backface-visibility: hidden;
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  display: flex;
+  flex-flow: row;
+  font-size: 16px;
+  font-weight: 700;
+  justify-content: flex-start;
+  margin: 0;
+  min-width: 14rem;
+  padding: 1.35rem 2rem;
+  text-align: center;
+  transition: opacity 0.15s ease;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+.enabled-icon,
+.disabled-icon {
+  display: block;
+}
+#MusicToggle[data-active="false"] .enabled-icon {
+  display: none;
+}
+
+#MusicToggle[data-active="true"] .disabled-icon {
+  display: none;
+}
+
+#MusicToggle button,
+#GameInfoBtn button,
+#SoundToggle button {
+  margin-right: 5px;
+}
+
+.MainMenuItem .text {
+  margin-bottom: 4px;
+}
+
+#SoundToggle[data-active="false"] .enabled-icon {
+  display: none;
+}
+
+#SoundToggle[data-active="true"] .disabled-icon {
+  display: none;
+}

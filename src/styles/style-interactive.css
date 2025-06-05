@@ -30,6 +30,7 @@
 }
 
 #DataPanel {
+  user-select: none;
   align-items: center;
   box-sizing: border-box;
   display: flex;
@@ -184,4 +185,17 @@
   overflow: hidden;
   padding: 0;
   width: 3.5rem;
+  cursor: pointer;
+}
+
+.x-icon {
+  display: none;
+}
+
+#DataPanel_Menu[data-active="true"] .menu-icon {
+  display: none;
+}
+
+#DataPanel_Menu[data-active="true"] .x-icon {
+  display: block;
 }

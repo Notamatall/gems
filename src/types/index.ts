@@ -1,6 +1,6 @@
 import { AnimatedSprite, Dict } from "pixi.js";
 
-export enum TextureType {
+export enum GSType {
   gemv = "GemV",
   gemc = "GemC",
   gemg = "GemG",
@@ -12,13 +12,17 @@ export enum TextureType {
   fschest = "FSChest",
 }
 
-export interface SlotTexture {
-  type: TextureType;
+export enum GSEffect {
+  blight = "BlueLight",
+}
+
+export interface TypedAnimation<T> {
+  type: T;
   animations: Dict<string[]>;
 }
 
 export interface SlotSymbolInitializer {
-  type: TextureType;
+  type: GSType;
   animSprite: AnimatedSprite;
 }
 
@@ -29,7 +33,7 @@ export class SlotSymbol {
     animSprite.animationSpeed = 1 / 3;
     animSprite.loop = false;
   }
-  private _type: TextureType;
+  private _type: GSType;
   private _animSprite: AnimatedSprite;
 
   get type() {

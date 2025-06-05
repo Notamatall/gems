@@ -1,0 +1,49 @@
+{
+  "frames": {
+    "multie-sheet8.webp": {
+      "frame": { "x": 1, "y": 1, "w": 274, "h": 495 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 274, "h": 495 },
+      "sourceSize": { "w": 274, "h": 495 }
+    },
+    "multie-sheet9.webp": {
+      "frame": { "x": 277, "y": 1, "w": 274, "h": 495 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 274, "h": 495 },
+      "sourceSize": { "w": 274, "h": 495 }
+    },
+    "multie-sheet10.webp": {
+      "frame": { "x": 553, "y": 1, "w": 274, "h": 495 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 274, "h": 495 },
+      "sourceSize": { "w": 274, "h": 495 }
+    },
+    "multie-sheet11.webp": {
+      "frame": { "x": 829, "y": 1, "w": 274, "h": 495 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 274, "h": 495 },
+      "sourceSize": { "w": 274, "h": 495 }
+    }
+  },
+  "animations": {
+    "anim": [
+      "multie-sheet8.webp",
+      "multie-sheet9.webp",
+      "multie-sheet10.webp",
+      "multie-sheet11.webp"
+    ]
+  },
+  "meta": {
+    "app": "https://www.codeandweb.com/texturepacker",
+    "version": "1.1",
+    "image": "blue-light.png",
+    "format": "RGBA8888",
+    "size": { "w": 1104, "h": 497 },
+    "scale": "1",
+    "smartupdate": "$TexturePacker:SmartUpdate:e4228354946b35e4106805c8a42caec4:7b569f81918429d5474bbae6947d8ea8:0b0b558aae77a73555441f86167b46a0$"
+  }
+}

@@ -4,6 +4,7 @@ import { ResourcesController } from "./controllers/ResourcesController";
 import { GameController } from "./controllers/GameController";
 import { AudioController } from "./controllers/AudioController";
 import { BalanceController } from "./controllers/BalanceController";
+import { HTMLController } from "./controllers/HtmlController";
 
 extensions.add(ResizePlugin);
 
@@ -11,6 +12,7 @@ extensions.add(ResizePlugin);
   const { app } = await initApp();
   const resCtrl = await ResourcesController.create(app);
   const audioCtrl = new AudioController();
+  new HTMLController(audioCtrl);
   const balanceCtrl = new BalanceController(audioCtrl);
   const gameCtrl = new GameController(app, resCtrl, audioCtrl, balanceCtrl);
   await gameCtrl.createDefaulReelsAndMask();

@@ -7,13 +7,18 @@ import {
   Spritesheet,
 } from "pixi.js";
 import { loadSprite } from "../utils";
-import { SlotSymbol, SlotTexture, TextureType } from "../types";
-import { AnimationsUrls, SLOT_SYM_ANIMATION_NAME } from "../constants";
+import { SlotSymbol, TypedAnimation, GSType, GSEffect } from "../types";
+import {
+  gs_des_anim,
+  gs_eff_anim,
+  SLOT_SYM_ANIMATION_NAME,
+} from "../constants";
 
 export class ResourcesController {
   private _reelBg?: Sprite;
   private _bg?: Sprite;
-  private _slotTextures: SlotTexture[] = [];
+  private _slotTextures: TypedAnimation<GSType>[] = [];
+  private _effectTextures: TypedAnimation<GSEffect>[] = [];
   private static _instance: ResourcesController;
 
   static async create(app: Application) {
@@ -27,14 +32,24 @@ export class ResourcesController {
 
   async init(app: Application<Renderer>) {
     this._reelBg = await loadSprite("/assets/reel.png");
-    this._slotTextures = Object.entries(AnimationsUrls).map(([name, url]) => {
+    this._slotTextures = Object.entries(gs_des_anim).map(([name, url]) => {
       const ss = Assets.cache.get<Spritesheet>(url);
       return {
         animations: ss.data.animations!,
         spritesheet: ss,
-        type: name as TextureType,
+        type: name as GSType,
       };
     });
+
+    this._effectTextures = Object.entries(gs_eff_anim).map(([name, url]) => {
+      const ss = Assets.cache.get<Spritesheet>(url);
+      return {
+        animations: ss.data.animations!,
+        spritesheet: ss,
+        type: name as GSEffect,
+      };
+    });
+
     const reelX = app.screen.width / 2 - this._reelBg.width / 2;
     this._reelBg.x = reelX;
     app.stage.addChild(this._reelBg);
@@ -47,7 +62,17 @@ export class ResourcesController {
   }
 
   static async loadGemsAnimationsInCache() {
-    await Assets.load(Object.values(AnimationsUrls));
+    await Assets.load(Object.values(gs_des_anim));
+    await Assets.load(Object.values(gs_eff_anim));
+  }
+
+  getEffectAnimSprite(effect: GSEffect) {
+    const efTexture = this._effectTextures.find((ef) => ef.type === effect);
+    if (!efTexture) throw new Error("Effect texture not found");
+    const animSprite = AnimatedSprite.fromFrames(
+      efTexture.animations[SLOT_SYM_ANIMATION_NAME],
+    );
+    return animSprite;
   }
 
   getRandomSlotSymbol() {
