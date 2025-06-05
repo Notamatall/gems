@@ -1,4 +1,7 @@
-import { isSoundEnabled } from "../constants/local-storage-keys";
+import {
+  isMusicEnabled,
+  isSoundEnabled,
+} from "../constants/local-storage-keys";
 import { getElementByIdOrThrow } from "../utils/document";
 import { AudioController, AudioKey } from "./AudioController";
 
@@ -6,12 +9,8 @@ export class HTMLController {
   constructor(ac: AudioController) {
     this._ac = ac;
     this.registerPanelClickHandler();
-    this.registerMusicClickHandler();
-    this.registerSoundClickHandler();
-    const isse = localStorage.getItem(isSoundEnabled);
-    if (!isse) {
-      this._soundToggle.setAttribute("data-active", "false");
-    }
+    this.initMusicToggle();
+    this.initSoundToggle();
   }
 
   private _ac: AudioController;
@@ -21,24 +20,37 @@ export class HTMLController {
   private _musicToggle: HTMLElement = getElementByIdOrThrow("MusicToggle");
   private _soundToggle: HTMLElement = getElementByIdOrThrow("SoundToggle");
 
-  private registerMusicClickHandler() {
+  private initMusicToggle() {
+    const isme = localStorage.getItem(isMusicEnabled);
+    if (isme && isme === "false") {
+      this._musicToggle.setAttribute("data-active", "false");
+    }
     this._musicToggle.addEventListener("click", () => {
       const isActive = this._musicToggle.getAttribute("data-active") === "true";
       this._musicToggle.setAttribute("data-active", `${!isActive}`);
 
       if (isActive) {
-        this._ac.pauseSound(AudioKey.music);
+        this._ac.disableMusic();
       } else {
-        this._ac.play(AudioKey.music, { loop: true, volume: 0.1 });
+        this._ac.enableMusic();
       }
     });
   }
 
-  private registerSoundClickHandler() {
+  private initSoundToggle() {
+    const isse = localStorage.getItem(isSoundEnabled);
+    if (isse && isse === "false") {
+      this._soundToggle.setAttribute("data-active", "false");
+    }
     this._soundToggle.addEventListener("click", () => {
-      this._ac.disable();
       const isActive = this._soundToggle.getAttribute("data-active") === "true";
       this._soundToggle.setAttribute("data-active", `${!isActive}`);
+
+      if (isActive) {
+        this._ac.disableSound();
+      } else {
+        this._ac.enableSound();
+      }
     });
   }
 

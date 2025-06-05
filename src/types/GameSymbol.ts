@@ -3,6 +3,7 @@ import { GSType } from ".";
 import { SlotReel } from "./SlotReel";
 import { REEL_VIEWPORT_MAX_Y } from "../constants";
 import { AudioKey } from "../controllers/AudioController";
+import { waitAsync } from "../utils";
 export type GameSymbolState = "Active" | "Inactive";
 export interface GameSymbolInitializer {
   type: GSType;
@@ -33,17 +34,21 @@ export class GameSymbol {
     this._finalYPos = finalYPos;
     this._onPlay = onPlay;
     this._animSprite = animSprite;
-    animSprite.animationSpeed = animationSpeed ?? 1 / 1.5;
+    animSprite.animationSpeed = animationSpeed ?? 0.4;
     animSprite.loop = false;
+
+    this._reel = reel;
 
     animSprite.onComplete = () => {
       reel.rc.removeChild(animSprite);
       this._reel.symbols = this._reel.symbols.filter(
         (sym) => sym.ID !== this._id,
       );
-    };
 
-    this._reel = reel;
+      if (this.playPromise) {
+        this.playPromise();
+      }
+    };
 
     this.destroy = () => {
       reel.rc.removeChild(animSprite);
@@ -64,10 +69,19 @@ export class GameSymbol {
   private _finalYPos: number;
   private _velocity: number = 0;
   private _onPlay: () => void;
+  private playPromise: (() => void) | null = null;
   destroy: () => void;
-  play() {
+
+  play(): Promise<void> {
     this._onPlay();
     this.animSprite.play();
+    return new Promise((res) => {
+      this.playPromise = async () => {
+        await waitAsync(300);
+        res();
+        this.playPromise = null;
+      };
+    });
   }
 
   removeWithPhysics() {

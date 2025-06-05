@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>6x5 Slot Simulation Tool</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1a1a2e;
+            color: #eee;
+            padding: 20px;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #f39c12;
+        }
+
+        .controls {
+            background: #16213e;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        button {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background: #2980b9;
+        }
+
+        button:active {
+            transform: scale(0.95);
+        }
+
+        button:disabled {
+            background: #7f8c8d;
+            cursor: not-allowed;
+        }
+
+        input[type="number"] {
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #34495e;
+            background: #2c3e50;
+            color: white;
+            width: 120px;
+        }
+
+        .slot-display {
+            background: #0f3460;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .reels {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 10px;
+            margin: 20px auto;
+            max-width: 600px;
+        }
+
+        .reel {
+            display: grid;
+            grid-template-rows: repeat(5, 1fr);
+            gap: 5px;
+        }
+
+        .symbol {
+            width: 80px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 18px;
+            border-radius: 5px;
+            border: 2px solid #34495e;
+            transition: all 0.3s;
+        }
+
+        .symbol.low {
+            background: #27ae60;
+        }
+
+        .symbol.mid {
+            background: #8e44ad;
+        }
+
+        .symbol.high {
+            background: #e74c3c;
+        }
+
+        .symbol.scatter {
+            background: #f39c12;
+        }
+
+        .symbol.winning {
+            border-color: #f1c40f;
+            box-shadow: 0 0 10px #f1c40f;
+            transform: scale(1.1);
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .stat-box {
+            background: #16213e;
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        .stat-box h3 {
+            margin: 0 0 10px 0;
+            color: #3498db;
+        }
+
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            margin: 5px 0;
+        }
+
+        .win-info {
+            background: #16213e;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .win-amount {
+            font-size: 24px;
+            color: #f39c12;
+            margin: 10px 0;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: #2c3e50;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #3498db;
+            transition: width 0.3s;
+        }
+
+        .paytable {
+            background: #16213e;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .paytable-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .paytable-item {
+            background: #0f3460;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>6x5 Slot Simulation Tool</h1>
+
+        <div class="controls">
+            <div>
+                <label>Number of Spins: </label>
+                <input type="number" id="spinCount" value="1000" min="1" max="1000000">
+            </div>
+            <button id="runSim">Run Simulation</button>
+            <button id="spinOnce">Spin Once</button>
+            <button id="autoSpin">Auto Spin</button>
+            <button id="reset">Reset Stats</button>
+            <label>
+                <input type="checkbox" id="showAnimations" checked> Show Animations
+            </label>
+        </div>
+
+        <div class="slot-display">
+            <div class="reels" id="reels"></div>
+        </div>
+
+        <div class="win-info">
+            <div>Last Win: <span class="win-amount" id="lastWin">0.00x</span></div>
+            <div id="winDetails"></div>
+        </div>
+
+        <div class="stats">
+            <div class="stat-box">
+                <h3>General Statistics</h3>
+                <div class="stat-item">
+                    <span>Total Spins:</span>
+                    <span id="totalSpins">0</span>
+                </div>
+                <div class="stat-item">
+                    <span>Total Wagered:</span>
+                    <span id="totalWagered">0</span>
+                </div>
+                <div class="stat-item">
+                    <span>Total Won:</span>
+                    <span id="totalWon">0</span>
+                </div>
+                <div class="stat-item">
+                    <span>Current RTP:</span>
+                    <span id="currentRTP">0.00%</span>
+                </div>
+                <div class="stat-item">
+                    <span>Hit Frequency:</span>
+                    <span id="hitFrequency">0.00%</span>
+                </div>
+            </div>
+
+            <div class="stat-box">
+                <h3>Win Distribution</h3>
+                <div class="stat-item">
+                    <span>Wins (0.5x - 2x):</span>
+                    <span id="smallWins">0</span>
+                </div>
+                <div class="stat-item">
+                    <span>Wins (2x - 10x):</span>
+                    <span id="mediumWins">0</span>
+                </div>
+                <div class="stat-item">
+                    <span>Wins (10x - 50x):</span>
+                    <span id="largeWins">0</span>
+                </div>
+                <div class="stat-item">
+                    <span>Wins (50x+):</span>
+                    <span id="hugeWins">0</span>
+                </div>
+                <div class="stat-item">
+                    <span>Biggest Win:</span>
+                    <span id="biggestWin">0.00x</span>
+                </div>
+            </div>
+
+            <div class="stat-box">
+                <h3>Symbol Hit Rates</h3>
+                <div class="stat-item">
+                    <span>Low Symbols (8+):</span>
+                    <span id="lowHits">0</span>
+                </div>
+                <div class="stat-item">
+                    <span>Mid Symbol (6+):</span>
+                    <span id="midHits">0</span>
+                </div>
+                <div class="stat-item">
+                    <span>High Symbol (4+):</span>
+                    <span id="highHits">0</span>
+                </div>
+                <div class="stat-item">
+                    <span>Scatter (3+):</span>
+                    <span id="scatterHits">0</span>
+                </div>
+                <div class="stat-item">
+                    <span>Free Spins Triggered:</span>
+                    <span id="freeSpinsTriggered">0</span>
+                </div>
+            </div>
+
+            <div class="stat-box">
+                <h3>Simulation Progress</h3>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressBar"></div>
+                </div>
+                <div class="stat-item">
+                    <span>Progress:</span>
+                    <span id="progressText">0%</span>
+                </div>
+                <div class="stat-item">
+                    <span>Time Elapsed:</span>
+                    <span id="timeElapsed">0s</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="paytable">
+            <h3>Paytable Reference</h3>
+            <div class="paytable-grid">
+                <div class="paytable-item">
+                    <strong>Low Symbols (L1-L6)</strong><br>
+                    8 symbols: 0.5x - 1.2x<br>
+                    12 symbols: 1.5x - 3.5x<br>
+                    20+ symbols: 25x - 80x
+                </div>
+                <div class="paytable-item">
+                    <strong>Mid Symbol (M1)</strong><br>
+                    6 symbols: 2x<br>
+                    10 symbols: 12x<br>
+                    15+ symbols: 150x
+                </div>
+                <div class="paytable-item">
+                    <strong>High Symbol (H1)</strong><br>
+                    4 symbols: 5x<br>
+                    8 symbols: 80x<br>
+                    12+ symbols: 1000x
+                </div>
+                <div class="paytable-item">
+                    <strong>Scatter</strong><br>
+                    3 symbols: 2x + 10 FS<br>
+                    4 symbols: 5x + 15 FS<br>
+                    5 symbols: 20x + 20 FS<br>
+                    6 symbols: 100x + 25 FS
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Symbol definitions
+        const symbols = {
+            L1: { type: 'low', weight: 12, display: 'L1' },
+            L2: { type: 'low', weight: 9, display: 'L2' },
+            L3: { type: 'low', weight: 8, display: 'L3' },
+            L4: { type: 'low', weight: 7, display: 'L4' },
+            L5: { type: 'low', weight: 6, display: 'L5' },
+            L6: { type: 'low', weight: 5, display: 'L6' },
+            M1: { type: 'mid', weight: 4, display: 'M1' },
+            H1: { type: 'high', weight: 3, display: 'H1' },
+            SC: { type: 'scatter', weight: 2, display: 'SC' }
+        };
+
+        // Paytables
+        const paytables = {
+            L1: { 8: 0.5, 9: 0.5, 10: 1.5, 11: 1.5, 12: 1.5, 13: 4, 14: 4, 15: 4, 16: 4, 17: 4, 18: 4, 19: 4, 20: 4 },
+            L2: { 8: 0.8, 9: 0.7, 10: 0.9, 11: 1.2, 12: 1.8, 13: 2.5, 14: 3.5, 15: 5.0, 16: 7.0, 17: 10.0, 18: 15.0, 19: 20.0, 20: 30.0 },
+            L3: { 8: 0.7, 9: 0.8, 10: 1.0, 11: 1.4, 12: 2.0, 13: 3.0, 14: 4.0, 15: 6.0, 16: 8.0, 17: 12.0, 18: 18.0, 19: 25.0, 20: 40.0 },
+            L4: { 8: 0.8, 9: 1.0, 10: 1.2, 11: 1.6, 12: 2.5, 13: 3.5, 14: 5.0, 15: 7.0, 16: 10.0, 17: 15.0, 18: 22.0, 19: 30.0, 20: 50.0 },
+            L5: { 8: 1.0, 9: 1.2, 10: 1.5, 11: 2.0, 12: 3.0, 13: 4.0, 14: 6.0, 15: 9.0, 16: 13.0, 17: 18.0, 18: 28.0, 19: 40.0, 20: 60.0 },
+            L6: { 8: 1.2, 9: 1.5, 10: 1.8, 11: 2.5, 12: 3.5, 13: 5.0, 14: 7.0, 15: 11.0, 16: 16.0, 17: 24.0, 18: 35.0, 19: 50.0, 20: 80.0 },
+            M1: { 6: 2.0, 7: 3.0, 8: 5.0, 9: 8.0, 10: 12.0, 11: 18.0, 12: 30.0, 13: 50.0, 14: 80.0, 15: 150.0 },
+            H1: { 4: 5.0, 5: 10.0, 6: 20.0, 7: 40.0, 8: 80.0, 9: 160.0, 10: 320.0, 11: 640.0, 12: 1000.0 },
+            SC: { 3: 2.0, 4: 5.0, 5: 20.0, 6: 100.0 }
+        };
+
+        // Game state
+        let stats = {
+            totalSpins: 0,
+            totalWagered: 0,
+            totalWon: 0,
+            wins: 0,
+            smallWins: 0,
+            mediumWins: 0,
+            largeWins: 0,
+            hugeWins: 0,
+            biggestWin: 0,
+            lowHits: 0,
+            midHits: 0,
+            highHits: 0,
+            scatterHits: 0,
+            freeSpinsTriggered: 0
+        };
+
+        let isAutoSpinning = false;
+        let simulationRunning = false;
+
+        // Create weighted symbol array
+        function createWeightedArray() {
+            const weighted = [];
+            for (const [symbol, data] of Object.entries(symbols)) {
+                for (let i = 0; i < data.weight; i++) {
+                    weighted.push(symbol);
+                }
+            }
+            return weighted;
+        }
+
+        const weightedSymbols = createWeightedArray();
+
+        // Generate random symbol
+        function getRandomSymbol() {
+            return weightedSymbols[Math.floor(Math.random() * weightedSymbols.length)];
+        }
+
+        // Generate reel result
+        function spinReels() {
+            const result = [];
+            for (let col = 0; col < 6; col++) {
+                const column = [];
+                for (let row = 0; row < 5; row++) {
+                    column.push(getRandomSymbol());
+                }
+                result.push(column);
+            }
+            return result;
+        }
+
+        // Count symbols
+        function countSymbols(reels) {
+            const counts = {};
+            for (const column of reels) {
+                for (const symbol of column) {
+                    counts[symbol] = (counts[symbol] || 0) + 1;
+                }
+            }
+            return counts;
+        }
+
+        // Calculate wins
+        function calculateWins(counts, inFreeSpins = false) {
+            const wins = [];
+            let totalWin = 0;
+            const multiplier = inFreeSpins ? 2 : 1;
+
+            // Check each symbol type
+            for (const [symbol, count] of Object.entries(counts)) {
+                if (count === 0) continue;
+
+                const symbolData = symbols[symbol];
+                const paytable = paytables[symbol];
+
+                // Check minimum requirements
+                if (symbolData.type === 'low' && count >= 8) {
+                    // For counts >= 20, use the max payout
+                    const payCount = Math.min(count, 20);
+                    const pay = paytable[payCount] || paytable[20];
+                    const win = pay * multiplier;
+                    wins.push({ symbol, count, win });
+                    totalWin += win;
+
+                    // Only count hit once per spin, not per symbol
+                    if (!inFreeSpins) stats.lowHits++;
+                } else if (symbolData.type === 'mid' && count >= 6) {
+                    const payCount = Math.min(count, 15);
+                    const pay = paytable[payCount] || paytable[15];
+                    const win = pay * multiplier;
+                    wins.push({ symbol, count, win });
+                    totalWin += win;
+
+                    if (!inFreeSpins) stats.midHits++;
+                } else if (symbolData.type === 'high' && count >= 4) {
+                    const payCount = Math.min(count, 12);
+                    const pay = paytable[payCount] || paytable[12];
+                    const win = pay * multiplier;
+                    wins.push({ symbol, count, win });
+                    totalWin += win;
+
+                    if (!inFreeSpins) stats.highHits++;
+                } else if (symbolData.type === 'scatter' && count >= 3) {
+                    const pay = paytable[count] || 0;
+                    if (pay > 0) {
+                        const win = pay * multiplier;
+                        wins.push({ symbol, count, win });
+                        totalWin += win;
+
+                        if (!inFreeSpins) {
+                            stats.scatterHits++;
+                        }
+                    }
+                }
+            }
+
+            return { wins, totalWin };
+        }
+
+        // Display reels
+        function displayReels(reels, winningSymbols = []) {
+            const reelsContainer = document.getElementById('reels');
+            reelsContainer.innerHTML = '';
+
+            for (let col = 0; col < 6; col++) {
+                const reelDiv = document.createElement('div');
+                reelDiv.className = 'reel';
+
+                for (let row = 0; row < 5; row++) {
+                    const symbol = reels[col][row];
+                    const symbolDiv = document.createElement('div');
+                    symbolDiv.className = `symbol ${symbols[symbol].type}`;
+                    symbolDiv.textContent = symbols[symbol].display;
+
+                    if (winningSymbols.includes(symbol)) {
+                        symbolDiv.classList.add('winning');
+                    }
+
+                    reelDiv.appendChild(symbolDiv);
+                }
+
+                reelsContainer.appendChild(reelDiv);
+            }
+        }
+
+        // Update statistics display
+        function updateStats() {
+            document.getElementById('totalSpins').textContent = stats.totalSpins;
+            document.getElementById('totalWagered').textContent = stats.totalWagered.toFixed(2);
+            document.getElementById('totalWon').textContent = stats.totalWon.toFixed(2);
+            document.getElementById('currentRTP').textContent = stats.totalWagered > 0
+                ? ((stats.totalWon / stats.totalWagered) * 100).toFixed(2) + '%'
+                : '0.00%';
+            document.getElementById('hitFrequency').textContent = stats.totalSpins > 0
+                ? ((stats.wins / stats.totalSpins) * 100).toFixed(2) + '%'
+                : '0.00%';
+            document.getElementById('smallWins').textContent = stats.smallWins;
+            document.getElementById('mediumWins').textContent = stats.mediumWins;
+            document.getElementById('largeWins').textContent = stats.largeWins;
+            document.getElementById('hugeWins').textContent = stats.hugeWins;
+            document.getElementById('biggestWin').textContent = stats.biggestWin.toFixed(2) + 'x';
+            document.getElementById('lowHits').textContent = stats.lowHits;
+            document.getElementById('midHits').textContent = stats.midHits;
+            document.getElementById('highHits').textContent = stats.highHits;
+            document.getElementById('scatterHits').textContent = stats.scatterHits;
+            document.getElementById('freeSpinsTriggered').textContent = stats.freeSpinsTriggered;
+        }
+
+        // Single spin
+        function singleSpin(showAnimation = true) {
+            const reels = spinReels();
+            const counts = countSymbols(reels);
+            const { wins, totalWin } = calculateWins(counts);
+
+            stats.totalSpins++;
+            stats.totalWagered += 1;
+
+            let totalSpinWin = totalWin;
+            let freeSpinWins = 0;
+
+            // Handle free spins
+            if (counts.SC >= 3) {
+                const freeSpins = counts.SC === 3 ? 10 : counts.SC === 4 ? 15 : counts.SC === 5 ? 20 : 25;
+                stats.freeSpinsTriggered++;
+
+                // Simulate free spins
+                for (let i = 0; i < freeSpins; i++) {
+                    const fsReels = spinReels();
+                    const fsCounts = countSymbols(fsReels);
+                    const { totalWin: fsWin } = calculateWins(fsCounts, true);
+                    freeSpinWins += fsWin;
+                }
+                totalSpinWin += freeSpinWins;
+            }
+
+            stats.totalWon += totalSpinWin;
+
+            if (totalSpinWin > 0) {
+                stats.wins++;
+
+                // Categorize win
+                if (totalSpinWin < 2) stats.smallWins++;
+                else if (totalSpinWin < 10) stats.mediumWins++;
+                else if (totalSpinWin < 50) stats.largeWins++;
+                else stats.hugeWins++;
+
+                if (totalSpinWin > stats.biggestWin) {
+                    stats.biggestWin = totalSpinWin;
+                }
+            }
+
+            if (showAnimation) {
+                const winningSymbols = wins.map(w => w.symbol);
+                displayReels(reels, winningSymbols);
+
+                document.getElementById('lastWin').textContent = totalSpinWin.toFixed(2) + 'x';
+                let detailsHtml = wins.length > 0
+                    ? wins.map(w => `${w.symbol}: ${w.count} symbols = ${w.win.toFixed(2)}x`).join('<br>')
+                    : 'No Win';
+                if (freeSpinWins > 0) {
+                    detailsHtml += `<br>Free Spins Won: ${freeSpinWins.toFixed(2)}x`;
+                }
+                document.getElementById('winDetails').innerHTML = detailsHtml;
+            }
+
+            updateStats();
+            return totalSpinWin;
+        }
+
+        // Run simulation
+        async function runSimulation() {
+            if (simulationRunning) return;
+            simulationRunning = true;
+
+            const spinCount = parseInt(document.getElementById('spinCount').value);
+            const startTime = Date.now();
+
+            document.getElementById('runSim').disabled = true;
+            document.getElementById('spinOnce').disabled = true;
+
+            for (let i = 0; i < spinCount; i++) {
+                singleSpin(false);
+
+                // Update progress
+                if (i % 100 === 0) {
+                    const progress = (i / spinCount) * 100;
+                    document.getElementById('progressBar').style.width = progress + '%';
+                    document.getElementById('progressText').textContent = progress.toFixed(1) + '%';
+                    document.getElementById('timeElapsed').textContent =
+                        ((Date.now() - startTime) / 1000).toFixed(1) + 's';
+
+                    // Allow UI to update
+                    await new Promise(resolve => setTimeout(resolve, 0));
+                }
+            }
+
+            document.getElementById('progressBar').style.width = '100%';
+            document.getElementById('progressText').textContent = '100%';
+
+            simulationRunning = false;
+            document.getElementById('runSim').disabled = false;
+            document.getElementById('spinOnce').disabled = false;
+        }
+
+        // Auto spin
+        async function autoSpin() {
+            isAutoSpinning = !isAutoSpinning;
+            document.getElementById('autoSpin').textContent = isAutoSpinning ? 'Stop Auto' : 'Auto Spin';
+
+            while (isAutoSpinning) {
+                singleSpin(true);
+                await new Promise(resolve => setTimeout(resolve, 1000));
+            }
+        }
+
+        // Reset statistics
+        function resetStats() {
+            stats = {
+                totalSpins: 0,
+                totalWagered: 0,
+                totalWon: 0,
+                wins: 0,
+                smallWins: 0,
+                mediumWins: 0,
+                largeWins: 0,
+                hugeWins: 0,
+                biggestWin: 0,
+                lowHits: 0,
+                midHits: 0,
+                highHits: 0,
+                scatterHits: 0,
+                freeSpinsTriggered: 0
+            };
+            updateStats();
+            document.getElementById('progressBar').style.width = '0%';
+            document.getElementById('progressText').textContent = '0%';
+            document.getElementById('timeElapsed').textContent = '0s';
+        }
+
+        // Event listeners
+        document.getElementById('runSim').addEventListener('click', runSimulation);
+        document.getElementById('spinOnce').addEventListener('click', () => singleSpin(true));
+        document.getElementById('autoSpin').addEventListener('click', autoSpin);
+        document.getElementById('reset').addEventListener('click', resetStats);
+
+        // Initialize display
+        displayReels(spinReels());
+        updateStats();
+    </script>
+</body>
+
+</html>

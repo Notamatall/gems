@@ -13,9 +13,9 @@ import { SlotSymbol, GSType, GSEffect } from "../types";
 import { ResourcesController } from "./ResourcesController";
 import { SlotReel } from "../types/SlotReel";
 import { GameSymbol, GSDestAudioKey } from "../types/GameSymbol";
-import { waitAsync } from "../utils";
 import { AudioController, AudioKey } from "./AudioController";
 import { BalanceController } from "./BalanceController";
+import { waitAsync } from "../utils";
 
 type SlotState =
   | "idle"
@@ -143,8 +143,7 @@ export class GameController {
   // Click actions
   private async expload() {
     this.state = "start_destroy";
-    console.log("start_destory");
-    await waitAsync(200);
+    await waitAsync(700);
     const symbols = this._reels.map((reel) => reel.symbols).flat(1);
 
     const matches: Record<GSType, GameSymbol[]> = {
@@ -166,17 +165,14 @@ export class GameController {
     }
     let isAnyMatch = false;
     for (const [type, value] of Object.entries(matches)) {
-      const minMatchCount = type == GSType.chestg ? 3 : MIN_MATCH_COUNT;
+      const minMatchCount = type == GSType.fschest ? 3 : MIN_MATCH_COUNT;
       if (value.length >= minMatchCount) {
         isAnyMatch = true;
-        value.forEach((sym) => sym.play());
-        await waitAsync(550);
+        await Promise.all(value.map((val) => val.play()));
       }
     }
 
     if (isAnyMatch) {
-      await waitAsync(550);
-
       this.state = "finish_destroy";
     } else {
       this.state = "waiting";

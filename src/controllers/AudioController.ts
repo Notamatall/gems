@@ -30,21 +30,35 @@ export class AudioController {
     sound.add(AudioKey.fshit, "/assets/sounds/fs-hit.mp3");
 
     const isse = localStorage.getItem(isSoundEnabled);
-    if (!isse) {
+    if (isse && isse === "false") {
       sound.muteAll();
     } else {
-      this.play(AudioKey.music, { loop: true, volume: 0.1, speed: 1 });
+      const isme = localStorage.getItem(isMusicEnabled);
+
+      if (!isme || (isme && isme === "true")) {
+        this.play(AudioKey.music, { loop: true, volume: 0.1, speed: 1 });
+      }
     }
   }
 
-  disable() {
+  disableSound() {
     sound.muteAll();
     localStorage.setItem(isSoundEnabled, "false");
   }
 
-  enable() {
+  enableSound() {
     sound.unmuteAll();
     localStorage.setItem(isSoundEnabled, "true");
+  }
+
+  disableMusic() {
+    sound.pause(AudioKey.music);
+    localStorage.setItem(isMusicEnabled, "false");
+  }
+
+  enableMusic() {
+    this.play(AudioKey.music, { loop: true, volume: 0.1, speed: 1 });
+    localStorage.setItem(isMusicEnabled, "true");
   }
 
   pauseSound(key: AudioKey) {
