@@ -9,6 +9,7 @@ export enum TextureType {
   gemr = "GemR",
   chests = "ChestS",
   chestg = "ChestG",
+  fschest = "FSChest",
 }
 
 export interface SlotTexture {

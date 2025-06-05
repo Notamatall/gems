@@ -1,0 +1,209 @@
+{
+  "frames": {
+    "fs.png": {
+      "frame": { "x": 1, "y": 1, "w": 220, "h": 203 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 220, "h": 203 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "winf-sheet0.webp": {
+      "frame": { "x": 381, "y": 130, "w": 44, "h": 44 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 94, "y": 68, "w": 44, "h": 44 },
+      "sourceSize": { "w": 200, "h": 200 }
+    },
+    "winf-sheet1.webp": {
+      "frame": { "x": 381, "y": 76, "w": 52, "h": 67 },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 87, "y": 58, "w": 52, "h": 67 },
+      "sourceSize": { "w": 200, "h": 200 }
+    },
+    "winf-sheet2.webp": {
+      "frame": { "x": 381, "y": 1, "w": 71, "h": 73 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 68, "y": 57, "w": 71, "h": 73 },
+      "sourceSize": { "w": 200, "h": 200 }
+    },
+    "winf-sheet3.webp": {
+      "frame": { "x": 1, "y": 765, "w": 95, "h": 90 },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 52, "y": 54, "w": 95, "h": 90 },
+      "sourceSize": { "w": 200, "h": 200 }
+    },
+    "winf-sheet4.webp": {
+      "frame": { "x": 197, "y": 868, "w": 99, "h": 113 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 46, "y": 31, "w": 99, "h": 113 },
+      "sourceSize": { "w": 200, "h": 200 }
+    },
+    "winf-sheet5.webp": {
+      "frame": { "x": 1, "y": 865, "w": 102, "h": 116 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 46, "y": 31, "w": 102, "h": 116 },
+      "sourceSize": { "w": 200, "h": 200 }
+    },
+    "winf-sheet6.webp": {
+      "frame": { "x": 315, "y": 299, "w": 137, "h": 128 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 16, "y": 22, "w": 137, "h": 128 },
+      "sourceSize": { "w": 200, "h": 200 }
+    },
+    "winf-sheet7.webp": {
+      "frame": { "x": 303, "y": 736, "w": 144, "h": 130 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 12, "y": 22, "w": 144, "h": 130 },
+      "sourceSize": { "w": 200, "h": 200 }
+    },
+    "winf-sheet8.webp": {
+      "frame": { "x": 152, "y": 729, "w": 149, "h": 134 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 8, "y": 19, "w": 149, "h": 134 },
+      "sourceSize": { "w": 200, "h": 200 }
+    },
+    "winf-sheet9.webp": {
+      "frame": { "x": 1, "y": 628, "w": 149, "h": 135 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 8, "y": 18, "w": 149, "h": 135 },
+      "sourceSize": { "w": 200, "h": 200 }
+    },
+    "winf-sheet10.webp": {
+      "frame": { "x": 314, "y": 584, "w": 150, "h": 136 },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 8, "y": 18, "w": 150, "h": 136 },
+      "sourceSize": { "w": 200, "h": 200 }
+    },
+    "winf-sheet11.webp": {
+      "frame": { "x": 1, "y": 491, "w": 153, "h": 135 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 6, "y": 18, "w": 153, "h": 135 },
+      "sourceSize": { "w": 200, "h": 200 }
+    },
+    "winf-sheet12.webp": {
+      "frame": { "x": 315, "y": 429, "w": 153, "h": 136 },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 6, "y": 17, "w": 153, "h": 136 },
+      "sourceSize": { "w": 200, "h": 200 }
+    },
+    "winf-sheet13.webp": {
+      "frame": { "x": 158, "y": 299, "w": 155, "h": 140 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 4, "y": 17, "w": 155, "h": 140 },
+      "sourceSize": { "w": 200, "h": 200 }
+    },
+    "winf-sheet14.webp": {
+      "frame": { "x": 1, "y": 349, "w": 155, "h": 140 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 4, "y": 17, "w": 155, "h": 140 },
+      "sourceSize": { "w": 200, "h": 200 }
+    },
+    "winf-sheet15.webp": {
+      "frame": { "x": 1, "y": 206, "w": 155, "h": 141 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 4, "y": 17, "w": 155, "h": 141 },
+      "sourceSize": { "w": 200, "h": 200 }
+    },
+    "winf-sheet16.webp": {
+      "frame": { "x": 223, "y": 1, "w": 156, "h": 144 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 3, "y": 17, "w": 156, "h": 144 },
+      "sourceSize": { "w": 200, "h": 200 }
+    },
+    "winf-sheet17.webp": {
+      "frame": { "x": 223, "y": 147, "w": 155, "h": 150 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 2, "y": 17, "w": 155, "h": 150 },
+      "sourceSize": { "w": 200, "h": 200 }
+    },
+    "winf-sheet18.webp": {
+      "frame": { "x": 158, "y": 441, "w": 153, "h": 154 },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 2, "y": 17, "w": 153, "h": 154 },
+      "sourceSize": { "w": 200, "h": 200 }
+    },
+    "winf-sheet19.webp": {
+      "frame": { "x": 156, "y": 596, "w": 131, "h": 152 },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 2, "y": 21, "w": 131, "h": 152 },
+      "sourceSize": { "w": 200, "h": 200 }
+    },
+    "winf-sheet20.webp": {
+      "frame": { "x": 298, "y": 868, "w": 88, "h": 144 },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 2, "y": 33, "w": 88, "h": 144 },
+      "sourceSize": { "w": 200, "h": 200 }
+    },
+    "winf-sheet21.webp": {
+      "frame": { "x": 105, "y": 865, "w": 90, "h": 115 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 7, "y": 68, "w": 90, "h": 115 },
+      "sourceSize": { "w": 200, "h": 200 }
+    },
+    "winf-sheet22.webp": {
+      "frame": { "x": 380, "y": 176, "w": 76, "h": 72 },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 25, "y": 113, "w": 76, "h": 72 },
+      "sourceSize": { "w": 200, "h": 200 }
+    }
+  },
+  "animations": {
+    "anim": [
+      "fs.png",
+      "winf-sheet0.webp",
+      "winf-sheet1.webp",
+      "winf-sheet2.webp",
+      "winf-sheet3.webp",
+      "winf-sheet4.webp",
+      "winf-sheet5.webp",
+      "winf-sheet6.webp",
+      "winf-sheet7.webp",
+      "winf-sheet8.webp",
+      "winf-sheet9.webp",
+      "winf-sheet10.webp",
+      "winf-sheet11.webp",
+      "winf-sheet12.webp",
+      "winf-sheet13.webp",
+      "winf-sheet14.webp",
+      "winf-sheet15.webp",
+      "winf-sheet16.webp",
+      "winf-sheet17.webp",
+      "winf-sheet18.webp",
+      "winf-sheet19.webp",
+      "winf-sheet20.webp",
+      "winf-sheet21.webp",
+      "winf-sheet22.webp"
+    ]
+  },
+  "meta": {
+    "app": "https://www.codeandweb.com/texturepacker",
+    "version": "1.1",
+    "image": "fs.png",
+    "format": "RGBA8888",
+    "size": { "w": 453, "h": 982 },
+    "scale": "1",
+    "smartupdate": "$TexturePacker:SmartUpdate:d399ca62d3f34335f6abc6378cbe7d8c:d55f527e0e44507bfe04127ad9c57933:2eb0463bde401daae2c2295e899fc0ed$"
+  }
+}

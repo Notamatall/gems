@@ -35,41 +35,14 @@ body {
   position: relative;
 }
 
-#bets-data {
-  left: 15%;
-  top: 10%;
-  font-size: 2rem;
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-}
-
-.bets-data-block {
-  box-shadow:
-    rgba(6, 24, 44, 0.4) 0px 0px 0px 2px,
-    rgba(6, 24, 44, 0.65) 0px 4px 6px -1px,
-    rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
-  width: 100%;
-}
-
 #pixi-container {
-  width: 65%;
+  max-width: 750px;
 }
 
 #pixi-container canvas {
-  max-width: 720px;
   width: 100%;
   height: 100%;
   aspect-ratio: 1318/1080;
-}
-.responsive-wrapper {
-  width: 35%;
-}
-
-.responsive-wrapper img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
 }
 
 #game-container {

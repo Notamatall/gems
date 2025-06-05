@@ -9,6 +9,7 @@ export const AnimationsUrls: Record<TextureType, string> = {
   GemR: "/assets/animations-json/gemr.json",
   ChestS: "/assets/animations-json/chestsilver.json",
   ChestG: "/assets/animations-json/chestgold.json",
+  FSChest: "/assets/animations-json/fs-chest-green.json",
 };
 
 export const SLOT_SYM_ANIMATION_NAME = "anim";

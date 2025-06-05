@@ -136,6 +136,7 @@ export class GameController {
             col: index,
             finalYPos: SLOT_SYMBOLS_Y_POS[ind],
             reel,
+            onPlay: () => this._audioCtrl.play(AudioKey.gemdest),
           }),
       );
       reel.addSymbols(newSymbols);
@@ -158,6 +159,7 @@ export class GameController {
       GemV: [],
       ChestG: [],
       ChestS: [],
+      FSChest: [],
     };
 
     for (const type of Object.values(TextureType)) {
@@ -166,11 +168,11 @@ export class GameController {
       }
     }
     let isAnyMatch = false;
-    for (const listOfMatches of Object.values(matches)) {
-      if (listOfMatches.length >= MIN_MATCH_COUNT) {
+    for (const [type, value] of Object.entries(matches)) {
+      const minMatchCount = type == TextureType.fschest ? 3 : MIN_MATCH_COUNT;
+      if (value.length >= minMatchCount) {
         isAnyMatch = true;
-        listOfMatches.forEach((sym) => sym.play());
-        this._audioCtrl.play(AudioKey.win);
+        value.forEach((sym) => sym.play());
         await waitAsync(550);
       }
     }
@@ -298,6 +300,7 @@ export class GameController {
             col: reelIndex,
             finalYPos: SLOT_SYMBOLS_Y_POS[writeIndex - row],
             reel,
+            onPlay: () => this._audioCtrl.play(AudioKey.gemdest),
           });
 
           newSymbols.push(newGameSymbol);

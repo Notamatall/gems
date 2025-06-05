@@ -10,7 +10,10 @@ export interface GameSymbolInitializer {
   finalYPos: number;
   animSprite: AnimatedSprite;
   reel: SlotReel;
+  onPlay: () => void;
+  animationSpeed?: number;
 }
+
 let gameSymbolId = 1;
 export class GameSymbol {
   constructor({
@@ -20,15 +23,18 @@ export class GameSymbol {
     col,
     finalYPos,
     reel,
+    onPlay,
+    animationSpeed,
   }: GameSymbolInitializer) {
     this._type = type;
     this._row = row;
     this._col = col;
     this._finalYPos = finalYPos;
-
+    this._onPlay = onPlay;
     this._animSprite = animSprite;
-    animSprite.animationSpeed = 1 / 1.5;
+    animSprite.animationSpeed = animationSpeed ?? 1 / 1.5;
     animSprite.loop = false;
+
     animSprite.onComplete = () => {
       reel.rc.removeChild(animSprite);
       this._reel.symbols = this._reel.symbols.filter(
@@ -39,7 +45,7 @@ export class GameSymbol {
     this._reel = reel;
 
     this.destroy = () => {
-      this.animSprite.play();
+      reel.rc.removeChild(animSprite);
       this._reel.symbols = this._reel.symbols.filter(
         (sym) => sym.ID !== this._id,
       );
@@ -56,9 +62,10 @@ export class GameSymbol {
 
   private _finalYPos: number;
   private _velocity: number = 0;
-
+  private _onPlay: () => void;
   destroy: () => void;
   play() {
+    this._onPlay();
     this.animSprite.play();
   }
 
