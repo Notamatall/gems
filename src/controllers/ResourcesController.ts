@@ -12,7 +12,6 @@ import {
   gs_des_anim,
   gs_eff_anim,
   SLOT_SYM_ANIMATION_NAME,
-  SLOT_WEIGHTS_LIMIT_PF,
 } from "../constants";
 import { getSymbolByCumulativeValue } from "../utils/symbol";
 import { cumWeight } from "../constants/math-engine";
