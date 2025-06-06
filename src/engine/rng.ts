@@ -8,6 +8,18 @@ import {
 } from "../types/Rng";
 
 abstract class Rng {
+  static generateRandomSeed(length: number = 32): string {
+    const charset =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    const charsetLength = charset.length;
+    const randomValues = new Uint8Array(length);
+    crypto.getRandomValues(randomValues);
+
+    return Array.from(randomValues)
+      .map((value) => charset[value % charsetLength])
+      .join("");
+  }
+
   private static validateRandomLimit(limit: number) {
     if (!Number.isInteger(limit)) {
       throw new RngError("Random function limit must be an integer");
@@ -49,7 +61,7 @@ abstract class Rng {
     clientSeed,
     nonce,
     currentRound,
-  }: BufferGeneratorArgs): Promise<Uint8Array<ArrayBuffer>> {
+  }: BufferGeneratorArgs): Promise<Uint8Array> {
     const buffer = await this.generateHMAC(
       serverSeed,
       `${clientSeed}:${nonce}:${currentRound}`,
@@ -65,7 +77,7 @@ abstract class Rng {
   }: RandomGeneratorArgs): Promise<ByteGeneratorResult> {
     let currentRound: number = Math.floor(cursor / SHA256_BUFFER_SIZE);
     let currentRoundCursor: number = cursor % SHA256_BUFFER_SIZE;
-    let buffer: Uint8Array<ArrayBuffer> = await this.getBuffer({
+    let buffer: Uint8Array = await this.getBuffer({
       serverSeed,
       clientSeed,
       nonce,

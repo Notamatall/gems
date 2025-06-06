@@ -1,4 +1,4 @@
-import { gsProbabilities } from "../constants/math-engine";
+import { gsWeights } from "../constants/math-engine";
 import Rng from "../engine/rng";
 import { GSType, SlotSymbol } from "../types";
 import { ResourcesController } from "./ResourcesController";
@@ -28,7 +28,7 @@ export class ProvablyFairController {
    */
   private getSymbolByCumulativeValue(value: number): GSType {
     let sum = 0;
-    for (const [symbol, prob] of Object.entries(gsProbabilities)) {
+    for (const [symbol, prob] of Object.entries(gsWeights)) {
       sum += prob;
       if (value <= sum) {
         return symbol as GSType;

@@ -9,7 +9,7 @@ export enum GSType {
   gemv = "GemV",
   chests = "ChestS",
   chestg = "ChestG",
-  fschest = "FSChest",
+  // fschest = "FSChest",
 }
 
 export enum GSEffect {

@@ -1,15 +1,14 @@
 import { Application, Container, Graphics } from "pixi.js";
 import {
-  REEL_WIDTH,
+  BOARD_WIDTH,
   REEL_BORDER_SIZE_PX,
-  REEL_HEIGHT,
+  BOARD_HEIGHT,
   SMALL_SYMBOL_SIZE_PX,
   ANIMATION_DIFFERENCE,
   FALL_SYMBOL_GAP,
   SLOT_SYMBOLS_Y_POS,
-  MIN_MATCH_COUNT,
 } from "../constants";
-import { SlotSymbol, GSType, GSEffect } from "../types";
+import { SlotSymbol, GSType } from "../types";
 import { ResourcesController } from "./ResourcesController";
 import { SlotReel } from "../types/SlotReel";
 import { GameSymbol, GSDestAudioKey } from "../types/GameSymbol";
@@ -65,7 +64,7 @@ export class GameController {
   // Generation actions
   async createDefaulReelsAndMask() {
     const reelBg = this._resCtrl.reelBg;
-    for (let i = 0; i < REEL_WIDTH; i++) {
+    for (let i = 0; i < BOARD_WIDTH; i++) {
       const rc = new Container();
       rc.x = reelBg.x + 188 * i;
       rc.y = reelBg.y + REEL_BORDER_SIZE_PX;
@@ -92,7 +91,7 @@ export class GameController {
   private genSingleReelSym(reelIndex: number): SlotSymbol[] {
     const reel = this._reels[reelIndex];
     const gameSymbols: SlotSymbol[] = [];
-    for (let index = REEL_HEIGHT; index > 0; index--) {
+    for (let index = BOARD_HEIGHT; index > 0; index--) {
       const gameSymbol = this._resCtrl.getRandomSlotSymbol();
       const sprite = gameSymbol.animSprite;
       sprite.x = SMALL_SYMBOL_SIZE_PX / 2 - ANIMATION_DIFFERENCE;
@@ -128,10 +127,12 @@ export class GameController {
           new GameSymbol({
             type: symbol.type,
             animSprite: symbol.animSprite,
-            row: REEL_HEIGHT - index,
+            row: BOARD_HEIGHT - index,
             col: index,
             finalYPos: SLOT_SYMBOLS_Y_POS[ind],
             reel,
+            animationSpeed: 1,
+
             onPlay: () =>
               this._ac.play(GSDestAudioKey[symbol.type], {
                 volume: 0.2,
@@ -158,7 +159,7 @@ export class GameController {
       GemV: [],
       ChestG: [],
       ChestS: [],
-      FSChest: [],
+      // FSChest: [],
     };
 
     for (const type of Object.values(GSType)) {
@@ -237,9 +238,9 @@ export class GameController {
 
       const activeSymbols = reel.actSym;
 
-      if (activeSymbols.length === REEL_HEIGHT) continue;
+      if (activeSymbols.length === BOARD_HEIGHT) continue;
 
-      const filledPositions = new Array(REEL_HEIGHT).fill(false);
+      const filledPositions = new Array(BOARD_HEIGHT).fill(false);
 
       activeSymbols.forEach((symbol) => {
         //TODO
@@ -253,9 +254,9 @@ export class GameController {
         }
       });
 
-      let writeIndex = REEL_HEIGHT - 1;
+      let writeIndex = BOARD_HEIGHT - 1;
 
-      for (let i = REEL_HEIGHT - 1; i >= 0; i--) {
+      for (let i = BOARD_HEIGHT - 1; i >= 0; i--) {
         if (filledPositions[i]) {
           //TODO
           const symbol = activeSymbols.find(
@@ -274,7 +275,7 @@ export class GameController {
           writeIndex--;
         }
       }
-      const emptySlots = REEL_HEIGHT - activeSymbols.length;
+      const emptySlots = BOARD_HEIGHT - activeSymbols.length;
       writeIndex = emptySlots - 1;
 
       if (emptySlots > 0) {
@@ -299,6 +300,7 @@ export class GameController {
             col: reelIndex,
             finalYPos: SLOT_SYMBOLS_Y_POS[writeIndex - row],
             reel,
+            animationSpeed: 1,
             onPlay: () =>
               this._ac.play(GSDestAudioKey[gameSymbol.type], {
                 volume: 0.2,

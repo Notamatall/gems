@@ -5,10 +5,12 @@ import { GameController } from "./controllers/GameController";
 import { AudioController } from "./controllers/AudioController";
 import { BalanceController } from "./controllers/BalanceController";
 import { HTMLController } from "./controllers/HtmlController";
+import { calcStats } from "./test/math-engine";
 
 extensions.add(ResizePlugin);
 
 (async () => {
+  calcStats();
   const { app } = await initApp();
   const resCtrl = await ResourcesController.create(app);
   const audioCtrl = new AudioController();

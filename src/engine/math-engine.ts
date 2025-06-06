@@ -89,4 +89,9 @@ export default class MathEngine {
     }
     return 0;
   }
+
+  static isMatch(type: keyof typeof paytables, matches: number): boolean {
+    const paytable = paytables[type];
+    return paytable.min <= matches;
+  }
 }

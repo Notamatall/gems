@@ -12,9 +12,10 @@ import {
   gs_des_anim,
   gs_eff_anim,
   SLOT_SYM_ANIMATION_NAME,
-  SLOT_WEIGHTS_LIMIT,
+  SLOT_WEIGHTS_LIMIT_PF,
 } from "../constants";
-import { getSymbolByCumulativeValue } from "../constants/math-engine";
+import { getSymbolByCumulativeValue } from "../utils/symbol";
+import { cumWeight } from "../constants/math-engine";
 
 export class ResourcesController {
   private _reelBg?: Sprite;
@@ -58,8 +59,7 @@ export class ResourcesController {
   }
 
   private getRandomSlotTexture() {
-    const randomValue = Math.floor(Math.random() * SLOT_WEIGHTS_LIMIT) + 1;
-    console.log(randomValue);
+    const randomValue = Math.floor(Math.random() * cumWeight) + 1;
 
     const type = getSymbolByCumulativeValue(randomValue);
     return this.slotTextures.find((tex) => tex.type === type)!;
