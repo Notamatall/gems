@@ -186,5 +186,6 @@ export const GSDestAudioKey: Record<GSType, AudioKey> = {
   GemV: AudioKey.gemdest,
   ChestG: AudioKey.chestrew,
   ChestS: AudioKey.chestrew,
+  GemGold: AudioKey.fshit,
   // FSChest: AudioKey.fshit,
 };

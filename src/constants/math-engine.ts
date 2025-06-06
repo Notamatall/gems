@@ -3,14 +3,14 @@ import { PayoutModel } from "../types/MathEngine";
 
 export const gsWeights: Record<GSType, number> = {
   GemC: 100,
-  GemG: 62,
-  GemR: 50,
-  GemW: 31,
-  GemY: 25,
-  GemV: 16,
-  ChestS: 12,
-  ChestG: 10,
-  // FSChest: 2,
+  GemG: 95,
+  GemR: 90,
+  GemW: 80,
+  GemY: 78,
+  GemV: 63,
+  ChestS: 50,
+  ChestG: 20,
+  GemGold: 10,
 };
 
 export const cumWeight = Object.values(gsWeights).reduce(
@@ -22,40 +22,40 @@ export const paytables: Record<GSType, PayoutModel> = {
   GemC: {
     min: 8,
     ranges: [
-      { payout: 0.1, range: "8-10" },
-      { payout: 0.2, range: "11-12" },
-      { payout: 0.7, range: "13-30" },
+      { payout: 0.5, range: "8-10" },
+      { payout: 1.5, range: "11-12" },
+      { payout: 4, range: "13-30" },
     ],
   },
   GemG: {
     min: 8,
     ranges: [
-      { payout: 0.2, range: "8-10" },
-      { payout: 0.4, range: "11-12" },
-      { payout: 0.9, range: "13-30" },
+      { payout: 0.8, range: "8-10" },
+      { payout: 1.8, range: "11-12" },
+      { payout: 8, range: "13-30" },
     ],
   },
   GemR: {
     min: 8,
     ranges: [
-      { payout: 0.4, range: "8-10" },
-      { payout: 0.7, range: "11-12" },
-      { payout: 5, range: "13-30" },
+      { payout: 1, range: "8-10" },
+      { payout: 2, range: "11-12" },
+      { payout: 10, range: "13-30" },
     ],
   },
   GemW: {
     min: 8,
     ranges: [
-      { payout: 0.5, range: "8-10" },
-      { payout: 1.2, range: "11-12" },
-      { payout: 10, range: "13-30" },
+      { payout: 1.6, range: "8-10" },
+      { payout: 2.4, range: "11-12" },
+      { payout: 16, range: "13-30" },
     ],
   },
   GemY: {
     min: 8,
     ranges: [
-      { payout: 0.9, range: "8-10" },
-      { payout: 1.8, range: "11-12" },
+      { payout: 2, range: "8-10" },
+      { payout: 3, range: "11-12" },
       { payout: 20, range: "13-30" },
     ],
   },
@@ -81,6 +81,14 @@ export const paytables: Record<GSType, PayoutModel> = {
       { payout: 5, range: "8-9" },
       { payout: 20, range: "10-11" },
       { payout: 50, range: "12-30" },
+    ],
+  },
+  GemGold: {
+    min: 8,
+    ranges: [
+      { payout: 20, range: "8-9" },
+      { payout: 50, range: "10-11" },
+      { payout: 100, range: "12-30" },
     ],
   },
   // FSChest: {

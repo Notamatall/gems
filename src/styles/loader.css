@@ -1,0 +1,46 @@
+#loaderContainer {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 280px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  opacity: 1;
+  transition: opacity 1s;
+}
+
+#progressBarContainer {
+  width: 100%;
+  height: 5px;
+  position: relative;
+  border-radius: 25px;
+  width: 273px;
+}
+
+#progressBarIndicator {
+  height: 100%;
+  border-radius: 25px;
+  width: 100%;
+  background: #ffffffbf;
+}
+
+#progressBarIndicatorValue {
+  position: absolute;
+  border-radius: 25px;
+  width: 33%;
+  transition: width 1s;
+  height: 100%;
+  top: 0;
+  left: 0;
+  transition-timing-function: cubic-bezier(0.1, 0.7, 1, 0.1);
+  background-image: linear-gradient(90deg, #8653fc 0%, #a64cf4 100%);
+}

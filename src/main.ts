@@ -10,13 +10,26 @@ import { calcStats } from "./test/math-engine";
 extensions.add(ResizePlugin);
 
 (async () => {
-  calcStats();
+  // calcStats();
+  const loaderContainer = document.getElementById("loaderContainer")!;
+  const progressBarIndicatorValue = document.getElementById(
+    "progressBarIndicatorValue",
+  )!;
+
   const { app } = await initApp();
+
   const resCtrl = await ResourcesController.create(app);
   const audioCtrl = new AudioController();
   new HTMLController(audioCtrl);
+  progressBarIndicatorValue.style.width = "66%";
   const balanceCtrl = new BalanceController(audioCtrl);
   const gameCtrl = new GameController(app, resCtrl, audioCtrl, balanceCtrl);
+
   await gameCtrl.createDefaulReelsAndMask();
+  progressBarIndicatorValue.style.width = "100%";
+
   gameCtrl.loop();
+  setTimeout(() => {
+    loaderContainer.remove();
+  }, 1500);
 })();

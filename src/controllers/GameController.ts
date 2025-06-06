@@ -159,6 +159,7 @@ export class GameController {
       GemV: [],
       ChestG: [],
       ChestS: [],
+      GemGold: [],
       // FSChest: [],
     };
 

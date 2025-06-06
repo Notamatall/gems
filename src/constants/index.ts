@@ -9,6 +9,7 @@ export const gs_des_anim: Record<GSType, string> = {
   GemR: "/assets/animations-json/gemr.json",
   ChestS: "/assets/animations-json/chestsilver.json",
   ChestG: "/assets/animations-json/chestgold.json",
+  GemGold: "/assets/animations-json/gemgold.json",
   // FSChest: "/assets/animations-json/fs-chest-green.json",
 };
 
@@ -30,4 +31,5 @@ export const DEFAULT_BALANCE = 10000;
 export const DEFAULT_BET = 10;
 export const MAX_BET = 100;
 export const MIN_BET = 0.1;
+export const SLOT_WEIGHTS_LIMIT = 99;
 export const SLOT_WEIGHTS_LIMIT_PF = 101;

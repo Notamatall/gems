@@ -115,6 +115,7 @@ export class SimulationEngine {
       GemV: [],
       ChestG: [],
       ChestS: [],
+      GemGold: [],
     };
 
     for (const type of Object.values(GSType)) {
