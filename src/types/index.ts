@@ -1,12 +1,12 @@
 import { AnimatedSprite, Dict } from "pixi.js";
 
 export enum GSType {
-  gemv = "GemV",
   gemc = "GemC",
   gemg = "GemG",
+  gemr = "GemR",
   gemw = "GemW",
   gemy = "GemY",
-  gemr = "GemR",
+  gemv = "GemV",
   chests = "ChestS",
   chestg = "ChestG",
   fschest = "FSChest",

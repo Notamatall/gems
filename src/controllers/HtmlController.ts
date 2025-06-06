@@ -1,7 +1,4 @@
-import {
-  isMusicEnabled,
-  isSoundEnabled,
-} from "../constants/local-storage-keys";
+import { isMusicEnabled, isSoundEnabled } from "../constants/lskey";
 import { getElementByIdOrThrow } from "../utils/document";
 import { AudioController, AudioKey } from "./AudioController";
 

@@ -143,7 +143,8 @@ export class GameController {
   // Click actions
   private async expload() {
     this.state = "start_destroy";
-    await waitAsync(700);
+
+    await waitAsync(400);
     const symbols = this._reels.map((reel) => reel.symbols).flat(1);
 
     const matches: Record<GSType, GameSymbol[]> = {

@@ -1,8 +1,5 @@
 import { PlayOptions, sound } from "@pixi/sound";
-import {
-  isMusicEnabled,
-  isSoundEnabled,
-} from "../constants/local-storage-keys";
+import { isMusicEnabled, isSoundEnabled } from "../constants/lskey";
 
 export enum AudioKey {
   music = "music",
