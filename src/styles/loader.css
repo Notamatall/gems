@@ -36,7 +36,7 @@
 #progressBarIndicatorValue {
   position: absolute;
   border-radius: 25px;
-  width: 33%;
+  width: 0%;
   transition: width 1s;
   height: 100%;
   top: 0;

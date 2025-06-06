@@ -22,7 +22,7 @@ export const paytables: Record<GSType, PayoutModel> = {
   GemC: {
     min: 8,
     ranges: [
-      { payout: 0.5, range: "8-10" },
+      { payout: 0.6, range: "8-10" },
       { payout: 1.5, range: "11-12" },
       { payout: 4, range: "13-30" },
     ],
@@ -38,7 +38,7 @@ export const paytables: Record<GSType, PayoutModel> = {
   GemR: {
     min: 8,
     ranges: [
-      { payout: 1, range: "8-10" },
+      { payout: 1.2, range: "8-10" },
       { payout: 2, range: "11-12" },
       { payout: 10, range: "13-30" },
     ],

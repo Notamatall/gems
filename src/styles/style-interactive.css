@@ -16,11 +16,6 @@
   border-radius: 12px;
 }
 
-@media (width < 1000px) {
-  #MainPanel {
-    transform: scale3d(0.8, 0.8, 1);
-  }
-}
 #MainPanelContainer {
   align-items: center;
   display: flex;
@@ -86,7 +81,7 @@
   background-image: url("/assets/interaction-panel/spin-hover.png");
 }
 
-.BetAmountChangersWidget {
+#BetAmountChangersWidget {
   align-items: center;
   display: flex;
   flex-direction: column;
@@ -208,4 +203,44 @@
 #WinAmountItem {
   opacity: 0;
   transition: opacity 0.3s;
+}
+
+@media (width < 1000px) {
+  #play-button {
+    height: 5rem;
+    width: 5rem;
+  }
+}
+
+@media (width < 600px) {
+  #BetAmountChangersWidget svg {
+    width: 18px;
+    height: 18px;
+  }
+  #BetAmountWidget {
+    padding: 5px 5px;
+    min-width: auto;
+  }
+  #BetAmountProgress {
+    height: 3px;
+    width: 50px;
+  }
+  #MainPanel {
+    min-width: auto;
+    height: 4rem;
+  }
+  .PanelItem_Label {
+    font-size: 8px;
+  }
+  .PanelItem_Value {
+    font-size: 9px;
+  }
+  #DataPanel_Menu svg {
+    width: 24px;
+    height: 24px;
+  }
+  #DataPanel_Menu {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
 }
