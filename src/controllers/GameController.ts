@@ -16,6 +16,7 @@ import { GameSymbol, GSDestAudioKey } from "../types/GameSymbol";
 import { AudioController, AudioKey } from "./AudioController";
 import { BalanceController } from "./BalanceController";
 import { waitAsync } from "../utils";
+import MathEngine from "../engine/math-engine";
 
 type SlotState =
   | "idle"
@@ -46,6 +47,7 @@ export class GameController {
     this._playButton.onclick = () => {
       this.play();
       this._balCtrl.decBal();
+      this._balCtrl.hideWinAmountItem();
       this._ac.play(AudioKey.bet, { volume: 0.2 });
     };
   }
@@ -166,10 +168,13 @@ export class GameController {
     }
     let isAnyMatch = false;
     for (const [type, value] of Object.entries(matches)) {
-      const minMatchCount = type == GSType.fschest ? 3 : MIN_MATCH_COUNT;
-      if (value.length >= minMatchCount) {
+      const matchesCount = value.length;
+      const multiplier = MathEngine.getMultiplier(type as GSType, matchesCount);
+
+      if (multiplier > 0) {
         isAnyMatch = true;
         await Promise.all(value.map((val) => val.play()));
+        this._balCtrl.winBet(multiplier);
       }
     }
 

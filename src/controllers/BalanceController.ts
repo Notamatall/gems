@@ -1,52 +1,57 @@
 import { CountUp } from "countup.js";
 import { DEFAULT_BALANCE, DEFAULT_BET, MAX_BET, MIN_BET } from "../constants";
 import { AudioController, AudioKey } from "./AudioController";
+import { getElementByIdOrThrow } from "../utils/document";
 
 export class BalanceController {
   constructor(audioCtrl: AudioController) {
     this._audioCtrl = audioCtrl;
-    const balaceValueElement = document.getElementById("BalanceValue");
-    if (!balaceValueElement) throw new Error("balaceValueElement not found");
-    this._balaceElement = balaceValueElement;
     this._balaceElement.textContent = `€ ${this._balanceValue.toFixed(2)}`;
-
-    const betAmountValue = document.getElementById("BetAmountValue");
-    if (!betAmountValue) throw new Error("balaceValueElement not found");
-    this._betAmountElement = betAmountValue;
     this._betAmountElement.textContent = `€ ${this._betAmountValue.toFixed(2)}`;
-
-    const betAmountProgress = document.getElementById(
-      "BetAmountProgress_Value",
-    );
-    if (!betAmountProgress) throw new Error("betAmountProgress not found");
-    this._betAmountProgressElement = betAmountProgress;
     this.setProgress();
 
-    const betAmountInc = document.getElementById("BetAmountChangersButton-Inc");
-    if (!betAmountInc) throw new Error("betAmountInc not found");
-    this._betAmountIncElement = betAmountInc as HTMLButtonElement;
     this._betAmountIncElement.onclick = () => {
-      this._audioCtrl.play(AudioKey.click);
+      this._audioCtrl.play(AudioKey.click, { volume: 0.7 });
       this.incBet();
     };
 
-    const betAmountDec = document.getElementById("BetAmountChangersButton-Dec");
-    if (!betAmountDec) throw new Error("betAmountDec not found");
-    this._betAmountDecElement = betAmountDec as HTMLButtonElement;
     this._betAmountDecElement.onclick = () => {
-      this._audioCtrl.play(AudioKey.click);
+      this._audioCtrl.play(AudioKey.click, { volume: 0.7 });
       this.decBet();
     };
   }
+
+  private lastWinAmount: number = 0;
+
   private _audioCtrl: AudioController;
-  private _betAmountIncElement: HTMLButtonElement;
-  private _betAmountDecElement: HTMLButtonElement;
-  private _balaceElement: HTMLElement;
-  private _betAmountElement: HTMLElement;
-  private _betAmountProgressElement: HTMLElement;
+  private _betAmountIncElement: HTMLButtonElement = getElementByIdOrThrow(
+    "BetAmountChangersButton-Inc",
+  );
+  private _betAmountDecElement: HTMLButtonElement = getElementByIdOrThrow(
+    "BetAmountChangersButton-Dec",
+  );
+  private _balaceElement: HTMLElement = getElementByIdOrThrow("BalanceValue");
+  private _betAmountElement: HTMLElement =
+    getElementByIdOrThrow("BetAmountValue");
+  private _winAmountValueElement: HTMLElement =
+    getElementByIdOrThrow("WinAmountValue");
+  private _betAmountProgressElement: HTMLElement = getElementByIdOrThrow(
+    "BetAmountProgress_Value",
+  );
+  private _winAmountItem: HTMLElement = getElementByIdOrThrow("WinAmountItem");
 
   private _balanceValue: number = DEFAULT_BALANCE;
   private _betAmountValue: number = DEFAULT_BET;
+
+  hideWinAmountItem() {
+    this._winAmountItem.style.opacity = "0";
+    this._winAmountValueElement.textContent = ``;
+  }
+
+  showWinAmountItem() {
+    this._winAmountItem.style.opacity = "1";
+    this._winAmountValueElement.textContent = `€ ${this.lastWinAmount.toFixed(2)}`;
+  }
 
   disCtrls() {
     this._betAmountIncElement.disabled = true;
@@ -112,5 +117,12 @@ export class BalanceController {
     this._betAmountValue = newVal;
     this._betAmountElement.textContent = `€ ${newVal.toFixed(2)}`;
     this.setProgress();
+  }
+
+  winBet(multiplier: number) {
+    const wonSize = Math.round(multiplier * this._betAmountValue);
+    this.changeBal(wonSize);
+    this.lastWinAmount = wonSize;
+    this.showWinAmountItem();
   }
 }

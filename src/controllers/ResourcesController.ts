@@ -12,7 +12,9 @@ import {
   gs_des_anim,
   gs_eff_anim,
   SLOT_SYM_ANIMATION_NAME,
+  SLOT_WEIGHTS_LIMIT,
 } from "../constants";
+import { getSymbolByCumulativeValue } from "../constants/math-engine";
 
 export class ResourcesController {
   private _reelBg?: Sprite;
@@ -56,9 +58,11 @@ export class ResourcesController {
   }
 
   private getRandomSlotTexture() {
-    return this.slotTextures[
-      Math.floor(Math.random() * this.slotTextures.length)
-    ];
+    const randomValue = Math.floor(Math.random() * SLOT_WEIGHTS_LIMIT) + 1;
+    console.log(randomValue);
+
+    const type = getSymbolByCumulativeValue(randomValue);
+    return this.slotTextures.find((tex) => tex.type === type)!;
   }
 
   static async loadGemsAnimationsInCache() {

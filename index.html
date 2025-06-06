@@ -128,9 +128,17 @@
 
 
           <div class="Divider_Vertical"></div>
-          <div id="Balance" class="DataPanelItem ">
-            <span class="PanelItem_Label">Demo Balance</span>
-            <span id="BalanceValue" class="PanelItem_Value"></span>
+          <div id="DataPanel_container">
+
+            <div id="Balance" class="DataPanelItem ">
+              <span class="PanelItem_Label">Demo Balance</span>
+              <span id="BalanceValue" class="PanelItem_Value"></span>
+            </div>
+
+            <div id="WinAmountItem" class="WinAmount DataPanelItem is-visible">
+              <span id="WinAmountLabel" class="PanelItem_Label">WIN</span>
+              <span id="WinAmountValue" class="PanelItem_Value"></span>
+            </div>
 
           </div>
         </div>
@@ -180,7 +188,6 @@
       </div>
 
     </div>
-    <button id="audio-button">audio</button>
   </div>
   <script type="module" src="/src/main.ts"></script>
 </body>

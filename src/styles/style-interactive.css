@@ -199,3 +199,13 @@
 #DataPanel_Menu[data-active="true"] .x-icon {
   display: block;
 }
+
+#DataPanel_container {
+  display: flex;
+  gap: 15px;
+}
+
+#WinAmountItem {
+  opacity: 0;
+  transition: opacity 0.3s;
+}

@@ -1,3 +1,4 @@
+import { paytables } from "../constants/math-engine";
 import { PayoutRange } from "../types/MathEngine";
 
 export default class MathEngine {
@@ -62,5 +63,30 @@ export default class MathEngine {
     }
 
     return rtp;
+  }
+
+  /**
+   * Returns the payout multiplier for a given symbol type and matches count.
+   * @param {GSType} type - Symbol type (e.g., 'GemC')
+   * @param {number} matches - Number of matches on the board
+   * @returns {number} - Multiplier, or 0 if not found
+   */
+  static getMultiplier(type: keyof typeof paytables, matches: number): number {
+    const paytable = paytables[type];
+    if (
+      !paytable ||
+      paytable.min > matches ||
+      !paytable.ranges ||
+      paytable.ranges.length === 0
+    )
+      return 0;
+
+    for (const { payout, range } of paytable.ranges) {
+      const [min, max] = range.split("-").map(Number);
+      if (matches >= min && matches <= max) {
+        return payout;
+      }
+    }
+    return 0;
   }
 }

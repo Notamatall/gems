@@ -72,13 +72,14 @@ export class GameSymbol {
   private playPromise: (() => void) | null = null;
   destroy: () => void;
 
-  play(): Promise<void> {
+  play(onPlayFinish?: () => void): Promise<void> {
     this._onPlay();
     this.animSprite.play();
     return new Promise((res) => {
       this.playPromise = async () => {
         await waitAsync(300);
         res();
+        if (onPlayFinish) onPlayFinish();
         this.playPromise = null;
       };
     });

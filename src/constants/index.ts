@@ -30,3 +30,4 @@ export const DEFAULT_BALANCE = 10000;
 export const DEFAULT_BET = 10;
 export const MAX_BET = 100;
 export const MIN_BET = 0.1;
+export const SLOT_WEIGHTS_LIMIT = 99;
