@@ -9,7 +9,6 @@ import { HTMLController } from "./controllers/HtmlController";
 extensions.add(ResizePlugin);
 
 (async () => {
-  // calcStats();
   const loaderContainer = document.getElementById("loaderContainer")!;
   const progressBarIndicatorValue = document.getElementById(
     "progressBarIndicatorValue",
@@ -19,16 +18,25 @@ extensions.add(ResizePlugin);
 
   const resCtrl = await ResourcesController.create(app);
   const audioCtrl = new AudioController();
-  new HTMLController(audioCtrl);
+  const htmlCtrl = new HTMLController(audioCtrl);
   progressBarIndicatorValue.style.width = "66%";
   const balanceCtrl = new BalanceController(audioCtrl);
-  const gameCtrl = new GameController(app, resCtrl, audioCtrl, balanceCtrl);
+  const gameCtrl = new GameController(
+    app,
+    resCtrl,
+    audioCtrl,
+    balanceCtrl,
+    htmlCtrl,
+  );
 
   await gameCtrl.createDefaulReelsAndMask();
   progressBarIndicatorValue.style.width = "100%";
 
   gameCtrl.loop();
   setTimeout(() => {
-    loaderContainer.remove();
+    htmlCtrl.initSoundToggles();
+    setTimeout(() => {
+      loaderContainer.remove();
+    }, 500);
   }, 1500);
 })();

@@ -22,8 +22,10 @@ body {
   background-image: url("/assets/background.png");
   background-repeat: no-repeat;
   background-size: contain;
-  aspect-ratio: 1920/1080;
+  aspect-ratio: 16/9;
   width: 100%;
+  max-width: 1440px;
+  position: relative;
 }
 
 #bets-container {
@@ -51,4 +53,5 @@ body {
   max-width: 1600px;
   justify-content: center;
   align-items: center;
+  position: relative;
 }

@@ -1,4 +1,4 @@
-import { GSType } from ".";
+import { GSType } from "./game-symbol";
 
 export interface SimBoard {
   reels: SimReel[];

@@ -1,4 +1,4 @@
-import { Application, Container, Graphics } from "pixi.js";
+import { Application, Container, Graphics, Sprite } from "pixi.js";
 import {
   BOARD_WIDTH,
   REEL_BORDER_SIZE_PX,
@@ -8,14 +8,18 @@ import {
   FALL_SYMBOL_GAP,
   SLOT_SYMBOLS_Y_POS,
 } from "../constants";
-import { SlotSymbol, GSType } from "../types";
+import { FreeSpinGameConfig, BonusGameType, SlotSymbol } from "../types";
 import { ResourcesController } from "./ResourcesController";
 import { SlotReel } from "../types/SlotReel";
-import { GameSymbol, GSDestAudioKey } from "../types/GameSymbol";
+import { GameSymbol } from "../types/GameSymbol";
 import { AudioController, AudioKey } from "./AudioController";
 import { BalanceController } from "./BalanceController";
 import { waitAsync } from "../utils";
 import MathEngine from "../engine/math-engine";
+import { GSDestAudioKey, GSType } from "../types/game-symbol";
+import { HTMLController } from "./HtmlController";
+import BonusEngine from "../engine/BonusEngine";
+import { getElementByIdOrThrow } from "../utils/document";
 
 type SlotState =
   | "idle"
@@ -27,34 +31,59 @@ type SlotState =
   | "finish_define_empty"
   | "start_move_empty"
   | "waiting";
-
 export class GameController {
   constructor(
     app: Application,
     resCtrl: ResourcesController,
     audioCtrl: AudioController,
     balController: BalanceController,
+    htmlController: HTMLController,
   ) {
     this._app = app;
     this._resCtrl = resCtrl;
     this._ac = audioCtrl;
     this._balCtrl = balController;
+    this._htmlCtrl = htmlController;
 
-    const playButton = document.getElementById("play-button");
-    if (!playButton) throw new Error("Play button not found");
+    const playButton = getElementByIdOrThrow("PlayButton");
     this._playButton = playButton as HTMLButtonElement;
     this._playButton.onclick = () => {
       this.play();
       this._balCtrl.decBal();
       this._balCtrl.hideWinAmountItem();
+      this._balCtrl.hideTotalWinItem();
       this._ac.play(AudioKey.bet, { volume: 0.2 });
     };
+    this._htmlCtrl.initBonusBuyButton(async () => {
+      this.freeSpinGameState = {
+        matchesCount: 3,
+        type: "Multiplier",
+        symbols: [],
+        spinnedCount: BonusEngine.getFreeSpinsCountByType("Multiplier"),
+        currentMultiplier: 0,
+        currentSpin: 0,
+        started: false,
+      };
+      await this.playFreeSpin();
+    });
   }
+
+  private freeSpinGameState?: {
+    type: BonusGameType;
+    matchesCount: number;
+    symbols: GameSymbol[];
+    spinnedCount: number;
+    currentMultiplier: number;
+    currentSpin: number;
+    started: boolean;
+  } = undefined;
+
   private _playButton: HTMLButtonElement;
   private _app: Application;
   private _resCtrl: ResourcesController;
   private _balCtrl: BalanceController;
   private _ac: AudioController;
+  private _htmlCtrl: HTMLController;
   private state: SlotState = "idle";
   private _reels: SlotReel[] = [];
   private _isInitial = true;
@@ -150,18 +179,9 @@ export class GameController {
     await waitAsync(400);
     const symbols = this._reels.map((reel) => reel.symbols).flat(1);
 
-    const matches: Record<GSType, GameSymbol[]> = {
-      GemC: [],
-      GemG: [],
-      GemR: [],
-      GemW: [],
-      GemY: [],
-      GemV: [],
-      ChestG: [],
-      ChestS: [],
-      GemGold: [],
-      // FSChest: [],
-    };
+    const matches = Object.fromEntries<GameSymbol[]>(
+      Object.values(GSType).map((symbol) => [symbol, []]),
+    );
 
     for (const type of Object.values(GSType)) {
       for (const symbol of symbols) {
@@ -169,13 +189,30 @@ export class GameController {
       }
     }
     let isAnyMatch = false;
-    for (const [type, value] of Object.entries(matches)) {
-      const matchesCount = value.length;
-      const multiplier = MathEngine.getMultiplier(type as GSType, matchesCount);
+    for (const [type, matchedSymbols] of Object.entries(matches)) {
+      const gsType = type as GSType;
+      const matchesCount = matchedSymbols.length;
+      const isFreeSpinGame = BonusEngine.isFreeSpinGame(gsType, matchesCount);
+
+      if (isFreeSpinGame && !this.freeSpinGameState?.started) {
+        const fsType = BonusEngine.getFreeSpinTypeByMatches(matchesCount);
+        this.freeSpinGameState = {
+          matchesCount: matchesCount,
+          type: fsType,
+          symbols: matchedSymbols,
+          spinnedCount: BonusEngine.getFreeSpinsCountByType(fsType),
+          currentMultiplier: 0,
+          currentSpin: 0,
+          started: false,
+        };
+        continue;
+      }
+
+      const multiplier = MathEngine.getMultiplier(gsType, matchesCount);
 
       if (multiplier > 0) {
         isAnyMatch = true;
-        await Promise.all(value.map((val) => val.play()));
+        await Promise.all(matchedSymbols.map((val) => val.play()));
         this._balCtrl.winBet(multiplier);
       }
     }
@@ -183,8 +220,50 @@ export class GameController {
     if (isAnyMatch) {
       this.state = "finish_destroy";
     } else {
-      this.state = "waiting";
+      if (this.freeSpinGameState) {
+        if (!this.freeSpinGameState.started) {
+          await this.playFreeSpin();
+          return;
+        } else {
+          const { currentSpin } = this.freeSpinGameState;
+          if (this.freeSpinGameState.spinnedCount > 0) {
+            this.freeSpinGameState.spinnedCount -= 1;
+            this.freeSpinGameState.currentSpin += 1;
+            this._htmlCtrl.updateSpinsCount(
+              this.freeSpinGameState.spinnedCount,
+            );
+            this._htmlCtrl.updateMultiplierValue(
+              BonusEngine.getMultiplierBySpinIndex(currentSpin),
+            );
+            await waitAsync(500);
+
+            this.play();
+          } else {
+            this._htmlCtrl.showWonModal();
+            this.freeSpinGameState = undefined;
+            this.state = "waiting";
+          }
+        }
+      } else {
+        this.state = "waiting";
+      }
     }
+  }
+
+  async playFreeSpin() {
+    if (!this.freeSpinGameState) throw Error("Free spin config is empty ");
+    const { symbols, type } = this.freeSpinGameState;
+    await Promise.all(symbols.map((val) => val.play()));
+    this._reels.forEach((r) => r.clear());
+    this.freeSpinGameState.symbols = [];
+    this._ac.play(AudioKey.bgame);
+    await this._htmlCtrl.showFreeSpinWindow(type);
+    this._htmlCtrl.updateMultiplierValue(
+      BonusEngine.getMultiplierBySpinIndex(this.freeSpinGameState.currentSpin),
+    );
+    this._htmlCtrl.updateSpinsCount(this.freeSpinGameState.spinnedCount);
+    this.freeSpinGameState.started = true;
+    this.play();
   }
 
   disCtrlsGlobal() {
@@ -232,88 +311,92 @@ export class GameController {
     }
   }
 
+  private moveSymbolsToNewPositions(reel: SlotReel) {
+    const activeSymbols = reel.actSym;
+    if (activeSymbols.length === BOARD_HEIGHT) return;
+
+    const filledPositions = new Array(BOARD_HEIGHT).fill(false);
+
+    activeSymbols.forEach((symbol) => {
+      //TODO
+
+      const closestSlot = SLOT_SYMBOLS_Y_POS.findIndex(
+        (pos) => Math.abs(symbol.animSprite.y - pos) < SMALL_SYMBOL_SIZE_PX / 2,
+      );
+      if (closestSlot !== -1) {
+        filledPositions[closestSlot] = true;
+      }
+    });
+
+    let writeIndex = BOARD_HEIGHT - 1;
+
+    for (let i = BOARD_HEIGHT - 1; i >= 0; i--) {
+      if (filledPositions[i]) {
+        //TODO
+        const symbol = activeSymbols.find(
+          (sym) =>
+            Math.abs(sym.animSprite.y - SLOT_SYMBOLS_Y_POS[i]) <
+            SMALL_SYMBOL_SIZE_PX / 2,
+        );
+
+        if (symbol && writeIndex !== i) {
+          symbol.finalYPos = SLOT_SYMBOLS_Y_POS[writeIndex];
+          symbol.row = writeIndex;
+
+          symbol.velocity = 0;
+        }
+
+        writeIndex--;
+      }
+    }
+  }
+
+  private dropNewSymbols(reel: SlotReel, reelIndex: number) {
+    const activeSymbols = reel.actSym;
+    const emptySlots = BOARD_HEIGHT - activeSymbols.length;
+    const writeIndex = emptySlots - 1;
+
+    if (emptySlots > 0) {
+      const newSymbols: GameSymbol[] = [];
+
+      for (let row = 0; row < emptySlots; row++) {
+        const gameSymbol = this._resCtrl.getRandomSlotSymbol();
+        const sprite = gameSymbol.animSprite;
+
+        sprite.x = SMALL_SYMBOL_SIZE_PX / 2 - ANIMATION_DIFFERENCE;
+        sprite.y =
+          -SMALL_SYMBOL_SIZE_PX * (row + 1) -
+          ANIMATION_DIFFERENCE -
+          row * FALL_SYMBOL_GAP;
+
+        reel.rc.addChild(sprite);
+
+        const newGameSymbol = new GameSymbol({
+          type: gameSymbol.type,
+          animSprite: sprite,
+          row,
+          col: reelIndex,
+          finalYPos: SLOT_SYMBOLS_Y_POS[writeIndex - row],
+          reel,
+          animationSpeed: 1,
+          onPlay: () => this._ac.play(GSDestAudioKey[gameSymbol.type], {}),
+        });
+
+        newSymbols.push(newGameSymbol);
+      }
+
+      reel.addSymbols(newSymbols);
+    }
+  }
+
   private moveToEmptyPlaces() {
     this.state = "start_define_empty";
     for (let reelIndex = 0; reelIndex < this._reels.length; reelIndex++) {
       const reel = this._reels[reelIndex];
-
-      const activeSymbols = reel.actSym;
-
-      if (activeSymbols.length === BOARD_HEIGHT) continue;
-
-      const filledPositions = new Array(BOARD_HEIGHT).fill(false);
-
-      activeSymbols.forEach((symbol) => {
-        //TODO
-
-        const closestSlot = SLOT_SYMBOLS_Y_POS.findIndex(
-          (pos) =>
-            Math.abs(symbol.animSprite.y - pos) < SMALL_SYMBOL_SIZE_PX / 2,
-        );
-        if (closestSlot !== -1) {
-          filledPositions[closestSlot] = true;
-        }
-      });
-
-      let writeIndex = BOARD_HEIGHT - 1;
-
-      for (let i = BOARD_HEIGHT - 1; i >= 0; i--) {
-        if (filledPositions[i]) {
-          //TODO
-          const symbol = activeSymbols.find(
-            (sym) =>
-              Math.abs(sym.animSprite.y - SLOT_SYMBOLS_Y_POS[i]) <
-              SMALL_SYMBOL_SIZE_PX / 2,
-          );
-
-          if (symbol && writeIndex !== i) {
-            symbol.finalYPos = SLOT_SYMBOLS_Y_POS[writeIndex];
-            symbol.row = writeIndex;
-
-            symbol.velocity = 0;
-          }
-
-          writeIndex--;
-        }
-      }
-      const emptySlots = BOARD_HEIGHT - activeSymbols.length;
-      writeIndex = emptySlots - 1;
-
-      if (emptySlots > 0) {
-        const newSymbols: GameSymbol[] = [];
-
-        for (let row = 0; row < emptySlots; row++) {
-          const gameSymbol = this._resCtrl.getRandomSlotSymbol();
-          const sprite = gameSymbol.animSprite;
-
-          sprite.x = SMALL_SYMBOL_SIZE_PX / 2 - ANIMATION_DIFFERENCE;
-          sprite.y =
-            -SMALL_SYMBOL_SIZE_PX * (row + 1) -
-            ANIMATION_DIFFERENCE -
-            row * FALL_SYMBOL_GAP;
-
-          reel.rc.addChild(sprite);
-
-          const newGameSymbol = new GameSymbol({
-            type: gameSymbol.type,
-            animSprite: sprite,
-            row,
-            col: reelIndex,
-            finalYPos: SLOT_SYMBOLS_Y_POS[writeIndex - row],
-            reel,
-            animationSpeed: 1,
-            onPlay: () =>
-              this._ac.play(GSDestAudioKey[gameSymbol.type], {
-                volume: 0.2,
-              }),
-          });
-
-          newSymbols.push(newGameSymbol);
-        }
-
-        reel.addSymbols(newSymbols);
-      }
+      this.moveSymbolsToNewPositions(reel);
+      this.dropNewSymbols(reel, reelIndex);
     }
+
     this.state = "start_move";
   }
 
@@ -325,6 +408,7 @@ export class GameController {
       if (this.state === "finish_move") {
         await this.expload();
       }
+
       if (this.state === "finish_destroy") {
         this.moveToEmptyPlaces();
       }

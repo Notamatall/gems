@@ -1,0 +1,161 @@
+{
+  "frames": {
+    "double-gold-0.png": {
+      "frame": { "x": 223, "y": 866, "w": 211, "h": 187 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 4, "y": 16, "w": 211, "h": 187 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "double-gold-1.png": {
+      "frame": { "x": 1, "y": 1, "w": 220, "h": 220 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 220, "h": 220 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "double-gold-2.png": {
+      "frame": { "x": 1, "y": 877, "w": 208, "h": 208 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 5, "y": 6, "w": 208, "h": 208 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "double-gold-3.png": {
+      "frame": { "x": 223, "y": 650, "w": 214, "h": 214 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 2, "y": 3, "w": 214, "h": 214 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "double-gold-4.png": {
+      "frame": { "x": 223, "y": 1, "w": 218, "h": 216 },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 0, "y": 2, "w": 218, "h": 216 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "double-gold-5.png": {
+      "frame": { "x": 223, "y": 221, "w": 219, "h": 215 },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 1, "y": 3, "w": 219, "h": 215 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "double-gold-6.png": {
+      "frame": { "x": 223, "y": 442, "w": 215, "h": 206 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 2, "y": 6, "w": 215, "h": 206 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "double-gold-7.png": {
+      "frame": { "x": 1, "y": 223, "w": 220, "h": 220 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 220, "h": 220 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "double-gold-8.png": {
+      "frame": { "x": 1, "y": 445, "w": 220, "h": 220 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 220, "h": 220 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "double-gold-9.png": {
+      "frame": { "x": 1, "y": 667, "w": 220, "h": 208 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 0, "y": 12, "w": 220, "h": 208 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "double-gold-10.png": {
+      "frame": { "x": 211, "y": 1055, "w": 200, "h": 189 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 0, "y": 29, "w": 200, "h": 189 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "double-gold-11.png": {
+      "frame": { "x": 1, "y": 1087, "w": 168, "h": 155 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 15, "y": 45, "w": 168, "h": 155 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "double-gold-12.png": {
+      "frame": { "x": 287, "y": 1246, "w": 144, "h": 133 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 27, "y": 56, "w": 144, "h": 133 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "double-gold-13.png": {
+      "frame": { "x": 1, "y": 1382, "w": 146, "h": 134 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 26, "y": 60, "w": 146, "h": 134 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "double-gold-14.png": {
+      "frame": { "x": 1, "y": 1244, "w": 146, "h": 136 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 25, "y": 64, "w": 146, "h": 136 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "double-gold-15.png": {
+      "frame": { "x": 149, "y": 1246, "w": 145, "h": 136 },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 25, "y": 69, "w": 145, "h": 136 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "double-gold-16.png": {
+      "frame": { "x": 149, "y": 1393, "w": 129, "h": 123 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 38, "y": 76, "w": 129, "h": 123 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "double-gold-17.png": {
+      "frame": { "x": 287, "y": 1381, "w": 129, "h": 124 },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 38, "y": 83, "w": 129, "h": 124 },
+      "sourceSize": { "w": 220, "h": 220 }
+    }
+  },
+  "animations": {
+    "anim": [
+      "double-gold-0.png",
+      "double-gold-1.png",
+      "double-gold-2.png",
+      "double-gold-3.png",
+      "double-gold-4.png",
+      "double-gold-5.png",
+      "double-gold-6.png",
+      "double-gold-7.png",
+      "double-gold-8.png",
+      "double-gold-9.png",
+      "double-gold-10.png",
+      "double-gold-11.png",
+      "double-gold-12.png",
+      "double-gold-13.png",
+      "double-gold-14.png",
+      "double-gold-15.png",
+      "double-gold-16.png",
+      "double-gold-17.png"
+    ]
+  },
+  "meta": {
+    "app": "https://www.codeandweb.com/texturepacker",
+    "version": "1.1",
+    "image": "chestdoublegold.png",
+    "format": "RGBA8888",
+    "size": { "w": 440, "h": 1517 },
+    "scale": "1",
+    "smartupdate": "$TexturePacker:SmartUpdate:73c9d6d9b665c64e86500b756c63e8ef:baa0fbe4f321d425def95faf3b1595a3:2eb01a7fa0712cd32ed4d12657368d8f$"
+  }
+}

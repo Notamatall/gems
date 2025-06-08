@@ -45,6 +45,7 @@
   -webkit-user-select: none;
   -moz-user-select: none;
   user-select: none;
+  text-transform: uppercase;
 }
 
 .enabled-icon,
@@ -61,7 +62,7 @@
 
 #MusicToggle button,
 #GameInfoBtn button,
-#SoundToggle button {
+#SoundToggle button #BonusBuyButton button {
   margin-right: 5px;
 }
 

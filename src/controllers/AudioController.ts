@@ -12,6 +12,7 @@ export enum AudioKey {
   coins = "coins",
   chestrew = "chestrew",
   fshit = "fshit",
+  bgame = "bgame",
 }
 export class AudioController {
   constructor() {
@@ -25,6 +26,7 @@ export class AudioController {
     sound.add(AudioKey.coins, "/assets/sounds/coins-sound.webm");
     sound.add(AudioKey.chestrew, "/assets/sounds/chest-reward.mp3");
     sound.add(AudioKey.fshit, "/assets/sounds/fs-hit.mp3");
+    sound.add(AudioKey.bgame, "/assets/sounds/bonus-game.mp3");
 
     const isse = localStorage.getItem(isSoundEnabled);
     if (isse && isse === "false") {

@@ -3,7 +3,7 @@
   align-items: center;
   flex-direction: column;
   width: 280px;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -15,7 +15,7 @@
   justify-content: center;
   z-index: 9999;
   opacity: 1;
-  transition: opacity 1s;
+  transition: opacity 0.5s;
 }
 
 #progressBarContainer {

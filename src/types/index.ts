@@ -1,21 +1,17 @@
 import { AnimatedSprite, Dict } from "pixi.js";
-
-export enum GSType {
-  gemgold = "GemGold",
-  gemc = "GemC",
-  gemg = "GemG",
-  gemr = "GemR",
-  gemw = "GemW",
-  gemy = "GemY",
-  gemv = "GemV",
-  chests = "ChestS",
-  chestg = "ChestG",
-  // fschest = "FSChest",
-}
+import { GSType } from "./game-symbol";
 
 export enum GSEffect {
   blight = "BlueLight",
+  peffect = "PurpleEffect",
 }
+
+export type BonusGameType = "Multiplier" | "Remainer" | "Combo";
+export const FreeSpinGameConfig: Record<number, BonusGameType> = {
+  3: "Multiplier",
+  4: "Remainer",
+  5: "Combo",
+};
 
 export interface TypedAnimation<T> {
   type: T;

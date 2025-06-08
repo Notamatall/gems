@@ -1,6 +1,7 @@
 import { BOARD_HEIGHT, BOARD_WIDTH } from "../constants";
 import { cumWeight } from "../constants/math-engine";
-import { GSType } from "../types";
+import { GSType } from "../types/game-symbol";
+import { GameSymbol } from "../types/GameSymbol";
 import { SimBoard, SimReel, SimSymbol } from "../types/Simulation";
 import { getSymbolByCumulativeValue, round } from "../utils/symbol";
 import MathEngine from "./math-engine";
@@ -106,17 +107,9 @@ export class SimulationEngine {
 
   private searchMatches(board: SimBoard) {
     const symbols = board.reels.map((x) => x.symbols).flat(1);
-    const matches: Record<GSType, SimSymbol[]> = {
-      GemC: [],
-      GemG: [],
-      GemR: [],
-      GemW: [],
-      GemY: [],
-      GemV: [],
-      ChestG: [],
-      ChestS: [],
-      GemGold: [],
-    };
+    const matches = Object.fromEntries<SimSymbol[]>(
+      Object.values(GSType).map((symbol) => [symbol, []]),
+    );
 
     for (const type of Object.values(GSType)) {
       for (const symbol of symbols) {

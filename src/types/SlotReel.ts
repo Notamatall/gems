@@ -19,6 +19,9 @@ export class SlotReel {
       this.symbols.push(newSymbol);
     }
   }
+  clear() {
+    this.symbols.forEach((s) => s.destroy());
+  }
 
   get actSym() {
     return this.symbols.filter((sym) => sym.state === "Active");

@@ -1,9 +1,8 @@
-import { AnimatedSprite } from "pixi.js";
-import { GSType } from ".";
+import { AnimatedSprite, NoiseFilter } from "pixi.js";
 import { SlotReel } from "./SlotReel";
 import { REEL_VIEWPORT_MAX_Y } from "../constants";
-import { AudioKey } from "../controllers/AudioController";
 import { waitAsync } from "../utils";
+import { GSType } from "./game-symbol";
 export type GameSymbolState = "Active" | "Inactive";
 export interface GameSymbolInitializer {
   type: GSType;
@@ -38,7 +37,6 @@ export class GameSymbol {
     animSprite.loop = false;
 
     this._reel = reel;
-
     animSprite.onComplete = () => {
       reel.rc.removeChild(animSprite);
       this._reel.symbols = this._reel.symbols.filter(
@@ -176,16 +174,3 @@ export class GameSymbol {
     return this._state;
   }
 }
-
-export const GSDestAudioKey: Record<GSType, AudioKey> = {
-  GemC: AudioKey.gemdest,
-  GemG: AudioKey.gemdest,
-  GemR: AudioKey.gemdest,
-  GemW: AudioKey.gemdest,
-  GemY: AudioKey.gemdest,
-  GemV: AudioKey.gemdest,
-  ChestG: AudioKey.chestrew,
-  ChestS: AudioKey.chestrew,
-  GemGold: AudioKey.fshit,
-  // FSChest: AudioKey.fshit,
-};

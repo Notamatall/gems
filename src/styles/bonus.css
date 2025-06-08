@@ -1,0 +1,99 @@
+.lucky-text {
+  font-family: "Luckiest Guy", cursive;
+  color: #ffd700;
+  text-shadow:
+    -2px -2px 0 #5c2c06,
+    2px -2px 0 #5c2c06,
+    -2px 2px 0 #5c2c06,
+    2px 2px 0 #5c2c06,
+    0 2px 0 #3a1b00,
+    0 4px 0 #2b1400;
+}
+
+.lucky-title {
+  color: #ffd700;
+  font-family: "Luckiest Guy", cursive;
+
+  text-shadow:
+    -2px -2px 0 #5c2c06,
+    2px -2px 0 #5c2c06,
+    -2px 2px 0 #5c2c06,
+    2px 2px 0 #5c2c06,
+    0 9px 0 #3a1b00,
+    0 8px 0 #2b1400;
+}
+
+.lucky-text {
+  font-family: "Luckiest Guy", cursive;
+  color: #ffd700;
+  text-shadow:
+    -2px -2px 0 #5c2c06,
+    2px -2px 0 #5c2c06,
+    -2px 2px 0 #5c2c06,
+    2px 2px 0 #5c2c06,
+    0 2px 0 #3a1b00,
+    0 4px 0 #2b1400;
+}
+
+#BonusBoard {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-image: url("/assets/bonus-game.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  aspect-ratio: 16/9;
+  transform: translateY(-100%);
+  max-width: 1440px;
+  position: absolute;
+  z-index: 10;
+  cursor: pointer;
+  height: 100%;
+}
+#BonusBoardTitle {
+  margin-top: 2rem;
+
+  font-size: clamp(12px, 6vw, 60px);
+  position: absolute;
+  text-align: center;
+  user-select: none;
+
+  left: 50%;
+  top: 0px;
+  transform: translate(-50%, 0);
+}
+
+#BonusBoardDescription {
+  margin-top: 5rem;
+  font-size: clamp(7px, 3vw, 23px);
+  padding: 20px;
+  max-width: 600px;
+  user-select: none;
+  text-align: center;
+}
+
+#BonusBoardClickToContinue {
+  font-size: clamp(10px, 4vw, 50px);
+  position: absolute;
+  text-align: center;
+  user-select: none;
+
+  left: 50%;
+  bottom: 0px;
+  transform: translate(-50%, -50%);
+}
+
+#MultiplierContainer {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-size: 30px;
+}
+
+#FreeSpinsContainer {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  font-size: 30px;
+}

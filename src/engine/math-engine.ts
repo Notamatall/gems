@@ -1,4 +1,6 @@
 import { paytables } from "../constants/math-engine";
+import { BonusGameType } from "../types";
+import { GSType } from "../types/game-symbol";
 import { PayoutRange } from "../types/MathEngine";
 
 export default class MathEngine {
@@ -71,15 +73,9 @@ export default class MathEngine {
    * @param {number} matches - Number of matches on the board
    * @returns {number} - Multiplier, or 0 if not found
    */
-  static getMultiplier(type: keyof typeof paytables, matches: number): number {
+  static getMultiplier(type: GSType, matches: number): number {
     const paytable = paytables[type];
-    if (
-      !paytable ||
-      paytable.min > matches ||
-      !paytable.ranges ||
-      paytable.ranges.length === 0
-    )
-      return 0;
+    if (paytable.min > matches) return 0;
 
     for (const { payout, range } of paytable.ranges) {
       const [min, max] = range.split("-").map(Number);

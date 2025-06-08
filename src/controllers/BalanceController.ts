@@ -22,6 +22,7 @@ export class BalanceController {
   }
 
   private lastWinAmount: number = 0;
+  private totalWinAmount: number = 0;
 
   private _audioCtrl: AudioController;
   private _betAmountIncElement: HTMLButtonElement = getElementByIdOrThrow(
@@ -35,10 +36,13 @@ export class BalanceController {
     getElementByIdOrThrow("BetAmountValue");
   private _winAmountValueElement: HTMLElement =
     getElementByIdOrThrow("WinAmountValue");
+  private _totalWinAmountValueElement: HTMLElement =
+    getElementByIdOrThrow("TotalWinValue");
   private _betAmountProgressElement: HTMLElement = getElementByIdOrThrow(
     "BetAmountProgress_Value",
   );
   private _winAmountItem: HTMLElement = getElementByIdOrThrow("WinAmountItem");
+  private _totalWinItem: HTMLElement = getElementByIdOrThrow("TotalWinItem");
 
   private _balanceValue: number = DEFAULT_BALANCE;
   private _betAmountValue: number = DEFAULT_BET;
@@ -46,6 +50,16 @@ export class BalanceController {
   hideWinAmountItem() {
     this._winAmountItem.style.opacity = "0";
     this._winAmountValueElement.textContent = ``;
+  }
+
+  hideTotalWinItem() {
+    this._totalWinItem.style.opacity = "0";
+    this._totalWinAmountValueElement.textContent = ``;
+  }
+
+  showTotalWinItem() {
+    this._totalWinItem.style.opacity = "1";
+    this._totalWinAmountValueElement.textContent = `€ ${this.totalWinAmount.toFixed(2)}`;
   }
 
   showWinAmountItem() {
@@ -123,6 +137,8 @@ export class BalanceController {
     const wonSize = Math.round(multiplier * this._betAmountValue);
     this.changeBal(wonSize);
     this.lastWinAmount = wonSize;
+    this.totalWinAmount += wonSize;
     this.showWinAmountItem();
+    this.showTotalWinItem();
   }
 }

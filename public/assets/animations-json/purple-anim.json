@@ -1,0 +1,137 @@
+{
+  "frames": {
+    "renwubaij_0.png": {
+      "frame": { "x": 0, "y": 0, "w": 220, "h": 220 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 220, "h": 220 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "renwubaij_2.png": {
+      "frame": { "x": 220, "y": 0, "w": 220, "h": 220 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 220, "h": 220 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "renwubaij_4.png": {
+      "frame": { "x": 0, "y": 220, "w": 220, "h": 220 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 220, "h": 220 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "renwubaij_6.png": {
+      "frame": { "x": 220, "y": 220, "w": 220, "h": 220 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 220, "h": 220 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "renwubaij_8.png": {
+      "frame": { "x": 0, "y": 440, "w": 220, "h": 220 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 220, "h": 220 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "renwubaij_10.png": {
+      "frame": { "x": 220, "y": 440, "w": 220, "h": 220 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 220, "h": 220 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "renwubaij_12.png": {
+      "frame": { "x": 0, "y": 660, "w": 220, "h": 220 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 220, "h": 220 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "renwubaij_14.png": {
+      "frame": { "x": 220, "y": 660, "w": 220, "h": 220 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 220, "h": 220 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "renwubaij_16.png": {
+      "frame": { "x": 0, "y": 880, "w": 220, "h": 220 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 220, "h": 220 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "renwubaij_18.png": {
+      "frame": { "x": 220, "y": 880, "w": 220, "h": 220 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 220, "h": 220 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "renwubaij_20.png": {
+      "frame": { "x": 0, "y": 1100, "w": 220, "h": 220 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 220, "h": 220 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "renwubaij_22.png": {
+      "frame": { "x": 220, "y": 1100, "w": 220, "h": 220 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 220, "h": 220 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "renwubaij_24.png": {
+      "frame": { "x": 0, "y": 1320, "w": 220, "h": 220 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 220, "h": 220 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "renwubaij_26.png": {
+      "frame": { "x": 220, "y": 1320, "w": 220, "h": 220 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 220, "h": 220 },
+      "sourceSize": { "w": 220, "h": 220 }
+    },
+    "renwubaij_28.png": {
+      "frame": { "x": 0, "y": 1540, "w": 220, "h": 220 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 220, "h": 220 },
+      "sourceSize": { "w": 220, "h": 220 }
+    }
+  },
+  "animations": {
+    "anim": [
+      "renwubaij_0.png",
+      "renwubaij_2.png",
+      "renwubaij_4.png",
+      "renwubaij_6.png",
+      "renwubaij_8.png",
+      "renwubaij_10.png",
+      "renwubaij_12.png",
+      "renwubaij_14.png",
+      "renwubaij_16.png",
+      "renwubaij_18.png",
+      "renwubaij_20.png",
+      "renwubaij_22.png",
+      "renwubaij_24.png",
+      "renwubaij_26.png",
+      "renwubaij_28.png"
+    ]
+  },
+  "meta": {
+    "app": "https://www.codeandweb.com/texturepacker",
+    "version": "1.1",
+    "image": "purple-anim.png",
+    "format": "RGBA8888",
+    "size": { "w": 440, "h": 1760 },
+    "scale": "1",
+    "smartupdate": "$TexturePacker:SmartUpdate:b84119c24cedf561e101b408597de487:d1500424d13c81ac6f233ecfc057e6d6:5a92ff6a95fb24f01aa42bae86799a44$"
+  }
+}

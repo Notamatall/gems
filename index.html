@@ -10,7 +10,8 @@
   <link rel="stylesheet" href="src/styles/style-interactive.css" />
   <link rel="stylesheet" href="src/styles/style-root.css" />
   <link rel="stylesheet" href="src/styles/loader.css" />
-  <title>PixiJS - Template</title>
+  <link rel="stylesheet" href="src/styles/bonus.css" />
+  <title>GC</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
@@ -18,29 +19,42 @@
     rel="stylesheet">
   <link href="https://unpkg.com/@tabler/icons-webfont/tabler-icons.min.css" rel="stylesheet" />
   <link rel="preload" href="/assets/logos/evo-gaming-logo.svg" as="image" />
+  <link rel="preload" href="/assets/interaction-panel/spin-normal.png" as="image" />
+  <link rel="preload" href="/assets/interaction-panel/spin-hover.png" as="image" />
+  <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
+
 
 <body>
 
- <div id="loaderContainer">
-      <img
-        src="/assets/logos/evo-gaming-logo.svg"
-        alt="Evo Gaming"
-        style="width: 272;height: 42;"
-      />
-      <div id="progressBarContainer">
-        <div id="progressBarIndicator" ></div>
-        <div  id="progressBarIndicatorValue" ></div>
-      </div>
+  <div id="loaderContainer">
+    <img src="/assets/logos/evo-gaming-logo.svg" alt="Evo Gaming" style="width: 272;height: 42;" />
+    <div id="progressBarContainer">
+      <div id="progressBarIndicator"></div>
+      <div id="progressBarIndicatorValue"></div>
     </div>
+  </div>
 
 
   <div id="app">
 
     <div id="game-container">
+
       <div id="pixi-container"></div>
     </div>
 
+
+
+    <div id="BonusBoard">
+      <div id="BonusBoardTitle" class="lucky-title">Gems Cave Bonus Game</div>
+      <div id="BonusBoardDescription" class="lucky-text">
+      </div>
+
+      <div id="BonusBoardClickToContinue" class="lucky-text">
+        click to continue
+      </div>
+    </div>
     <div id="MainPanel">
+
       <div id="MainPanelContainer">
 
         <div id="DataPanel">
@@ -139,6 +153,18 @@
                 <span class="text">INFO</span>
               </li>
 
+
+              <li id="BonusBuyButton" class="MainMenuItem MainMenuItem--info">
+                <button class="disabled-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"
+                    class="icon icon-tabler icons-tabler-filled icon-tabler-play-card-star">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <path
+                      d="M17 2a3 3 0 0 1 3 3v14a3 3 0 0 1 -3 3h-10a3 3 0 0 1 -3 -3v-14a3 3 0 0 1 3 -3zm.01 16h-.01a1 1 0 0 0 -.117 1.993l.127 .007a1 1 0 0 0 0 -2m-4.98 -9.5l-.115 .005c-.384 .04 -.724 .273 -.898 .623l-.51 1.027l-1.138 .166c-.423 .059 -.78 .357 -.914 .768l-.033 .125a1.13 1.13 0 0 0 .322 1.039l.82 .797l-.194 1.127c-.07 .432 .107 .857 .454 1.108l.107 .068a1.13 1.13 0 0 0 1.078 .018l1.022 -.536l1.019 .535c.377 .2 .84 .168 1.19 -.086l.1 -.08c.281 -.259 .416 -.645 .35 -1.028l-.194 -1.126l.823 -.799c.31 -.302 .42 -.752 .287 -1.161l-.042 -.11a1.13 1.13 0 0 0 -.873 -.659l-1.138 -.166l-.508 -1.026a1.13 1.13 0 0 0 -1.014 -.63m-5.021 -4.499h-.01a1 1 0 0 0 -.117 1.993l.127 .007a1 1 0 1 0 0 -2" />
+                  </svg>
+                </button>
+                <span class="text">Buy bonus</span>
+              </li>
             </ul>
           </div>
 
@@ -147,7 +173,7 @@
           <div id="DataPanel_container">
 
             <div id="Balance" class="DataPanelItem ">
-              <span class="PanelItem_Label">Demo Balance</span>
+              <span class="PanelItem_Label ">Demo Balance</span>
               <span id="BalanceValue" class="PanelItem_Value"></span>
             </div>
 
@@ -156,9 +182,24 @@
               <span id="WinAmountValue" class="PanelItem_Value"></span>
             </div>
 
+            <div id="TotalWinItem" class="DataPanelItem is-visible">
+              <span id="TotalWinLabel" class="PanelItem_Label">WIN</span>
+              <span id="TotalWinValue" class="PanelItem_Value"></span>
+            </div>
+
           </div>
         </div>
-
+        <div id="FeaturePanel">
+          <div id="FeatureTotalWinItem" class="FeatureTotalWin">
+            <span class="PanelItem_Label FeatureTotalWin__label">TOTAL WIN</span>
+            <span id="FeatureTotalWinValue" class="FeatureTotalWin__value PanelItem_Value "></span>
+          </div>
+          <div class="Divider_Vertical" data-small="true"></div>
+          <div id="FeatureCounterItem" class="FeatureCounter">
+            <span id="FeatureCounterLabel" class="PanelItem_Label FeatureCounter__label">FREE SPINS</span>
+            <span id="FeatureCounterValue" class="FeatureCounter__value PanelItem_Value"></span>
+          </div>
+        </div>
         <div id="ActionPanel">
           <div id="BetAmountWidget">
             <div id="BetAmountWidget-container">
@@ -196,11 +237,13 @@
 
           </div>
 
-          <button id="play-button">
+          <button id="PlayButton">
 
           </button>
 
         </div>
+
+
       </div>
 
     </div>

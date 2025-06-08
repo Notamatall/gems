@@ -7,14 +7,11 @@ import {
   Spritesheet,
 } from "pixi.js";
 import { loadSprite } from "../utils";
-import { SlotSymbol, TypedAnimation, GSType, GSEffect } from "../types";
-import {
-  gs_des_anim,
-  gs_eff_anim,
-  SLOT_SYM_ANIMATION_NAME,
-} from "../constants";
+import { SlotSymbol, TypedAnimation, GSEffect } from "../types";
+import { SLOT_SYM_ANIMATION_NAME } from "../constants";
 import { getSymbolByCumulativeValue } from "../utils/symbol";
 import { cumWeight } from "../constants/math-engine";
+import { gs_des_anim, gs_eff_anim, GSType } from "../types/game-symbol";
 
 export class ResourcesController {
   private _reelBg?: Sprite;
@@ -84,6 +81,49 @@ export class ResourcesController {
       slotTexture.animations[SLOT_SYM_ANIMATION_NAME],
     );
     return new SlotSymbol({ animSprite, type: slotTexture.type });
+  }
+
+  async loadRandomAnimationTest(app: Application, effect: GSEffect) {
+    // Load texture
+    const anim = this.getEffectAnimSprite(effect);
+
+    // Create sprite
+    anim.alpha = 0.4;
+    anim.x = 70 + 10;
+    anim.y = 70 - 40;
+    anim.animationSpeed = 1 / 3;
+    anim.loop = true;
+
+    // Add to stage
+    anim.play();
+    app.stage.addChild(anim);
+  }
+
+  async loadAndDisplaySpriteTest(app: Application, url: string) {
+    // Load texture
+    const texture = await Assets.load(url);
+
+    // Create sprite
+    const sprite = new Sprite(texture);
+
+    sprite.x = 70 + 24;
+    sprite.y = 70;
+
+    // Add to stage
+    app.stage.addChild(sprite);
+  }
+
+  preloadImagesAsync(paths: string[]): Promise<void[]> {
+    return Promise.all(
+      paths.map((path) => {
+        return new Promise<void>((resolve, reject) => {
+          const img = new Image();
+          img.onload = () => resolve();
+          img.onerror = reject;
+          img.src = path;
+        });
+      }),
+    );
   }
 
   get reelBg() {

@@ -1,4 +1,4 @@
-import { GSType } from "../types";
+import { GSType } from "../types/game-symbol";
 import { PayoutModel } from "../types/MathEngine";
 
 export const gsWeights: Record<GSType, number> = {
@@ -10,7 +10,8 @@ export const gsWeights: Record<GSType, number> = {
   GemV: 63,
   ChestS: 50,
   ChestG: 30,
-  GemGold: 20,
+  ChestDoubleG: 20,
+  FSChest: 10,
 };
 
 export const cumWeight = Object.values(gsWeights).reduce(
@@ -20,6 +21,7 @@ export const cumWeight = Object.values(gsWeights).reduce(
 
 export const paytables: Record<GSType, PayoutModel> = {
   GemC: {
+    special: false,
     min: 8,
     ranges: [
       { payout: 0.5, range: "8-10" },
@@ -28,6 +30,8 @@ export const paytables: Record<GSType, PayoutModel> = {
     ],
   },
   GemG: {
+    special: false,
+
     min: 8,
     ranges: [
       { payout: 0.8, range: "8-10" },
@@ -36,6 +40,8 @@ export const paytables: Record<GSType, PayoutModel> = {
     ],
   },
   GemR: {
+    special: false,
+
     min: 8,
     ranges: [
       { payout: 1, range: "8-10" },
@@ -44,6 +50,7 @@ export const paytables: Record<GSType, PayoutModel> = {
     ],
   },
   GemW: {
+    special: false,
     min: 8,
     ranges: [
       { payout: 1.6, range: "8-10" },
@@ -52,6 +59,8 @@ export const paytables: Record<GSType, PayoutModel> = {
     ],
   },
   GemY: {
+    special: false,
+
     min: 8,
     ranges: [
       { payout: 2, range: "8-10" },
@@ -60,6 +69,7 @@ export const paytables: Record<GSType, PayoutModel> = {
     ],
   },
   GemV: {
+    special: false,
     min: 8,
     ranges: [
       { payout: 3, range: "8-10" },
@@ -68,6 +78,7 @@ export const paytables: Record<GSType, PayoutModel> = {
     ],
   },
   ChestS: {
+    special: false,
     min: 6,
     ranges: [
       { payout: 3.5, range: "6-9" },
@@ -76,6 +87,8 @@ export const paytables: Record<GSType, PayoutModel> = {
     ],
   },
   ChestG: {
+    special: false,
+
     min: 6,
     ranges: [
       { payout: 4, range: "6-9" },
@@ -83,7 +96,8 @@ export const paytables: Record<GSType, PayoutModel> = {
       { payout: 50, range: "12-30" },
     ],
   },
-  GemGold: {
+  ChestDoubleG: {
+    special: false,
     min: 6,
     ranges: [
       { payout: 15, range: "6-9" },
@@ -91,8 +105,13 @@ export const paytables: Record<GSType, PayoutModel> = {
       { payout: 100, range: "12-30" },
     ],
   },
-  // FSChest: {
-  //   min: 3,
-  //   ranges: [],
-  // },
+  FSChest: {
+    ranges: [
+      { payout: 0, range: "3-3", type: "Multiplier" },
+      { payout: 0, range: "4-4", type: "Remainer" },
+      { payout: 0, range: "5-30", type: "Combo" },
+    ],
+    special: true,
+    min: 3,
+  },
 };

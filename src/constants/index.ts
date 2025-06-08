@@ -1,22 +1,3 @@
-import { GSEffect, GSType } from "../types";
-
-export const gs_des_anim: Record<GSType, string> = {
-  GemV: "/assets/animations-json/gemv.json",
-  GemC: "/assets/animations-json/gemc.json",
-  GemG: "/assets/animations-json/gemg.json",
-  GemW: "/assets/animations-json/gemw.json",
-  GemY: "/assets/animations-json/gemy.json",
-  GemR: "/assets/animations-json/gemr.json",
-  ChestS: "/assets/animations-json/chestsilver.json",
-  ChestG: "/assets/animations-json/chestgold.json",
-  GemGold: "/assets/animations-json/gemgold.json",
-  // FSChest: "/assets/animations-json/fs-chest-green.json",
-};
-
-export const gs_eff_anim: Record<GSEffect, string> = {
-  BlueLight: "/assets/animations-json/bl-220.json",
-};
-
 export const SLOT_SYM_ANIMATION_NAME = "anim";
 export const SLOT_SYMBOLS_Y_POS = [-16, 172, 360, 548, 736];
 export const BOARD_WIDTH = 6;
