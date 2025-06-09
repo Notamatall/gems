@@ -18,9 +18,10 @@ extensions.add(ResizePlugin);
 
   const resCtrl = await ResourcesController.create(app);
   const audioCtrl = new AudioController();
-  const htmlCtrl = new HTMLController(audioCtrl);
-  progressBarIndicatorValue.style.width = "66%";
   const balanceCtrl = new BalanceController(audioCtrl);
+
+  const htmlCtrl = new HTMLController(audioCtrl, balanceCtrl);
+  progressBarIndicatorValue.style.width = "66%";
   const gameCtrl = new GameController(
     app,
     resCtrl,

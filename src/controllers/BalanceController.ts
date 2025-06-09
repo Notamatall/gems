@@ -19,6 +19,7 @@ export class BalanceController {
       this._audioCtrl.play(AudioKey.click, { volume: 0.7 });
       this.decBet();
     };
+    this.setFeatureBuyPrice();
   }
 
   private lastWinAmount: number = 0;
@@ -41,6 +42,8 @@ export class BalanceController {
   private _betAmountProgressElement: HTMLElement = getElementByIdOrThrow(
     "BetAmountProgress_Value",
   );
+  private _featureBuyPrice: HTMLElement =
+    getElementByIdOrThrow("FeatureBuyPrice");
   private _winAmountItem: HTMLElement = getElementByIdOrThrow("WinAmountItem");
   private _totalWinItem: HTMLElement = getElementByIdOrThrow("TotalWinItem");
 
@@ -88,9 +91,22 @@ export class BalanceController {
       this._betAmountValue.toString(),
     );
   }
+  private _bonusBuyMultiplier = 60;
+
+  setFeatureBuyPrice() {
+    const getBonusBuyPrice = () => {
+      return (this._betAmountValue * this._bonusBuyMultiplier).toFixed(2);
+    };
+
+    this._featureBuyPrice.textContent = `€ ${getBonusBuyPrice()}`;
+  }
 
   decBal() {
     this.changeBal(-this._betAmountValue);
+  }
+
+  buyBonus() {
+    this.changeBal(-(this._betAmountValue * this._bonusBuyMultiplier));
   }
 
   private changeBal(val: number) {
@@ -136,6 +152,7 @@ export class BalanceController {
     this._betAmountValue = newVal;
     this._betAmountElement.textContent = `€ ${newVal.toFixed(2)}`;
     this.setProgress();
+    this.setFeatureBuyPrice();
   }
 
   winBet(multiplier: number) {

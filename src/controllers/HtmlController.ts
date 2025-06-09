@@ -3,14 +3,17 @@ import { isMusicEnabled, isSoundEnabled } from "../constants/lskey";
 import { BonusGameType } from "../types";
 import { getElementByIdOrThrow } from "../utils/document";
 import { AudioController } from "./AudioController";
+import { BalanceController } from "./BalanceController";
 
 export class HTMLController {
-  constructor(ac: AudioController) {
+  constructor(ac: AudioController, bc: BalanceController) {
     this._ac = ac;
+    this._bc = bc;
     this.registerPanelClickHandler();
   }
 
   private _ac: AudioController;
+  private _bc: BalanceController;
   private _panelMenu: HTMLElement =
     getElementByIdOrThrow<HTMLElement>("DataPanel_Menu");
   private _mainMenu: HTMLElement = getElementByIdOrThrow("MainMenu");
@@ -27,6 +30,9 @@ export class HTMLController {
   private _actionPanel: HTMLElement = getElementByIdOrThrow("ActionPanel");
   private _bonusBuyButton: HTMLButtonElement =
     getElementByIdOrThrow("BonusBuyButton");
+  private _featureBuyCardButton: HTMLButtonElement = getElementByIdOrThrow(
+    "FeatureBuyCardButton",
+  );
 
   private _freeSpinsContainer: HTMLElement = getElementByIdOrThrow(
     "FeatureCounterValue",
@@ -37,11 +43,15 @@ export class HTMLController {
     getElementByIdOrThrow("GameInfoClose");
   private _gameInfoWindow: HTMLElement =
     getElementByIdOrThrow("GameInfoWindowId");
-
+  private _featureBuyWindow: HTMLElement =
+    getElementByIdOrThrow("FeatureBuyWindow");
+  private _featureBuyClose: HTMLElement =
+    getElementByIdOrThrow("FeatureBuyClose");
   initSoundToggles() {
     this.initMusicToggle();
     this.initSoundToggle();
     this.initMenuToggleBtn();
+    this.initFeatureBuyClose();
   }
 
   disControlls() {
@@ -56,9 +66,9 @@ export class HTMLController {
     this._mainMenu.classList.remove("is-visible");
     this._panelMenu.setAttribute("data-active", `false`);
   }
-  triggerBonusPopup(value = 2) {
+  triggerBonusPopup(value = 2, type: "FS" | "X" = "FS") {
     const el = this._bonusPopup;
-    el.textContent = `+${value} FS`;
+    el.textContent = `+${value} ${type}`;
 
     const animation = el.animate(
       [
@@ -76,6 +86,20 @@ export class HTMLController {
       animation.onfinish = () => {
         res();
       };
+    });
+  }
+  private initFeatureBuyClose() {
+    this._gameInfoBtn.addEventListener("click", () => {
+      this.hideMenu();
+      const isMenuVisible = this._gameInfoWindow.style.display === "flex";
+      if (isMenuVisible) {
+        this._gameInfoWindow.style.display = "none";
+      } else {
+        this._gameInfoWindow.style.display = "flex";
+      }
+    });
+    this._featureBuyClose.addEventListener("click", () => {
+      this._featureBuyWindow.style.display = "none";
     });
   }
 
@@ -203,6 +227,14 @@ export class HTMLController {
   }
 
   initBonusBuyButton(onClick: () => void) {
-    this._bonusBuyButton.addEventListener("click", onClick);
+    this._bonusBuyButton.addEventListener("click", () => {
+      this._featureBuyWindow.style.display = "flex";
+    });
+
+    this._featureBuyCardButton.addEventListener("click", () => {
+      onClick();
+      this._bc.buyBonus();
+      this._featureBuyWindow.style.display = "none";
+    });
   }
 }

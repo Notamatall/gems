@@ -230,11 +230,17 @@ export class GameController {
         await Promise.all(matchedSymbols.map((val) => val.play()));
         let am = 0;
         if (this.freeSpinGameState && this.freeSpinGameState.started) {
-          this.freeSpinGameState.additionalMultiplier +=
-            BonusEngine.getMultiplierGrowBySimpolType(type as GSType);
+          const amGrow = BonusEngine.getMultiplierGrowBySimpolType(
+            type as GSType,
+          );
+          this.freeSpinGameState.additionalMultiplier += amGrow;
           am =
             this.freeSpinGameState.currentMultiplier +
             this.freeSpinGameState.additionalMultiplier;
+          if (amGrow > 0) {
+            this._htmlCtrl.updateMultiplierValue(am);
+            await this._htmlCtrl.triggerBonusPopup(amGrow, "X");
+          }
         }
 
         this._balCtrl.winBet(multiplier + am);
@@ -270,13 +276,21 @@ export class GameController {
             this.freeSpinGameState.spinsCount -= 1;
             this.freeSpinGameState.currentSpin += 1;
             this._htmlCtrl.updateSpinsCount(this.freeSpinGameState.spinsCount);
-            this.freeSpinGameState.currentMultiplier =
+            const newMultiplier =
               BonusEngine.getMultiplierBySpinIndex(currentSpin);
+            const oldMultiplier = this.freeSpinGameState.currentMultiplier;
+            const isDifferenceExist = newMultiplier > oldMultiplier;
+            this.freeSpinGameState.currentMultiplier = newMultiplier;
+
             const am =
               this.freeSpinGameState.currentMultiplier +
               this.freeSpinGameState.additionalMultiplier;
 
             this._htmlCtrl.updateMultiplierValue(am);
+            if (isDifferenceExist) {
+              await this._htmlCtrl.triggerBonusPopup(oldMultiplier, "X");
+            }
+
             await waitAsync(500);
 
             this.play();

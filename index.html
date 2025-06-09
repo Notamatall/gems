@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="src/styles/loader.css" />
   <link rel="stylesheet" href="src/styles/game-info.css" />
   <link rel="stylesheet" href="src/styles/bonus.css" />
+  <link rel="stylesheet" href="src/styles/feature-buy.css" />
   <title>GC</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -516,6 +517,108 @@
 
             </div>
           </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div id="FeatureBuyWindow" class="FeatureBuyWindow Modal is-visible">
+      <div id="FeatureBuyClose" class="Modal__close-button">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+          class="icon icon-tabler icons-tabler-outline icon-tabler-square-x">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <path d="M3 5a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v14a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-14z" />
+          <path d="M9 9l6 6m0 -6l-6 6" />
+        </svg>
+      </div>
+
+      <div class="FeatureBuyCard">
+        <div class="FeatureBuyCardBody">
+          <h2 class="spacing lucky-text title" style="text-align: center; margin:5px 0;">
+            Crystal Depths Bonus
+          </h2>
+          <div>
+            Start with <strong class="lucky-text">10 Free Spins</strong> in this high-potential bonus mode. Each
+            win cascades, just
+            like
+            in the base game.
+          </div>
+          <div>
+            Each spin starts with a <strong class="lucky-text">0.1× multiplier</strong> that adds up with every
+            collected chest, up to a
+            maximum of <strong class="lucky-text">3.2×</strong>.
+          </div>
+          <div>
+            Collect chest symbols to increase your spin multiplier:
+          </div>
+          <div class="FeatureBuyChestContainer">
+            <div style=" display: flex; justify-content: space-between; align-items: center; max-width: 280px;">
+              <div style="display: flex; align-items: center; gap: 6px;">
+                <img style="width: 16px; height: 16px;" src="public/assets/symbols/Chest Silver.png"
+                  alt="Silver Chest" />
+                <strong>Silver Chest</strong>
+              </div>
+              <div style="min-width: 32px; text-align: right;">
+                <span class="lucky-text spacing">+3x</span>
+
+              </div>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; align-items: center; max-width: 280px;">
+              <div style="display: flex; align-items: center; gap: 6px;">
+                <img style="width: 16px; height: 16px;" src="public/assets/symbols/Chest Gold.png" alt="Gold Chest" />
+                <strong>Golden Chest</strong>
+              </div>
+              <div style="min-width: 32px; text-align: right;">
+                <span class="lucky-text spacing">+3x</span>
+              </div>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; align-items: center; max-width: 280px;">
+              <div style="display: flex; align-items: center; gap: 6px;">
+                <img style="width: 16px; height: 16px;" src="public/assets/symbols/high-3.png" alt="Obsidian Vault" />
+                <strong>Obsidian Vault</strong>
+              </div>
+              <div style="min-width: 32px; text-align: right;">
+                <span class="lucky-text spacing">+4x</span>
+              </div>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; max-width: 280px;">
+              <div style="display: flex; align-items: center; gap: 6px;">
+                <img style="width: 16px; height: 16px;" src="public/assets/symbols/fs-chest-220x220.png"
+                  alt="Free Spin" />
+                <strong>FS 2</strong>
+              </div>
+              <div style="min-width: 32px; text-align: right;" class="lucky-text spacing">+2 Spins</div>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; max-width: 280px;">
+              <div style="display: flex; align-items: center; gap: 6px;">
+                <img style="width: 16px; height: 16px;" src="public/assets/symbols/fs-chest-220x220.png"
+                  alt="Free Spin" />
+                <strong>FS 3</strong>
+              </div>
+              <div style="min-width: 32px; text-align: right;" class="lucky-text spacing">+4 Spins</div>
+            </div>
+
+          </div>
+          <div class="FeatureBuyBottom">
+            <div>
+              Max win: <strong class="lucky-text">10,000×</strong> your bet.
+
+            </div>
+            <div>
+              <span>Price:</span>
+              <span id="FeatureBuyPrice" class="lucky-text"></span>
+            </div>
+
+          </div>
+
+        </div>
+        <div>
+          <button id="FeatureBuyCardButton">
+            <span class="spacing lucky-text">Buy </span>
+          </button>
         </div>
       </div>
 
