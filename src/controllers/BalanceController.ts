@@ -47,6 +47,11 @@ export class BalanceController {
   private _balanceValue: number = DEFAULT_BALANCE;
   private _betAmountValue: number = DEFAULT_BET;
 
+  resetBalances() {
+    this.lastWinAmount = 0;
+    this.totalWinAmount = 0;
+  }
+
   hideWinAmountItem() {
     this._winAmountItem.style.opacity = "0";
     this._winAmountValueElement.textContent = ``;

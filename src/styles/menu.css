@@ -7,7 +7,7 @@
   display: none;
   left: -0.3rem;
   position: absolute;
-  max-width: 200px;
+  width: 12rem;
 }
 
 #MainMenu ul {
@@ -34,11 +34,11 @@
   cursor: pointer;
   display: flex;
   flex-flow: row;
-  font-size: 16px;
+  font-size: 12px;
   font-weight: 700;
   justify-content: flex-start;
   margin: 0;
-  min-width: 14rem;
+  width: 100%;
   padding: 1.35rem 2rem;
   text-align: center;
   transition: opacity 0.15s ease;
@@ -76,4 +76,16 @@
 
 #SoundToggle[data-active="true"] .disabled-icon {
   display: none;
+}
+
+#BonusBuyButton,
+#GameInfoBtn,
+#MusicToggle,
+#SoundToggle {
+  display: flex;
+  align-items: center;
+}
+
+#BonusBuyButton:disabled {
+  opacity: 0.3;
 }

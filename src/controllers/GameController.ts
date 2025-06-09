@@ -55,15 +55,20 @@ export class GameController {
       this._ac.play(AudioKey.bet, { volume: 0.2 });
     };
     this._htmlCtrl.initBonusBuyButton(async () => {
+      this._balCtrl.hideWinAmountItem();
+      this._balCtrl.hideTotalWinItem();
+      this._balCtrl.resetBalances();
       this.freeSpinGameState = {
         matchesCount: 3,
         type: "Multiplier",
         symbols: [],
         spinnedCount: BonusEngine.getFreeSpinsCountByType("Multiplier"),
-        currentMultiplier: 0,
+        currentMultiplier: BonusEngine.getMultiplierBySpinIndex(0),
+        additionalMultiplier: 0,
         currentSpin: 0,
         started: false,
       };
+      this.disCtrlsGlobal();
       await this.playFreeSpin();
     });
   }
@@ -74,6 +79,7 @@ export class GameController {
     symbols: GameSymbol[];
     spinnedCount: number;
     currentMultiplier: number;
+    additionalMultiplier: number;
     currentSpin: number;
     started: boolean;
   } = undefined;
@@ -203,6 +209,7 @@ export class GameController {
           spinnedCount: BonusEngine.getFreeSpinsCountByType(fsType),
           currentMultiplier: 0,
           currentSpin: 0,
+          additionalMultiplier: 0,
           started: false,
         };
         continue;
@@ -213,7 +220,12 @@ export class GameController {
       if (multiplier > 0) {
         isAnyMatch = true;
         await Promise.all(matchedSymbols.map((val) => val.play()));
-        this._balCtrl.winBet(multiplier);
+        const am = this.freeSpinGameState
+          ? this.freeSpinGameState.currentMultiplier +
+            this.freeSpinGameState.additionalMultiplier
+          : 0;
+
+        this._balCtrl.winBet(multiplier + am);
       }
     }
 
@@ -232,14 +244,18 @@ export class GameController {
             this._htmlCtrl.updateSpinsCount(
               this.freeSpinGameState.spinnedCount,
             );
-            this._htmlCtrl.updateMultiplierValue(
-              BonusEngine.getMultiplierBySpinIndex(currentSpin),
-            );
+            this.freeSpinGameState.currentMultiplier =
+              BonusEngine.getMultiplierBySpinIndex(currentSpin);
+            const am =
+              this.freeSpinGameState.currentMultiplier +
+              this.freeSpinGameState.additionalMultiplier;
+            this._htmlCtrl.updateMultiplierValue(am);
             await waitAsync(500);
 
             this.play();
           } else {
             this._htmlCtrl.showWonModal();
+            this._balCtrl.resetBalances();
             this.freeSpinGameState = undefined;
             this.state = "waiting";
           }
@@ -269,11 +285,14 @@ export class GameController {
   disCtrlsGlobal() {
     this._balCtrl.disCtrls();
     this._playButton.disabled = true;
+    this._htmlCtrl.disControlls();
   }
 
   enCtrlsGlobal() {
+    console.log("enable");
     this._balCtrl.enCtrls();
     this._playButton.disabled = false;
+    this._htmlCtrl.enControlls();
   }
 
   private play() {

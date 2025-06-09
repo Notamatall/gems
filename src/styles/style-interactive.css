@@ -163,6 +163,7 @@
   display: flex;
   font-size: 14px;
   font-weight: 600;
+  text-transform: uppercase;
   line-height: 1;
   white-space: nowrap;
 }

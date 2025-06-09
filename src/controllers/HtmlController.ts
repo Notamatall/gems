@@ -25,7 +25,7 @@ export class HTMLController {
   );
   private _featurePanel: HTMLElement = getElementByIdOrThrow("FeaturePanel");
   private _actionPanel: HTMLElement = getElementByIdOrThrow("ActionPanel");
-  private _bonusBuyButton: HTMLElement =
+  private _bonusBuyButton: HTMLButtonElement =
     getElementByIdOrThrow("BonusBuyButton");
 
   private _freeSpinsContainer: HTMLElement = getElementByIdOrThrow(
@@ -35,6 +35,14 @@ export class HTMLController {
   initSoundToggles() {
     this.initMusicToggle();
     this.initSoundToggle();
+  }
+
+  disControlls() {
+    this._bonusBuyButton.disabled = true;
+  }
+
+  enControlls() {
+    this._bonusBuyButton.disabled = false;
   }
 
   private initMusicToggle() {
