@@ -59,7 +59,7 @@ export class GameController {
         matchesCount: 3,
         type: "Multiplier",
         symbols: [],
-        spinnedCount: BonusEngine.getFreeSpinsCountByType("Multiplier"),
+        spinsCount: BonusEngine.getFreeSpinsCountByType("Multiplier"),
         currentMultiplier: BonusEngine.getMultiplierBySpinIndex(0),
         additionalMultiplier: 0,
         currentSpin: 0,
@@ -85,7 +85,7 @@ export class GameController {
     type: BonusGameType;
     matchesCount: number;
     symbols: GameSymbol[];
-    spinnedCount: number;
+    spinsCount: number;
     currentMultiplier: number;
     additionalMultiplier: number;
     currentSpin: number;
@@ -214,7 +214,7 @@ export class GameController {
           matchesCount: matchesCount,
           type: fsType,
           symbols: matchedSymbols,
-          spinnedCount: BonusEngine.getFreeSpinsCountByType(fsType),
+          spinsCount: BonusEngine.getFreeSpinsCountByType(fsType),
           currentMultiplier: 0,
           currentSpin: 0,
           additionalMultiplier: 0,
@@ -229,7 +229,7 @@ export class GameController {
         isAnyMatch = true;
         await Promise.all(matchedSymbols.map((val) => val.play()));
         let am = 0;
-        if (this.freeSpinGameState) {
+        if (this.freeSpinGameState && this.freeSpinGameState.started) {
           this.freeSpinGameState.additionalMultiplier +=
             BonusEngine.getMultiplierGrowBySimpolType(type as GSType);
           am =
@@ -238,6 +238,22 @@ export class GameController {
         }
 
         this._balCtrl.winBet(multiplier + am);
+      }
+
+      if (this.freeSpinGameState && this.freeSpinGameState.started) {
+        if (gsType === GSType.fschest && matchesCount === 2) {
+          this.freeSpinGameState.spinsCount += 2;
+          await Promise.all(matchedSymbols.map((val) => val.play()));
+          this._htmlCtrl.updateSpinsCount(this.freeSpinGameState.spinsCount);
+          await this._htmlCtrl.triggerBonusPopup(2);
+        }
+        if (gsType === GSType.fschest && matchesCount > 2) {
+          this.freeSpinGameState.spinsCount += 4;
+
+          await Promise.all(matchedSymbols.map((val) => val.play()));
+          this._htmlCtrl.updateSpinsCount(this.freeSpinGameState.spinsCount);
+          await this._htmlCtrl.triggerBonusPopup(4);
+        }
       }
     }
 
@@ -250,12 +266,10 @@ export class GameController {
           return;
         } else {
           const { currentSpin } = this.freeSpinGameState;
-          if (this.freeSpinGameState.spinnedCount > 0) {
-            this.freeSpinGameState.spinnedCount -= 1;
+          if (this.freeSpinGameState.spinsCount > 0) {
+            this.freeSpinGameState.spinsCount -= 1;
             this.freeSpinGameState.currentSpin += 1;
-            this._htmlCtrl.updateSpinsCount(
-              this.freeSpinGameState.spinnedCount,
-            );
+            this._htmlCtrl.updateSpinsCount(this.freeSpinGameState.spinsCount);
             this.freeSpinGameState.currentMultiplier =
               BonusEngine.getMultiplierBySpinIndex(currentSpin);
             const am =
@@ -290,7 +304,7 @@ export class GameController {
     this._htmlCtrl.updateMultiplierValue(
       BonusEngine.getMultiplierBySpinIndex(this.freeSpinGameState.currentSpin),
     );
-    this._htmlCtrl.updateSpinsCount(this.freeSpinGameState.spinnedCount);
+    this._htmlCtrl.updateSpinsCount(this.freeSpinGameState.spinsCount);
     this.freeSpinGameState.started = true;
     this.play();
   }

@@ -31,6 +31,7 @@ export class HTMLController {
   private _freeSpinsContainer: HTMLElement = getElementByIdOrThrow(
     "FeatureCounterValue",
   );
+  private _bonusPopup: HTMLElement = getElementByIdOrThrow("BonusPopup");
   private _gameInfoBtn: HTMLElement = getElementByIdOrThrow("GameInfoBtn");
   private _gameInfoCloseButton: HTMLElement =
     getElementByIdOrThrow("GameInfoClose");
@@ -54,6 +55,28 @@ export class HTMLController {
   hideMenu() {
     this._mainMenu.classList.remove("is-visible");
     this._panelMenu.setAttribute("data-active", `false`);
+  }
+  triggerBonusPopup(value = 2) {
+    const el = this._bonusPopup;
+    el.textContent = `+${value} FS`;
+
+    const animation = el.animate(
+      [
+        { opacity: 0, transform: "translate(-50%, 20%) scale(0.9)" }, // below center
+        { opacity: 1, transform: "translate(-50%, 0%) scale(1.1)" }, // center-ish
+        { opacity: 0, transform: "translate(-50%, -40%) scale(1)" }, // above center
+      ],
+      {
+        duration: 1300,
+        easing: "ease-out",
+        fill: "forwards",
+      },
+    );
+    return new Promise<void>((res) => {
+      animation.onfinish = () => {
+        res();
+      };
+    });
   }
 
   private initMenuToggleBtn() {
