@@ -1,7 +1,6 @@
 import { BOARD_HEIGHT, BOARD_WIDTH } from "../constants";
 import { cumWeight } from "../constants/math-engine";
 import { GSType } from "../types/game-symbol";
-import { GameSymbol } from "../types/GameSymbol";
 import { SimBoard, SimReel, SimSymbol } from "../types/Simulation";
 import { getSymbolByCumulativeValue, round } from "../utils/symbol";
 import MathEngine from "./math-engine";

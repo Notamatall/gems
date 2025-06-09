@@ -1,4 +1,4 @@
-import { AnimatedSprite, NoiseFilter } from "pixi.js";
+import { AnimatedSprite } from "pixi.js";
 import { SlotReel } from "./SlotReel";
 import { REEL_VIEWPORT_MAX_Y } from "../constants";
 import { waitAsync } from "../utils";

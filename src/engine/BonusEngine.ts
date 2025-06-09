@@ -31,7 +31,7 @@ export default class BonusEngine {
     throw new Error("Range is empty");
   }
 
-  static getFreeSpinsCountByType(type: BonusGameType) {
+  static getFreeSpinsCountByType(_type: BonusGameType) {
     return 10;
   }
 

@@ -1,6 +1,6 @@
 import { gsWeights, paytables } from "../constants/math-engine";
 import MathEngine from "../engine/math-engine";
-import { GSType } from "../types";
+import { GSType } from "../types/game-symbol";
 
 const n = 30;
 const symbols = Object.values(GSType);

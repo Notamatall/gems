@@ -1,5 +1,5 @@
 import { gsWeights } from "../constants/math-engine";
-import { GSType } from "../types";
+import { GSType } from "../types/game-symbol";
 
 /**
  * Selects the symbol by cumulative probability value (1–100)

@@ -84,7 +84,7 @@ export class HTMLController {
     });
   }
 
-  showFreeSpinWindow(bonusType: BonusGameType): Promise<void> {
+  showFreeSpinWindow(_bonusType: BonusGameType): Promise<void> {
     this._bonusBoardDescription.textContent = BonusText["Multiplier"];
     this._bonusBoard.style.display = "flex";
 

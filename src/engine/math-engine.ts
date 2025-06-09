@@ -1,5 +1,4 @@
 import { paytables } from "../constants/math-engine";
-import { BonusGameType } from "../types";
 import { GSType } from "../types/game-symbol";
 import { PayoutRange } from "../types/MathEngine";
 

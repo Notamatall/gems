@@ -1,4 +1,4 @@
-import { Application, Container, Graphics, Sprite } from "pixi.js";
+import { Application, Container, Graphics } from "pixi.js";
 import {
   BOARD_WIDTH,
   REEL_BORDER_SIZE_PX,
@@ -8,7 +8,7 @@ import {
   FALL_SYMBOL_GAP,
   SLOT_SYMBOLS_Y_POS,
 } from "../constants";
-import { FreeSpinGameConfig, BonusGameType, SlotSymbol } from "../types";
+import { BonusGameType, SlotSymbol } from "../types";
 import { ResourcesController } from "./ResourcesController";
 import { SlotReel } from "../types/SlotReel";
 import { GameSymbol } from "../types/GameSymbol";
