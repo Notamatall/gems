@@ -45,6 +45,10 @@ export class HTMLController {
     this._bonusBuyButton.disabled = false;
   }
 
+  hideMenu() {
+    this._mainMenu.classList.remove("is-visible");
+  }
+
   private initMusicToggle() {
     const isme = localStorage.getItem(isMusicEnabled);
     if (isme && isme === "false") {

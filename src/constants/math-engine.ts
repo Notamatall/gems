@@ -11,7 +11,7 @@ export const gsWeights: Record<GSType, number> = {
   ChestS: 50,
   ChestG: 30,
   ChestDoubleG: 20,
-  FSChest: 10,
+  FSChest: 3,
 };
 
 export const cumWeight = Object.values(gsWeights).reduce(

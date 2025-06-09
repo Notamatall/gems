@@ -7,7 +7,7 @@
   display: none;
   left: -0.3rem;
   position: absolute;
-  width: 12rem;
+  width: fit-content;
 }
 
 #MainMenu ul {
@@ -88,4 +88,18 @@
 
 #BonusBuyButton:disabled {
   opacity: 0.3;
+}
+
+@media (width<600px) {
+  .MainMenuItem {
+    padding: 0.7rem 0.7rem 0.7rem 1.5rem;
+    font-size: 8px;
+  }
+  #MainMenu {
+    bottom: 3.5rem;
+  }
+  .MainMenuItem svg {
+    width: 16px;
+    height: 16px;
+  }
 }

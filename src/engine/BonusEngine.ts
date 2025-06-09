@@ -56,4 +56,20 @@ export default class BonusEngine {
         return 3.2;
     }
   }
+
+  static getMultiplierGrowBySimpolType(gs: GSType) {
+    switch (gs) {
+      case GSType.chestdoublegold: {
+        return 4;
+      }
+      case GSType.chests: {
+        return 2;
+      }
+      case GSType.chestg: {
+        return 3;
+      }
+      default:
+        return 0;
+    }
+  }
 }

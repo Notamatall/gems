@@ -45,15 +45,12 @@ export class GameController {
     this._balCtrl = balController;
     this._htmlCtrl = htmlController;
 
-    const playButton = getElementByIdOrThrow("PlayButton");
-    this._playButton = playButton as HTMLButtonElement;
-    this._playButton.onclick = () => {
-      this.play();
-      this._balCtrl.decBal();
-      this._balCtrl.hideWinAmountItem();
-      this._balCtrl.hideTotalWinItem();
-      this._ac.play(AudioKey.bet, { volume: 0.2 });
-    };
+    this._playButton.onclick = () => this.onPlayButtonClick();
+    window.addEventListener("keypress", (ev: KeyboardEvent) => {
+      if (ev.code === "Space") {
+        this.onPlayButtonClick();
+      }
+    });
     this._htmlCtrl.initBonusBuyButton(async () => {
       this._balCtrl.hideWinAmountItem();
       this._balCtrl.hideTotalWinItem();
@@ -68,11 +65,22 @@ export class GameController {
         currentSpin: 0,
         started: false,
       };
+      this._htmlCtrl.hideMenu();
+
       this.disCtrlsGlobal();
       await this.playFreeSpin();
     });
   }
 
+  onPlayButtonClick() {
+    const canPlay = !this._playButton.disabled;
+    if (!canPlay) return;
+    this.play();
+    this._balCtrl.decBal();
+    this._balCtrl.hideWinAmountItem();
+    this._balCtrl.hideTotalWinItem();
+    this._ac.play(AudioKey.bet, { volume: 0.2 });
+  }
   private freeSpinGameState?: {
     type: BonusGameType;
     matchesCount: number;
@@ -84,7 +92,7 @@ export class GameController {
     started: boolean;
   } = undefined;
 
-  private _playButton: HTMLButtonElement;
+  private _playButton: HTMLButtonElement = getElementByIdOrThrow("PlayButton");
   private _app: Application;
   private _resCtrl: ResourcesController;
   private _balCtrl: BalanceController;
@@ -220,10 +228,14 @@ export class GameController {
       if (multiplier > 0) {
         isAnyMatch = true;
         await Promise.all(matchedSymbols.map((val) => val.play()));
-        const am = this.freeSpinGameState
-          ? this.freeSpinGameState.currentMultiplier +
-            this.freeSpinGameState.additionalMultiplier
-          : 0;
+        let am = 0;
+        if (this.freeSpinGameState) {
+          this.freeSpinGameState.additionalMultiplier +=
+            BonusEngine.getMultiplierGrowBySimpolType(type as GSType);
+          am =
+            this.freeSpinGameState.currentMultiplier +
+            this.freeSpinGameState.additionalMultiplier;
+        }
 
         this._balCtrl.winBet(multiplier + am);
       }
@@ -249,6 +261,7 @@ export class GameController {
             const am =
               this.freeSpinGameState.currentMultiplier +
               this.freeSpinGameState.additionalMultiplier;
+
             this._htmlCtrl.updateMultiplierValue(am);
             await waitAsync(500);
 
@@ -298,6 +311,8 @@ export class GameController {
   private play() {
     this.state = "start_move";
     this._isInitial = false;
+    if (!this.freeSpinGameState) this._balCtrl.resetBalances();
+
     this.disCtrlsGlobal();
     this.genAllReelSym();
   }
