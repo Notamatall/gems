@@ -21,11 +21,12 @@ body {
   flex-direction: column;
   background-image: url("/assets/background.png");
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: 100% 100%;
   aspect-ratio: 16/9;
   width: 100%;
   max-width: 1440px;
   position: relative;
+  min-height: 300px;
 }
 
 #bets-container {

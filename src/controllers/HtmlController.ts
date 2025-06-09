@@ -89,15 +89,6 @@ export class HTMLController {
     });
   }
   private initFeatureBuyClose() {
-    this._gameInfoBtn.addEventListener("click", () => {
-      this.hideMenu();
-      const isMenuVisible = this._gameInfoWindow.style.display === "flex";
-      if (isMenuVisible) {
-        this._gameInfoWindow.style.display = "none";
-      } else {
-        this._gameInfoWindow.style.display = "flex";
-      }
-    });
     this._featureBuyClose.addEventListener("click", () => {
       this._featureBuyWindow.style.display = "none";
     });

@@ -98,6 +98,7 @@
   font-size: 30px;
 }
 #BonusPopup {
+  white-space: nowrap;
   position: absolute;
   left: 50%;
   top: 50%;
@@ -118,4 +119,10 @@
     2px 2px 0 #5c2c06,
     0 9px 0 #3a1b00,
     0 8px 0 #2b1400;
+}
+
+@media (width<600px) {
+  #BonusPopup {
+    font-size: 24px;
+  }
 }

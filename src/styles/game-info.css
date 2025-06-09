@@ -199,3 +199,7 @@
   max-width: 100%;
   text-align: center;
 }
+
+#GameInfoBody {
+  padding: 5px;
+}
