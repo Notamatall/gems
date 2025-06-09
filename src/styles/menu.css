@@ -60,12 +60,6 @@
   display: none;
 }
 
-#MusicToggle button,
-#GameInfoBtn button,
-#SoundToggle button #BonusBuyButton button {
-  margin-right: 5px;
-}
-
 .MainMenuItem .text {
   margin-bottom: 4px;
 }
@@ -102,4 +96,9 @@
     width: 16px;
     height: 16px;
   }
+}
+
+.PayoutColumnItem__symbol img {
+  width: 40px;
+  height: 40px;
 }

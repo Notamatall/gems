@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="src/styles/style-interactive.css" />
   <link rel="stylesheet" href="src/styles/style-root.css" />
   <link rel="stylesheet" href="src/styles/loader.css" />
+  <link rel="stylesheet" href="src/styles/game-info.css" />
   <link rel="stylesheet" href="src/styles/bonus.css" />
   <title>GC</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -39,11 +40,8 @@
   <div id="app">
 
     <div id="game-container">
-
       <div id="pixi-container"></div>
     </div>
-
-
 
     <div id="BonusBoard">
       <div id="BonusBoardTitle" class="lucky-title">Gems Cave Bonus Game</div>
@@ -54,6 +52,7 @@
         click to continue
       </div>
     </div>
+
     <div id="MainPanel">
 
       <div id="MainPanelContainer">
@@ -150,7 +149,7 @@
                     <path d="M12 16v.01" />
                     <path d="M12 13a2 2 0 0 0 .914 -3.782a1.98 1.98 0 0 0 -2.414 .483" />
                   </svg>
-                  <span class="text">INFO</span>
+                  <span>INFO</span>
 
                 </button>
               </li>
@@ -192,6 +191,7 @@
 
           </div>
         </div>
+
         <div id="FeaturePanel">
           <div id="FeatureTotalWinItem" class="FeatureTotalWin">
             <span class="PanelItem_Label FeatureTotalWin__label">Multiplier</span>
@@ -203,6 +203,7 @@
             <span id="FeatureCounterValue" class="FeatureCounter__value PanelItem_Value"></span>
           </div>
         </div>
+
         <div id="ActionPanel">
           <div id="BetAmountWidget">
             <div id="BetAmountWidget-container">
@@ -250,6 +251,208 @@
       </div>
 
     </div>
+
+    <div id="GameInfoWindowId" class="GameInfoWindow">
+      <div id="GameInfoClose" class="Modal__close-button">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+          class="icon icon-tabler icons-tabler-outline icon-tabler-square-x">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <path d="M3 5a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v14a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-14z" />
+          <path d="M9 9l6 6m0 -6l-6 6" />
+        </svg>
+
+      </div>
+
+      <div class="GameInfo Modal__container">
+        <div class="GameInfo__inner">
+          <div class="GameInfo__title Modal__title">
+            <div class="GameInfo__title-container">
+              <span data-translation="game_info" data-charcount="9">GAME INFO</span>&nbsp;<span>-</span>&nbsp;<span
+                id="GameInfoGameName" class="GameInfoGameName">Gems Cave</span>
+            </div>
+            <div class="divider--horizontal"></div>
+          </div>
+          <div id="GameInfoBody" class="GameInfo__body">
+            <div>
+              <div>
+                <section data-gameinfo-section="intro">
+                  <h1>ABOUT THE GAME</h1>
+                  <p>Venture deep into the Gems Cave, where glittering stones and hidden treasures await. Match shining
+                    gems and crack open rare chests to uncover massive rewards. This all-scatter win game features
+                    cascading symbols, a thrilling bonus game, and a max win of up to 10,000× your bet!
+                  </p>
+                  <p>Gems Cave is played on a 6-reel, 5-row grid with scatter-based payouts and symbol cascades. Win
+                    combinations remove symbols and allow new ones to fall in, offering multiple chances per spin.</p>
+                </section>
+                <section data-gameinfo-section="features">
+                  <h1>FEATURES</h1>
+
+                  <h2>Crystal Depths Bonus Game</h2>
+                  <p>Land <strong>3 FS Chest</strong> symbols to trigger the <strong>Crystal Depths</strong> bonus
+                    feature with <strong>10 free spins</strong>.</p>
+                  <div class="FeatureImageNormal"><img src="public/assets/symbols/fs-chest-220x220.png"></div>
+
+                  <p>In this feature:</p>
+                  <ul>
+                    <li>Symbols cascade after every win.</li>
+                    <li>Special chest symbols apply win multipliers during the bonus round:</li>
+                    <ul>
+                      <li><strong>Silver Chest</strong> → adds +2× multiplier to the round total</li>
+                      <li><strong>Golden Chest</strong> → adds +3× multiplier</li>
+                      <li><strong>Obsidian Chest</strong> → adds +4× multiplier</li>
+                    </ul>
+                    <li>All multipliers are applied to the each spin of that free spin.</li>
+                    <li>FS Chest symbols can re-trigger the bonus:</li>
+                    <ul>
+                      <li>2 FS symbols = +2 additional spins</li>
+                      <li>3 FS symbols = +4 additional spins</li>
+                    </ul>
+                  </ul>
+
+                </section>
+                <section data-gameinfo-section="paytable">
+                  <h1>SYMBOL PAYOUTS</h1>
+                  <div class="GameInfo__payout-columns ">
+                    <div class="PayoutColumnItem">
+                      <div class="PayoutColumnItem__values">
+                        <div class="PayoutColumnItem__value">13+</div>
+                        <div class="PayoutColumnItem__value">11-12</div>
+                        <div class="PayoutColumnItem__value">8-10</div>
+                      </div>
+                    </div>
+                    <div class="PayoutColumnItem has-symbol">
+                      <div class="PayoutColumnItem__symbol LOW_1"><img src="public/assets/symbols/Gem C.png">
+                      </div>
+                      <div class="PayoutColumnItem__values">
+                        <div class="PayoutColumnItem__value" data-symbol-win-value="true" data-symbol-id="1"
+                          data-symbol-win-multiplier="500" data-charcount="8">4,00x</div>
+                        <div class="PayoutColumnItem__value" data-symbol-win-value="true" data-symbol-id="1"
+                          data-symbol-win-multiplier="200" data-charcount="8">1,50x</div>
+                        <div class="PayoutColumnItem__value" data-symbol-win-value="true" data-symbol-id="1"
+                          data-symbol-win-multiplier="100" data-charcount="8">0,50x</div>
+                      </div>
+                    </div>
+                    <div class="PayoutColumnItem has-symbol">
+                      <div class="PayoutColumnItem__symbol LOW_2"><img src="public/assets/symbols/Gem G.png"></div>
+                      <div class="PayoutColumnItem__values">
+                        <div class="PayoutColumnItem__value" data-symbol-win-value="true" data-symbol-id="1"
+                          data-symbol-win-multiplier="4" data-charcount="8">8,00x</div>
+                        <div class="PayoutColumnItem__value" data-symbol-win-value="true" data-symbol-id="1"
+                          data-symbol-win-multiplier="1.5" data-charcount="8">1,80x</div>
+                        <div class="PayoutColumnItem__value" data-symbol-win-value="true" data-symbol-id="1"
+                          data-symbol-win-multiplier="0.5" data-charcount="8">0,80x</div>
+                      </div>
+                    </div>
+                    <div class="PayoutColumnItem has-symbol">
+                      <div class="PayoutColumnItem__symbol LOW_3"><img src="public/assets/symbols/Gem R.png"></div>
+                      <div class="PayoutColumnItem__values">
+                        <div class="PayoutColumnItem__value" data-symbol-win-value="true" data-symbol-id="1"
+                          data-symbol-win-multiplier="4" data-charcount="8">10,00x</div>
+                        <div class="PayoutColumnItem__value" data-symbol-win-value="true" data-symbol-id="1"
+                          data-symbol-win-multiplier="1.5" data-charcount="8">2,00x</div>
+                        <div class="PayoutColumnItem__value" data-symbol-win-value="true" data-symbol-id="1"
+                          data-symbol-win-multiplier="0.5" data-charcount="8">1,00x</div>
+                      </div>
+                    </div>
+                    <div class="PayoutColumnItem has-symbol">
+                      <div class="PayoutColumnItem__symbol LOW_4"><img src="public/assets/symbols/Gem W.png"></div>
+                      <div class="PayoutColumnItem__values">
+                        <div class="PayoutColumnItem__value" data-symbol-win-value="true" data-symbol-id="1"
+                          data-symbol-win-multiplier="4" data-charcount="8">16,00x</div>
+                        <div class="PayoutColumnItem__value" data-symbol-win-value="true" data-symbol-id="1"
+                          data-symbol-win-multiplier="1.5" data-charcount="8">2,40x</div>
+                        <div class="PayoutColumnItem__value" data-symbol-win-value="true" data-symbol-id="1"
+                          data-symbol-win-multiplier="0.5" data-charcount="8">1,60x</div>
+                      </div>
+                    </div>
+                    <div class="PayoutColumnItem has-symbol">
+                      <div class="PayoutColumnItem__symbol LOW_5"><img src="public/assets/symbols/Gem Y.png"></div>
+                      <div class="PayoutColumnItem__values">
+                        <div class="PayoutColumnItem__value" data-symbol-win-value="true" data-symbol-id="1"
+                          data-symbol-win-multiplier="4" data-charcount="8">20,00x</div>
+                        <div class="PayoutColumnItem__value" data-symbol-win-value="true" data-symbol-id="1"
+                          data-symbol-win-multiplier="1.5" data-charcount="8">3,00x</div>
+                        <div class="PayoutColumnItem__value" data-symbol-win-value="true" data-symbol-id="1"
+                          data-symbol-win-multiplier="0.5" data-charcount="8">2,00x</div>
+                      </div>
+                    </div>
+                    <div class="PayoutColumnItem has-symbol">
+                      <div class="PayoutColumnItem__symbol HIGH_1"><img src="public/assets/symbols/Gem V.png"></div>
+                      <div class="PayoutColumnItem__values">
+                        <div class="PayoutColumnItem__value" data-symbol-win-value="true" data-symbol-id="1"
+                          data-symbol-win-multiplier="4" data-charcount="8">24,00x</div>
+                        <div class="PayoutColumnItem__value" data-symbol-win-value="true" data-symbol-id="1"
+                          data-symbol-win-multiplier="1.5" data-charcount="8">4,00x</div>
+                        <div class="PayoutColumnItem__value" data-symbol-win-value="true" data-symbol-id="1"
+                          data-symbol-win-multiplier="0.5" data-charcount="8">3,00x</div>
+                      </div>
+                    </div>
+
+                  </div>
+                  <div class="GameInfo__payout-columns ">
+                    <div class="PayoutColumnItem">
+                      <div class="PayoutColumnItem__values">
+                        <div class="PayoutColumnItem__value">12+</div>
+                        <div class="PayoutColumnItem__value">10-11</div>
+                        <div class="PayoutColumnItem__value">6-9</div>
+                      </div>
+                    </div>
+
+                    <div class="PayoutColumnItem has-symbol">
+                      <div class="PayoutColumnItem__symbol "><img src="public/assets/symbols/Chest Silver.png"></div>
+                      <div class="PayoutColumnItem__values">
+                        <div class="PayoutColumnItem__value" data-symbol-win-value="true" data-symbol-id="1"
+                          data-symbol-win-multiplier="4" data-charcount="8">30,00x</div>
+                        <div class="PayoutColumnItem__value" data-symbol-win-value="true" data-symbol-id="1"
+                          data-symbol-win-multiplier="1.5" data-charcount="8">10,00x</div>
+                        <div class="PayoutColumnItem__value" data-symbol-win-value="true" data-symbol-id="1"
+                          data-symbol-win-multiplier="0.5" data-charcount="8">3,50x</div>
+                      </div>
+                    </div>
+                    <div class="PayoutColumnItem has-symbol">
+                      <div class="PayoutColumnItem__symbol "><img src="public/assets/symbols/Chest Gold.png"></div>
+                      <div class="PayoutColumnItem__values">
+                        <div class="PayoutColumnItem__value" data-symbol-win-value="true" data-symbol-id="1"
+                          data-symbol-win-multiplier="4" data-charcount="8">50,00x</div>
+                        <div class="PayoutColumnItem__value" data-symbol-win-value="true" data-symbol-id="1"
+                          data-symbol-win-multiplier="1.5" data-charcount="8">20,00x</div>
+                        <div class="PayoutColumnItem__value" data-symbol-win-value="true" data-symbol-id="1"
+                          data-symbol-win-multiplier="0.5" data-charcount="8">4,00x</div>
+                      </div>
+                    </div>
+                    <div class="PayoutColumnItem has-symbol">
+                      <div class="PayoutColumnItem__symbol HIGH_6"><img src="public/assets/symbols/high-3.png"></div>
+                      <div class="PayoutColumnItem__values">
+                        <div class="PayoutColumnItem__value" data-symbol-win-value="true" data-symbol-id="1"
+                          data-symbol-win-multiplier="4" data-charcount="8">100,00x</div>
+                        <div class="PayoutColumnItem__value" data-symbol-win-value="true" data-symbol-id="1"
+                          data-symbol-win-multiplier="1.5" data-charcount="8">50,00x</div>
+                        <div class="PayoutColumnItem__value" data-symbol-win-value="true" data-symbol-id="1"
+                          data-symbol-win-multiplier="0.5" data-charcount="8">15,00x</div>
+                      </div>
+                    </div>
+                  </div>
+                  <p data-part-id="gameRtp">The symbol payouts displayed above reflect the currently selected bet
+                    level.
+                    The theoretical payout for this game is 96.31%. The RTP was calculated by simulating
+                    10,000,000,000
+                    rounds.</p>
+
+
+                </section>
+
+                <section data-gameinfo-section="generalSection-dictionary"></section>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
   </div>
   <script type="module" src="/src/main.ts"></script>
 </body>

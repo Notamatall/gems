@@ -2,7 +2,6 @@ import { GSEffect } from ".";
 import { AudioKey } from "../controllers/AudioController";
 
 export enum GSType {
-  chestdoublegold = "ChestDoubleG",
   gemc = "GemC",
   gemg = "GemG",
   gemr = "GemR",
@@ -11,6 +10,7 @@ export enum GSType {
   gemv = "GemV",
   chests = "ChestS",
   chestg = "ChestG",
+  chestdoublegold = "ChestDoubleG",
   fschest = "FSChest",
 }
 

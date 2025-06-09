@@ -1,0 +1,201 @@
+#GameInfoWindowId {
+  display: none;
+}
+
+.GameInfoWindow {
+  align-items: center;
+  background: transparent;
+  height: 100%;
+  justify-content: center;
+  left: 0;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  transform-origin: left top 0;
+  width: 100%;
+  z-index: 1300;
+}
+
+.GameInfoWindow::before {
+  background: rgba(21, 16, 16, 0.95);
+  bottom: 0;
+  content: "";
+  height: 100%;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 100%;
+  z-index: 0;
+}
+
+#GameInfoClose {
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  font-size: 1.5rem;
+  justify-content: center;
+  overflow: hidden;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transition: all 0.15s linear;
+  z-index: 9000;
+}
+
+#GameInfoModalContainer {
+  display: flex;
+  height: 100%;
+  scrollbar-gutter: auto;
+  scrollbar-width: thin;
+  width: 100%;
+  align-items: flex-start;
+  color: var(--hg-text-primary);
+  justify-content: stretch;
+  margin: 0 auto;
+  max-width: 52.5rem;
+  padding: 2.5rem 0;
+}
+
+.GameInfo_inner {
+  align-items: stretch;
+  border-radius: 0;
+  display: flex;
+  flex-direction: column;
+  max-height: 100%;
+  max-width: 100%;
+  min-width: 320px;
+  padding: 0;
+  position: relative;
+  width: 100%;
+}
+
+.Modal_title {
+  align-items: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+}
+
+.GameInfoWindow .GameInfo {
+  align-items: flex-start;
+  color: #fafafa;
+  justify-content: stretch;
+  margin: 0 auto;
+  max-width: 52.5rem;
+  height: 100%;
+  padding: 2.5rem 0;
+}
+
+.GameInfoWindow .GameInfo__inner {
+  align-items: stretch;
+  border-radius: 0;
+  display: flex;
+  flex-direction: column;
+  max-height: 100%;
+  max-width: 100%;
+  min-width: 320px;
+  padding: 0;
+  position: relative;
+  width: 100%;
+}
+
+.GameInfoWindow .GameInfo__body {
+  height: 100%;
+  margin: 0 auto;
+  outline: none;
+  overflow: auto;
+  padding: 0 0 1rem;
+  touch-action: pan-y;
+  width: 100%;
+}
+
+.GameInfoWindow .GameInfo__body::-webkit-scrollbar {
+  width: 4px;
+}
+
+.GameInfoWindow .GameInfo__body::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 8px;
+}
+
+.GameInfoWindow .GameInfo .FeatureImageNormal {
+  text-align: center;
+}
+
+.FeatureImageNormal img {
+  height: 120px;
+  width: 120px;
+}
+
+.GameInfoWindow .GameInfo__title {
+  font-size: 16px;
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.GameInfoWindow .Modal__title {
+  align-items: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+}
+.GameInfoWindow .GameInfo__body h1 {
+  color: var(--hg-bg-accent);
+  font-size: 18px;
+  font-weight: 700;
+  text-align: left;
+}
+.GameInfoWindow .GameInfo__payout-columns .PayoutColumnItem__symbol {
+  height: 5rem;
+  margin: 0;
+  width: 5rem;
+}
+.GameInfoWindow .GameInfo__payout-columns .PayoutColumnItem {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  margin: auto 0 1rem;
+  width: calc(14.28% - 2px);
+}
+.GameInfoWindow .GameInfo__payout-columns .PayoutColumnItem:not(.has-symbol) {
+  padding-top: 5.5rem;
+  width: calc(10% - 2px);
+}
+.GameInfoWindow .GameInfo__payout-columns .PayoutColumnItem:first-child {
+  flex-grow: 0;
+}
+.GameInfo__payout-columns .PayoutColumnItem:not(.has-symbol) {
+  padding-top: 90px;
+  width: calc(10% - 2px);
+}
+.GameInfoWindow .GameInfo__payout-columns .PayoutColumnItem {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  margin: auto 0 1rem;
+  width: calc(14.28% - 2px);
+}
+.GameInfo__payout-columns .PayoutColumnItem {
+  align-items: center;
+  display: flex;
+  flex-flow: column;
+  flex-grow: 1;
+  width: calc(14.28%- 2px);
+}
+.GameInfoWindow .GameInfo__payout-columns {
+  align-items: center;
+  display: flex;
+  flex-flow: wrap;
+  flex-grow: 1;
+  justify-content: center;
+  margin: 0 1rem;
+  max-width: 100%;
+  text-align: center;
+}

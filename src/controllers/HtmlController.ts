@@ -31,10 +31,16 @@ export class HTMLController {
   private _freeSpinsContainer: HTMLElement = getElementByIdOrThrow(
     "FeatureCounterValue",
   );
+  private _gameInfoBtn: HTMLElement = getElementByIdOrThrow("GameInfoBtn");
+  private _gameInfoCloseButton: HTMLElement =
+    getElementByIdOrThrow("GameInfoClose");
+  private _gameInfoWindow: HTMLElement =
+    getElementByIdOrThrow("GameInfoWindowId");
 
   initSoundToggles() {
     this.initMusicToggle();
     this.initSoundToggle();
+    this.initMenuToggleBtn();
   }
 
   disControlls() {
@@ -47,6 +53,22 @@ export class HTMLController {
 
   hideMenu() {
     this._mainMenu.classList.remove("is-visible");
+    this._panelMenu.setAttribute("data-active", `false`);
+  }
+
+  private initMenuToggleBtn() {
+    this._gameInfoBtn.addEventListener("click", () => {
+      this.hideMenu();
+      const isMenuVisible = this._gameInfoWindow.style.display === "flex";
+      if (isMenuVisible) {
+        this._gameInfoWindow.style.display = "none";
+      } else {
+        this._gameInfoWindow.style.display = "flex";
+      }
+    });
+    this._gameInfoCloseButton.addEventListener("click", () => {
+      this._gameInfoWindow.style.display = "none";
+    });
   }
 
   private initMusicToggle() {
