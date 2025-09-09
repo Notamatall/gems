@@ -11,7 +11,7 @@ export const gsWeights: Record<GSType, number> = {
   ChestS: 50,
   ChestG: 30,
   ChestDoubleG: 20,
-  FSChest: 3,
+  // FSChest: 3,
 };
 
 export const cumWeight = Object.values(gsWeights).reduce(
@@ -31,7 +31,6 @@ export const paytables: Record<GSType, PayoutModel> = {
   },
   GemG: {
     special: false,
-
     min: 8,
     ranges: [
       { payout: 0.8, range: "8-10" },
@@ -105,13 +104,13 @@ export const paytables: Record<GSType, PayoutModel> = {
       { payout: 100, range: "12-30" },
     ],
   },
-  FSChest: {
-    ranges: [
-      { payout: 0, range: "3-3", type: "Multiplier" },
-      { payout: 0, range: "4-4", type: "Remainer" },
-      { payout: 0, range: "5-30", type: "Combo" },
-    ],
-    special: true,
-    min: 3,
-  },
+  // FSChest: {
+  //   ranges: [
+  //     { payout: 0, range: "3-3", type: "Multiplier" },
+  //     { payout: 0, range: "4-4", type: "Remainer" },
+  //     { payout: 0, range: "5-30", type: "Combo" },
+  //   ],
+  //   special: true,
+  //   min: 3,
+  // },
 };

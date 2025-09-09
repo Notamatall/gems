@@ -11,7 +11,7 @@ export enum GSType {
   chests = "ChestS",
   chestg = "ChestG",
   chestdoublegold = "ChestDoubleG",
-  fschest = "FSChest",
+  // fschest = "FSChest",
 }
 
 export const GSDestAudioKey: Record<GSType, AudioKey> = {
@@ -24,7 +24,7 @@ export const GSDestAudioKey: Record<GSType, AudioKey> = {
   ChestG: AudioKey.chestrew,
   ChestS: AudioKey.chestrew,
   ChestDoubleG: AudioKey.fshit,
-  FSChest: AudioKey.fshit,
+  // FSChest: AudioKey.fshit,
 };
 
 export const gs_des_anim: Record<GSType, string> = {
@@ -37,7 +37,7 @@ export const gs_des_anim: Record<GSType, string> = {
   ChestS: "/assets/animations-json/chestsilver.json",
   ChestG: "/assets/animations-json/chestgold.json",
   ChestDoubleG: "/assets/animations-json/chestdoublegold.json",
-  FSChest: "/assets/animations-json/fs-chest-green.json",
+  // FSChest: "/assets/animations-json/fs-chest-green.json",
 };
 
 export const gs_eff_anim: Record<GSEffect, string> = {

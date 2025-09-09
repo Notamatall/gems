@@ -199,9 +199,12 @@ export class GameController {
 
     for (const type of Object.values(GSType)) {
       for (const symbol of symbols) {
-        if (symbol.type === type) matches[type].push(symbol);
+        if (symbol.type === type) {
+          matches[type].push(symbol);
+        }
       }
     }
+
     let isAnyMatch = false;
     for (const [type, matchedSymbols] of Object.entries(matches)) {
       const gsType = type as GSType;
@@ -244,23 +247,25 @@ export class GameController {
         }
 
         this._balCtrl.winBet(multiplier + am);
+        break;
       }
 
-      if (this.freeSpinGameState && this.freeSpinGameState.started) {
-        if (gsType === GSType.fschest && matchesCount === 2) {
-          this.freeSpinGameState.spinsCount += 2;
-          await Promise.all(matchedSymbols.map((val) => val.play()));
-          this._htmlCtrl.updateSpinsCount(this.freeSpinGameState.spinsCount);
-          await this._htmlCtrl.triggerBonusPopup(2);
-        }
-        if (gsType === GSType.fschest && matchesCount > 2) {
-          this.freeSpinGameState.spinsCount += 4;
+      //FS
+      // if (this.freeSpinGameState && this.freeSpinGameState.started) {
+      //   if (gsType === GSType.fschest && matchesCount === 2) {
+      //     this.freeSpinGameState.spinsCount += 2;
+      //     await Promise.all(matchedSymbols.map((val) => val.play()));
+      //     this._htmlCtrl.updateSpinsCount(this.freeSpinGameState.spinsCount);
+      //     await this._htmlCtrl.triggerBonusPopup(2);
+      //   }
+      //   if (gsType === GSType.fschest && matchesCount > 2) {
+      //     this.freeSpinGameState.spinsCount += 4;
 
-          await Promise.all(matchedSymbols.map((val) => val.play()));
-          this._htmlCtrl.updateSpinsCount(this.freeSpinGameState.spinsCount);
-          await this._htmlCtrl.triggerBonusPopup(4);
-        }
-      }
+      //     await Promise.all(matchedSymbols.map((val) => val.play()));
+      //     this._htmlCtrl.updateSpinsCount(this.freeSpinGameState.spinsCount);
+      //     await this._htmlCtrl.triggerBonusPopup(4);
+      //   }
+      // }
     }
 
     if (isAnyMatch) {
